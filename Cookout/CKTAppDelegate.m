@@ -7,14 +7,19 @@
 //
 
 #import "CKTAppDelegate.h"
+#import "CKTHomeViewController.h"
 
 @implementation CKTAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
     // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
+    CKTHomeViewController *hvc = [[CKTHomeViewController alloc] init];
+    self.window.rootViewController = hvc;
+
+    self.window.backgroundColor = [UIColor grayColor];
     [self.window makeKeyAndVisible];
     return YES;
 }
