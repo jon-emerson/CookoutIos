@@ -12,22 +12,22 @@
 
 @property (copy, readonly) NSString *name;
 @property (copy, readonly) NSString *subtitle;
-@property (copy, readonly) NSString *imageFilename;
-@property (copy, readonly) NSString *profileImageFilename;
+@property (copy, readonly) NSURL *imageUrl;
+@property (copy, readonly) NSURL *profileImageUrl;
 @property (copy, readonly) NSArray *ingredients;
 @property (copy, readonly) NSString *description;
 
 // Designated initalizer for BNRItem.
 - (instancetype)initWithName:(NSString *)name
                     subtitle:(NSString *)subtitle
-               imageFilename:(NSString *)imageFilename
-        profileImageFilename:(NSString *)profileImageFilename
+                    imageUrl:(NSURL *)imageUrl
+             profileImageUrl:(NSURL *)profileImageUrl
                  ingredients:(NSArray *)ingredients
                  description:(NSString *)description;
 
 - (instancetype)initWithName:(NSString *)name
                     subtitle:(NSString *)subtitle
-               imageFilename:(NSString *)imageFilename
-        profileImageFilename:(NSString *)profileImageFilename;
+                    imageUrl:(NSURL *)imageUrl
+             profileImageUrl:(NSURL *)profileImageUrl;
 
 @end

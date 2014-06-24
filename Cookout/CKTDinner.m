@@ -17,8 +17,8 @@
 
 - (instancetype)initWithName:(NSString *)name
                     subtitle:(NSString *)subtitle
-               imageFilename:(NSString *)imageFilename
-        profileImageFilename:(NSString *)profileImageFilename
+                    imageUrl:(NSURL *)imageUrl
+             profileImageUrl:(NSURL *)profileImageUrl
                  ingredients:(NSArray *)ingredients
                  description:(NSString *)description
 {
@@ -27,8 +27,8 @@
     if (self) {
         _name = name;
         _subtitle = subtitle;
-        _imageFilename = imageFilename;
-        _profileImageFilename = profileImageFilename;
+        _imageUrl = imageUrl;
+        _profileImageUrl = profileImageUrl;
         _ingredients = ingredients;
         _description = description;
     }
@@ -38,13 +38,13 @@
 
 - (instancetype)initWithName:(NSString *)name
                     subtitle:(NSString *)subtitle
-               imageFilename:(NSString *)imageFilename
-        profileImageFilename:(NSString *)profileImageFilename
+               imageUrl:(NSURL *)imageUrl
+        profileImageUrl:(NSURL *)profileImageUrl
 {
     return [self initWithName:name
                      subtitle:subtitle
-                imageFilename:imageFilename
-         profileImageFilename:profileImageFilename
+                     imageUrl:imageUrl
+              profileImageUrl:profileImageUrl
                   ingredients:[[NSArray alloc] init]
                   description:@""];
 }
