@@ -1,14 +1,14 @@
 //
-//  CKTDish.m
+//  CKTDinner.m
 //  Cookout
 //
-//  Created by Jonathan Emerson on 6/16/14.
+//  Created by Jonathan Emerson on 6/17/14.
 //  Copyright (c) 2014 Cookout. All rights reserved.
 //
 
-#import "CKTDish.h"
+#import "CKTDinner.h"
 
-@implementation CKTDish
+@implementation CKTDinner
 
 - (instancetype)init
 {
@@ -29,6 +29,8 @@
         _subtitle = subtitle;
         _imageFilename = imageFilename;
         _profileImageFilename = profileImageFilename;
+        _ingredients = ingredients;
+        _description = description;
     }
     
     return self;
@@ -42,7 +44,7 @@
     return [self initWithName:name
                      subtitle:subtitle
                 imageFilename:imageFilename
-            profileImageFilename:profileImageFilename
+         profileImageFilename:profileImageFilename
                   ingredients:[[NSArray alloc] init]
                   description:@""];
 }

@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CKTDish.h"
+#import "CKTDinner.h"
 
 @interface CKTHomeViewCell : UITableViewCell
 
-- (void)populate:(CKTDish *)dish;
+- (void)populate:(CKTDinner *)dish;
 
 @end

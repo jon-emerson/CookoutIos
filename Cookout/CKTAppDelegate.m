@@ -17,7 +17,9 @@
     
     // Override point for customization after application launch.
     CKTHomeViewController *hvc = [[CKTHomeViewController alloc] init];
-    self.window.rootViewController = hvc;
+    UINavigationController *navController = [[UINavigationController alloc]
+                                             initWithRootViewController:hvc];
+    self.window.rootViewController = navController;
 
     self.window.backgroundColor = [UIColor grayColor];
     [self.window makeKeyAndVisible];

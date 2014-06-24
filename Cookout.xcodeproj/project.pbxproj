@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FC2FFFC219514AA6000C8AF7 /* CKTDinnerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2FFFC019514AA6000C8AF7 /* CKTDinnerViewController.m */; };
+		FC2FFFC319514AA6000C8AF7 /* CKTDinnerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC2FFFC119514AA6000C8AF7 /* CKTDinnerViewController.xib */; };
+		FC2FFFC619514AE0000C8AF7 /* CKTDinner.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2FFFC519514AE0000C8AF7 /* CKTDinner.m */; };
 		FC9B5030194FBFAC00C32D97 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC9B502F194FBFAC00C32D97 /* Foundation.framework */; };
 		FC9B5032194FBFAC00C32D97 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC9B5031194FBFAC00C32D97 /* CoreGraphics.framework */; };
 		FC9B5034194FBFAC00C32D97 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC9B5033194FBFAC00C32D97 /* UIKit.framework */; };
@@ -39,7 +42,6 @@
 		FC9B508F194FDA3100C32D97 /* profile3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FC9B508A194FDA3100C32D97 /* profile3.jpg */; };
 		FC9B5090194FDA3100C32D97 /* profile4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FC9B508B194FDA3100C32D97 /* profile4.jpg */; };
 		FC9B5091194FDA3100C32D97 /* profile5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FC9B508C194FDA3100C32D97 /* profile5.jpg */; };
-		FC9B5094194FE9C200C32D97 /* CKTDish.m in Sources */ = {isa = PBXBuildFile; fileRef = FC9B5093194FE9C200C32D97 /* CKTDish.m */; };
 		FC9B5096194FFF7C00C32D97 /* cra.png in Resources */ = {isa = PBXBuildFile; fileRef = FC9B5095194FFF7C00C32D97 /* cra.png */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +56,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FC2FFFBF19514AA6000C8AF7 /* CKTDinnerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTDinnerViewController.h; sourceTree = "<group>"; };
+		FC2FFFC019514AA6000C8AF7 /* CKTDinnerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKTDinnerViewController.m; sourceTree = "<group>"; };
+		FC2FFFC119514AA6000C8AF7 /* CKTDinnerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CKTDinnerViewController.xib; sourceTree = "<group>"; };
+		FC2FFFC419514AE0000C8AF7 /* CKTDinner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTDinner.h; sourceTree = "<group>"; };
+		FC2FFFC519514AE0000C8AF7 /* CKTDinner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKTDinner.m; sourceTree = "<group>"; };
 		FC9B502C194FBFAC00C32D97 /* Cookout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cookout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC9B502F194FBFAC00C32D97 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FC9B5031194FBFAC00C32D97 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -92,8 +99,6 @@
 		FC9B508A194FDA3100C32D97 /* profile3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = profile3.jpg; sourceTree = "<group>"; };
 		FC9B508B194FDA3100C32D97 /* profile4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = profile4.jpg; sourceTree = "<group>"; };
 		FC9B508C194FDA3100C32D97 /* profile5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = profile5.jpg; sourceTree = "<group>"; };
-		FC9B5092194FE9C200C32D97 /* CKTDish.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTDish.h; sourceTree = "<group>"; };
-		FC9B5093194FE9C200C32D97 /* CKTDish.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKTDish.m; sourceTree = "<group>"; };
 		FC9B5095194FFF7C00C32D97 /* cra.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cra.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -168,8 +173,11 @@
 				FC9B5085194FD5A000C32D97 /* CKTHomeViewCell.xib */,
 				FC9B505E194FC77000C32D97 /* CKTHomeViewController.h */,
 				FC9B505F194FC77000C32D97 /* CKTHomeViewController.m */,
-				FC9B5092194FE9C200C32D97 /* CKTDish.h */,
-				FC9B5093194FE9C200C32D97 /* CKTDish.m */,
+				FC2FFFBF19514AA6000C8AF7 /* CKTDinnerViewController.h */,
+				FC2FFFC019514AA6000C8AF7 /* CKTDinnerViewController.m */,
+				FC2FFFC119514AA6000C8AF7 /* CKTDinnerViewController.xib */,
+				FC2FFFC419514AE0000C8AF7 /* CKTDinner.h */,
+				FC2FFFC519514AE0000C8AF7 /* CKTDinner.m */,
 				FC9B5073194FD08600C32D97 /* grill1.jpg */,
 				FC9B5068194FD06D00C32D97 /* hd1.png */,
 				FC9B5069194FD06D00C32D97 /* hd2.png */,
@@ -313,6 +321,7 @@
 				FC9B508D194FDA3100C32D97 /* profile1.jpg in Resources */,
 				FC9B5070194FD06D00C32D97 /* hd4.png in Resources */,
 				FC9B507C194FD08600C32D97 /* indian2.jpg in Resources */,
+				FC2FFFC319514AA6000C8AF7 /* CKTDinnerViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,8 +341,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC9B5060194FC77000C32D97 /* CKTHomeViewController.m in Sources */,
+				FC2FFFC619514AE0000C8AF7 /* CKTDinner.m in Sources */,
+				FC2FFFC219514AA6000C8AF7 /* CKTDinnerViewController.m in Sources */,
 				FC9B503C194FBFAC00C32D97 /* main.m in Sources */,
-				FC9B5094194FE9C200C32D97 /* CKTDish.m in Sources */,
 				FC9B5040194FBFAC00C32D97 /* CKTAppDelegate.m in Sources */,
 				FC9B5086194FD5A000C32D97 /* CKTHomeViewCell.m in Sources */,
 			);
@@ -532,6 +542,7 @@
 				FC9B505A194FBFAC00C32D97 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FC9B505B194FBFAC00C32D97 /* Build configuration list for PBXNativeTarget "CookoutTests" */ = {
 			isa = XCConfigurationList;
@@ -540,6 +551,7 @@
 				FC9B505D194FBFAC00C32D97 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

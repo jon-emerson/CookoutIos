@@ -22,12 +22,12 @@
     [super awakeFromNib];
 }
 
-- (void)populate:(CKTDish *)dish
+- (void)populate:(CKTDinner *)dinner
 {
-    self.foodImage.image = [UIImage imageNamed:[dish imageFilename]];
-    self.profileImage.image = [UIImage imageNamed:[dish profileImageFilename]];
-    self.foodLabel.text = [dish name];
-    self.subtitleLabel.text = [dish subtitle];
+    self.foodImage.image = [UIImage imageNamed:[dinner imageFilename]];
+    self.profileImage.image = [UIImage imageNamed:[dinner profileImageFilename]];
+    self.foodLabel.text = [dinner name];
+    self.subtitleLabel.text = [dinner subtitle];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
