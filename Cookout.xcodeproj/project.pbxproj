@@ -126,6 +126,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FC0B06FE195A009600DF3BD2 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				FC9B5078194FD08600C32D97 /* thai.jpg */,
+				FC9B5074194FD08600C32D97 /* indian1.jpg */,
+				FC9B5075194FD08600C32D97 /* indian2.jpg */,
+				FC9B5076194FD08600C32D97 /* mexican1.jpg */,
+				FC9B5077194FD08600C32D97 /* peruvian1.jpg */,
+				FC9B5073194FD08600C32D97 /* grill1.jpg */,
+				FC9B5068194FD06D00C32D97 /* hd1.png */,
+				FC9B5069194FD06D00C32D97 /* hd2.png */,
+				FC9B506A194FD06D00C32D97 /* hd3.png */,
+				FC9B506B194FD06D00C32D97 /* hd4.png */,
+				FC9B506C194FD06D00C32D97 /* hd5.png */,
+				FC9B5095194FFF7C00C32D97 /* cra.png */,
+				FC9B5088194FDA3100C32D97 /* profile1.jpg */,
+				FC9B5089194FDA3100C32D97 /* profile2.jpg */,
+				FC9B508A194FDA3100C32D97 /* profile3.jpg */,
+				FC9B508B194FDA3100C32D97 /* profile4.jpg */,
+				FC9B508C194FDA3100C32D97 /* profile5.jpg */,
+				FC9B5072194FD08600C32D97 /* chinese1.jpg */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
 		FC9B5023194FBFAC00C32D97 = {
 			isa = PBXGroup;
 			children = (
@@ -159,13 +184,7 @@
 		FC9B5035194FBFAC00C32D97 /* Cookout */ = {
 			isa = PBXGroup;
 			children = (
-				FC9B5095194FFF7C00C32D97 /* cra.png */,
-				FC9B5088194FDA3100C32D97 /* profile1.jpg */,
-				FC9B5089194FDA3100C32D97 /* profile2.jpg */,
-				FC9B508A194FDA3100C32D97 /* profile3.jpg */,
-				FC9B508B194FDA3100C32D97 /* profile4.jpg */,
-				FC9B508C194FDA3100C32D97 /* profile5.jpg */,
-				FC9B5072194FD08600C32D97 /* chinese1.jpg */,
+				FC0B06FE195A009600DF3BD2 /* Assets */,
 				FC9B503E194FBFAC00C32D97 /* CKTAppDelegate.h */,
 				FC9B503F194FBFAC00C32D97 /* CKTAppDelegate.m */,
 				FC9B5083194FD5A000C32D97 /* CKTHomeViewCell.h */,
@@ -178,19 +197,8 @@
 				FC2FFFC119514AA6000C8AF7 /* CKTDinnerViewController.xib */,
 				FC2FFFC419514AE0000C8AF7 /* CKTDinner.h */,
 				FC2FFFC519514AE0000C8AF7 /* CKTDinner.m */,
-				FC9B5073194FD08600C32D97 /* grill1.jpg */,
-				FC9B5068194FD06D00C32D97 /* hd1.png */,
-				FC9B5069194FD06D00C32D97 /* hd2.png */,
-				FC9B506A194FD06D00C32D97 /* hd3.png */,
-				FC9B506B194FD06D00C32D97 /* hd4.png */,
-				FC9B506C194FD06D00C32D97 /* hd5.png */,
 				FC9B5041194FBFAC00C32D97 /* Images.xcassets */,
-				FC9B5074194FD08600C32D97 /* indian1.jpg */,
-				FC9B5075194FD08600C32D97 /* indian2.jpg */,
-				FC9B5076194FD08600C32D97 /* mexican1.jpg */,
-				FC9B5077194FD08600C32D97 /* peruvian1.jpg */,
 				FC9B5036194FBFAC00C32D97 /* Supporting Files */,
-				FC9B5078194FD08600C32D97 /* thai.jpg */,
 			);
 			path = Cookout;
 			sourceTree = "<group>";
