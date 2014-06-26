@@ -7,6 +7,8 @@
 //
 
 #import "CKTAsyncImageView.h"
+#import "CKTChef.h"
+#import "CKTDataModel.h"
 #import "CKTDinnerViewController.h"
 
 @interface CKTDinnerViewController ()
@@ -33,11 +35,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view from its nib.
+    CKTChef *chef = [CKTDataModel.sharedDataModel chefWithId:self.dinner.chefId];
     self.foodImage.imageURL = [self.dinner imageUrl];
-    self.profileImage.imageURL = [self.dinner profileImageUrl];
+    self.profileImage.imageURL = [chef imageUrl];
     self.foodLabel.text = [self.dinner name];
-    self.subtitleLabel.text = [self.dinner subtitle];
+    self.subtitleLabel.text = [chef name];
     self.descriptionLabel.text = [self.dinner description];
     self.descriptionLabel.numberOfLines = 0;
     [self.descriptionLabel sizeToFit];
