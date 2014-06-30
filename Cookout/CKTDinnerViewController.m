@@ -6,11 +6,14 @@
 //  Copyright (c) 2014 Cookout. All rights reserved.
 //
 
+#import "CKTAsyncImageView.h"
+#import "CKTChef.h"
+#import "CKTDataModel.h"
 #import "CKTDinnerViewController.h"
 
 @interface CKTDinnerViewController ()
-@property (weak, nonatomic) IBOutlet UIImageView *foodImage;
-@property (weak, nonatomic) IBOutlet UIImageView *profileImage;
+@property (weak, nonatomic) IBOutlet CKTAsyncImageView *foodImage;
+@property (weak, nonatomic) IBOutlet CKTAsyncImageView *profileImage;
 @property (weak, nonatomic) IBOutlet UILabel *foodLabel;
 @property (weak, nonatomic) IBOutlet UILabel *subtitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
@@ -25,7 +28,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        
     }
     return self;
 }
@@ -33,11 +35,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view from its nib.
-    self.foodImage.image = [UIImage imageNamed:[self.dinner imageFilename]];
-    self.profileImage.image = [UIImage imageNamed:[self.dinner profileImageFilename]];
+    CKTChef *chef = [CKTDataModel.sharedDataModel chefWithId:self.dinner.chefId];
+    self.foodImage.imageURL = [self.dinner imageUrl];
+    self.profileImage.imageURL = [chef imageUrl];
     self.foodLabel.text = [self.dinner name];
-    self.subtitleLabel.text = [self.dinner subtitle];
+    self.subtitleLabel.text = [chef name];
     self.descriptionLabel.text = [self.dinner description];
     self.descriptionLabel.numberOfLines = 0;
     [self.descriptionLabel sizeToFit];

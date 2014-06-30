@@ -10,24 +10,23 @@
 
 @interface CKTDinner : NSObject
 
+@property (copy, readonly) NSString *dinnerId;
 @property (copy, readonly) NSString *name;
-@property (copy, readonly) NSString *subtitle;
+@property (copy, readonly) NSString *chefId;
 @property (copy, readonly) NSString *imageFilename;
-@property (copy, readonly) NSString *profileImageFilename;
 @property (copy, readonly) NSArray *ingredients;
 @property (copy, readonly) NSString *description;
 
 // Designated initalizer for BNRItem.
-- (instancetype)initWithName:(NSString *)name
-                    subtitle:(NSString *)subtitle
-               imageFilename:(NSString *)imageFilename
-        profileImageFilename:(NSString *)profileImageFilename
-                 ingredients:(NSArray *)ingredients
-                 description:(NSString *)description;
+- (instancetype)initWithDinnerId:(NSString *)dinnerId
+                            name:(NSString *)name
+                          chefId:(NSString *)chefId
+                   imageFilename:(NSString *)imageFilename
+                     ingredients:(NSArray *)ingredients
+                     description:(NSString *)description;
 
-- (instancetype)initWithName:(NSString *)name
-                    subtitle:(NSString *)subtitle
-               imageFilename:(NSString *)imageFilename
-        profileImageFilename:(NSString *)profileImageFilename;
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary;
+
+- (NSURL *)imageUrl;
 
 @end

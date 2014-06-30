@@ -5,7 +5,11 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
+<<<<<<< HEAD
 	<string>B5A90C43-57FB-4AC1-B7D9-CD0A63250457</string>
+=======
+	<string>9061C9A1-D771-4C2B-969C-9BCD5C8D1FB2</string>
+>>>>>>> FETCH_HEAD
 	<key>IDESourceControlProjectName</key>
 	<string>Cookout</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>

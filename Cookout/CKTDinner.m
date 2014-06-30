@@ -8,6 +8,10 @@
 
 #import "CKTDinner.h"
 
+@interface CKTDinner ()
+@property (nonatomic, strong) NSURL *imageUrl;
+@end
+
 @implementation CKTDinner
 
 - (instancetype)init
@@ -15,20 +19,20 @@
     return nil;
 }
 
-- (instancetype)initWithName:(NSString *)name
-                    subtitle:(NSString *)subtitle
-               imageFilename:(NSString *)imageFilename
-        profileImageFilename:(NSString *)profileImageFilename
-                 ingredients:(NSArray *)ingredients
-                 description:(NSString *)description
+- (instancetype)initWithDinnerId:(NSString *)dinnerId
+                            name:(NSString *)name
+                          chefId:(NSString *)chefId
+                   imageFilename:(NSString *)imageFilename
+                     ingredients:(NSArray *)ingredients
+                     description:(NSString *)description
 {
     self = [super init];
     
     if (self) {
+        _dinnerId = dinnerId;
         _name = name;
-        _subtitle = subtitle;
+        _chefId = chefId;
         _imageFilename = imageFilename;
-        _profileImageFilename = profileImageFilename;
         _ingredients = ingredients;
         _description = description;
     }
@@ -36,17 +40,27 @@
     return self;
 }
 
-- (instancetype)initWithName:(NSString *)name
-                    subtitle:(NSString *)subtitle
-               imageFilename:(NSString *)imageFilename
-        profileImageFilename:(NSString *)profileImageFilename
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary
 {
-    return [self initWithName:name
-                     subtitle:subtitle
-                imageFilename:imageFilename
-         profileImageFilename:profileImageFilename
-                  ingredients:[[NSArray alloc] init]
-                  description:@""];
+    NSMutableArray *ingredients = [[NSMutableArray alloc] init];
+    if ([dictionary valueForKey:@"ingredients"]) {
+        [ingredients addObjectsFromArray:[dictionary valueForKey:@"ingredients"]];
+    }
+    return [self initWithDinnerId:[dictionary valueForKey:@"id"]
+                             name:[dictionary valueForKey:@"name"]
+                           chefId:[dictionary valueForKey:@"chefId"]
+                    imageFilename:[dictionary valueForKey:@"imageFilename"]
+                      ingredients:ingredients
+                      description:[dictionary valueForKey:@"description"]];
+}
+
+- (NSURL *)imageUrl {
+    if (!_imageUrl) {
+        _imageUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",
+                          @"http://cookout-assets.s3-website-us-east-1.amazonaws.com/",
+                          self.imageFilename]];
+    }
+    return _imageUrl;
 }
 
 @end
