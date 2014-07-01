@@ -12,10 +12,10 @@
 		FC0B070B195B8AE300DF3BD2 /* CKTDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B070A195B8AE300DF3BD2 /* CKTDataModel.m */; };
 		FC0B070E195B8BA700DF3BD2 /* CKTChef.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B070D195B8BA700DF3BD2 /* CKTChef.m */; };
 		FC0B0711195B947F00DF3BD2 /* CKTDataModelBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B0710195B947F00DF3BD2 /* CKTDataModelBuilder.m */; };
-		FC0B0719195CD0C200DF3BD2 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0B0718195CD0C200DF3BD2 /* FacebookSDK.framework */; };
 		FC0B071B195CE52500DF3BD2 /* cookout-logo-160.png in Resources */ = {isa = PBXBuildFile; fileRef = FC0B071A195CE52500DF3BD2 /* cookout-logo-160.png */; };
 		FC0B0720195CEF8200DF3BD2 /* CKTNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B071F195CEF8200DF3BD2 /* CKTNavigationBar.m */; };
 		FC0B07241962638800DF3BD2 /* CKTFacebookSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B07231962638800DF3BD2 /* CKTFacebookSessionManager.m */; };
+		FC0B072919634D8000DF3BD2 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0B072819634D8000DF3BD2 /* FacebookSDK.framework */; };
 		FC2FFFC219514AA6000C8AF7 /* CKTDinnerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2FFFC019514AA6000C8AF7 /* CKTDinnerViewController.m */; };
 		FC2FFFC319514AA6000C8AF7 /* CKTDinnerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC2FFFC119514AA6000C8AF7 /* CKTDinnerViewController.xib */; };
 		FC2FFFC619514AE0000C8AF7 /* CKTDinner.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2FFFC519514AE0000C8AF7 /* CKTDinner.m */; };
@@ -58,7 +58,6 @@
 		FC0B070F195B947F00DF3BD2 /* CKTDataModelBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTDataModelBuilder.h; sourceTree = "<group>"; };
 		FC0B0710195B947F00DF3BD2 /* CKTDataModelBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKTDataModelBuilder.m; sourceTree = "<group>"; };
 		FC0B0717195BCFDF00DF3BD2 /* CKTDataModelChangeDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKTDataModelChangeDelegate.h; sourceTree = "<group>"; };
-		FC0B0718195CD0C200DF3BD2 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		FC0B071A195CE52500DF3BD2 /* cookout-logo-160.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cookout-logo-160.png"; sourceTree = "<group>"; };
 		FC0B071E195CEF8200DF3BD2 /* CKTNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTNavigationBar.h; sourceTree = "<group>"; };
 		FC0B071F195CEF8200DF3BD2 /* CKTNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKTNavigationBar.m; sourceTree = "<group>"; };
@@ -66,6 +65,7 @@
 		FC0B07221962638800DF3BD2 /* CKTFacebookSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTFacebookSessionManager.h; sourceTree = "<group>"; };
 		FC0B07231962638800DF3BD2 /* CKTFacebookSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKTFacebookSessionManager.m; sourceTree = "<group>"; };
 		FC0B07251963315000DF3BD2 /* CKTFacebookSessionListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKTFacebookSessionListener.h; sourceTree = "<group>"; };
+		FC0B072819634D8000DF3BD2 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		FC2FFFBF19514AA6000C8AF7 /* CKTDinnerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTDinnerViewController.h; sourceTree = "<group>"; };
 		FC2FFFC019514AA6000C8AF7 /* CKTDinnerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKTDinnerViewController.m; sourceTree = "<group>"; };
 		FC2FFFC119514AA6000C8AF7 /* CKTDinnerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CKTDinnerViewController.xib; sourceTree = "<group>"; };
@@ -100,7 +100,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC9B5032194FBFAC00C32D97 /* CoreGraphics.framework in Frameworks */,
-				FC0B0719195CD0C200DF3BD2 /* FacebookSDK.framework in Frameworks */,
+				FC0B072919634D8000DF3BD2 /* FacebookSDK.framework in Frameworks */,
 				FC9B5034194FBFAC00C32D97 /* UIKit.framework in Frameworks */,
 				FC9B5030194FBFAC00C32D97 /* Foundation.framework in Frameworks */,
 			);
@@ -141,9 +141,9 @@
 		FC9B502E194FBFAC00C32D97 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				FC0B0718195CD0C200DF3BD2 /* FacebookSDK.framework */,
-				FC9B502F194FBFAC00C32D97 /* Foundation.framework */,
 				FC9B5031194FBFAC00C32D97 /* CoreGraphics.framework */,
+				FC0B072819634D8000DF3BD2 /* FacebookSDK.framework */,
+				FC9B502F194FBFAC00C32D97 /* Foundation.framework */,
 				FC9B5033194FBFAC00C32D97 /* UIKit.framework */,
 				FC9B5048194FBFAC00C32D97 /* XCTest.framework */,
 			);
@@ -154,9 +154,6 @@
 			isa = PBXGroup;
 			children = (
 				FC9B503E194FBFAC00C32D97 /* CKTAppDelegate.h */,
-				FC0B07221962638800DF3BD2 /* CKTFacebookSessionManager.h */,
-				FC0B07231962638800DF3BD2 /* CKTFacebookSessionManager.m */,
-				FC0B07251963315000DF3BD2 /* CKTFacebookSessionListener.h */,
 				FC9B503F194FBFAC00C32D97 /* CKTAppDelegate.m */,
 				FC0B06FF195A266200DF3BD2 /* CKTAsyncImageView.h */,
 				FC0B0700195A266200DF3BD2 /* CKTAsyncImageView.m */,
@@ -173,6 +170,9 @@
 				FC2FFFBF19514AA6000C8AF7 /* CKTDinnerViewController.h */,
 				FC2FFFC019514AA6000C8AF7 /* CKTDinnerViewController.m */,
 				FC2FFFC119514AA6000C8AF7 /* CKTDinnerViewController.xib */,
+				FC0B07251963315000DF3BD2 /* CKTFacebookSessionListener.h */,
+				FC0B07221962638800DF3BD2 /* CKTFacebookSessionManager.h */,
+				FC0B07231962638800DF3BD2 /* CKTFacebookSessionManager.m */,
 				FC9B5083194FD5A000C32D97 /* CKTHomeViewCell.h */,
 				FC9B5084194FD5A000C32D97 /* CKTHomeViewCell.m */,
 				FC9B5085194FD5A000C32D97 /* CKTHomeViewCell.xib */,
@@ -449,6 +449,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/jon/Documents/FacebookSDK,
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cookout/Cookout-Prefix.pch";
@@ -466,6 +467,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/jon/Documents/FacebookSDK,
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cookout/Cookout-Prefix.pch";
