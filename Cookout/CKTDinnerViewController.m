@@ -66,10 +66,10 @@
     [scrollView addConstraint:[NSLayoutConstraint constraintWithItem:child
                                                               attribute:NSLayoutAttributeBottom
                                                               relatedBy:NSLayoutRelationEqual
-                                                                 toItem:scrollView
+                                                              toItem:scrollView
                                                               attribute:NSLayoutAttributeBottom
-                                                             multiplier:1.0
-                                                               constant:0.0]];
+                                                              multiplier:1.0
+                                                              constant:0.0]];
 }
 
 - (void) didReceiveMemoryWarning
