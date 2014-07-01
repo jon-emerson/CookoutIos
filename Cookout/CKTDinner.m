@@ -63,4 +63,23 @@
     return _imageUrl;
 }
 
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeObject:_dinnerId forKey:@"dinnerId"];
+    [encoder encodeObject:_name forKey:@"name"];
+    [encoder encodeObject:_chefId forKey:@"chefId"];
+    [encoder encodeObject:_imageFilename forKey:@"imageFilename"];
+    [encoder encodeObject:_ingredients forKey:@"ingredients"];
+    [encoder encodeObject:_description forKey:@"description"];
+}
+
+- (instancetype)initWithCoder:(NSCoder *)decoder {
+    _dinnerId = [decoder decodeObjectForKey:@"dinnerId"];
+    _name = [decoder decodeObjectForKey:@"name"];
+    _chefId = [decoder decodeObjectForKey:@"chefId"];
+    _imageFilename = [decoder decodeObjectForKey:@"imageFilename"];
+    _ingredients = [decoder decodeObjectForKey:@"ingredients"];
+    _description = [decoder decodeObjectForKey:@"description"];
+    return self;
+}
+
 @end

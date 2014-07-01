@@ -51,4 +51,17 @@
     return _imageUrl;
 }
 
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeObject:_chefId forKey:@"chefId"];
+    [encoder encodeObject:_name forKey:@"name"];
+    [encoder encodeObject:_imageFilename forKey:@"imageFilename"];
+}
+
+- (instancetype)initWithCoder:(NSCoder *)decoder {
+    _chefId = [decoder decodeObjectForKey:@"chefId"];
+    _name = [decoder decodeObjectForKey:@"name"];
+    _imageFilename = [decoder decodeObjectForKey:@"imageFilename"];
+    return self;
+}
+
 @end

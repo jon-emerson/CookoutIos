@@ -25,7 +25,6 @@
             [delegate dataModelError:error];
         } else {
             NSString *jsonStr = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] substringFromIndex:[jsonPrefix length]];
-            NSLog(@"Got data: %@", jsonStr);
             [CKTDataModelBuilder populateDataModelFromJSON:jsonStr];
             [delegate dataModelInitialized];
         }

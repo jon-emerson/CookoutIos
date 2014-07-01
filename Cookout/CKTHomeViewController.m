@@ -32,7 +32,6 @@
     [super viewDidLoad];
 
     self.tableView.separatorColor = [UIColor clearColor];
-    
     [CKTServerCommunicator initializeDataModel:self];
 }
 
@@ -52,14 +51,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"numberOfRowsInSection called, count = %d",
-          [[[CKTDataModel sharedDataModel] dinners] count]);
     return [[[CKTDataModel sharedDataModel] dinners] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"cellForRowAtIndexPath called");
     static NSString *CellIdentifier = @"homeViewCell";
     CKTHomeViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {

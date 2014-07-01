@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CKTDinner : NSObject
+@interface CKTDinner : NSObject <NSCoding>
 
 @property (copy, readonly) NSString *dinnerId;
 @property (copy, readonly) NSString *name;

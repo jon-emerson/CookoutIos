@@ -7,7 +7,10 @@
 //
 
 #import "CKTAppDelegate.h"
+#import "CKTDefines.h"
+#import "CKTFacebookSessionManager.h"
 #import "CKTHomeViewController.h"
+#import "CKTNavigationBar.h"
 
 @implementation CKTAppDelegate
 
@@ -17,13 +20,24 @@
     
     // Override point for customization after application launch.
     CKTHomeViewController *hvc = [[CKTHomeViewController alloc] init];
-    UINavigationController *navController = [[UINavigationController alloc]
-                                             initWithRootViewController:hvc];
+    UINavigationController *navController = [[UINavigationController alloc] initWithNavigationBarClass:[CKTNavigationBar class] toolbarClass:nil];
+    navController.viewControllers = @[hvc];
+    
     self.window.rootViewController = navController;
 
-    self.window.backgroundColor = [UIColor grayColor];
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    // attempt to extract a token from the url
+    FBSession *session = [CKTFacebookSessionManager sharedFacebookSessionManager].session;
+    return [FBAppCall handleOpenURL:url
+                  sourceApplication:sourceApplication
+                        withSession:session];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -46,11 +60,13 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [[CKTFacebookSessionManager sharedFacebookSessionManager] applicationDidBecomeActive:application];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [[CKTFacebookSessionManager sharedFacebookSessionManager] applicationWillTerminate:application];
 }
 
 @end

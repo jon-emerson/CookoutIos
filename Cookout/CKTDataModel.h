@@ -11,11 +11,12 @@
 #import "CKTChef.h"
 #import "CKTDinner.h"
 
-@interface CKTDataModel : NSObject
+@interface CKTDataModel : NSObject <NSCoding>
 + (instancetype)sharedDataModel;
 - (NSArray *)dinners;
 - (CKTChef *)chefWithId:(NSString *)id;
 - (void)addDinner:(CKTDinner *)dinner;
 - (void)addChef:(CKTChef *)chef;
+- (BOOL)saveToDisk;
 
 @end

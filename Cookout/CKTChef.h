@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CKTChef : NSObject
+@interface CKTChef : NSObject <NSCoding>
 
 @property (copy, readonly) NSString *chefId;
 @property (copy, readonly) NSString *name;
