@@ -28,14 +28,14 @@
                                  filename]];
 }
 
-- (void)viewDidLoad {
+- (void) viewDidLoad {
     [super viewDidLoad];
 
     self.tableView.separatorColor = [UIColor clearColor];
     [CKTServerCommunicator initializeDataModel:self];
 }
 
-- (void)dataModelInitialized
+- (void) dataModelInitialized
 {
     NSLog(@"Data model initialized!");
     
@@ -44,17 +44,17 @@
     });
 }
 
-- (void)dataModelError:(NSError *)error
+- (void) dataModelError:(NSError *)error
 {
     NSLog(@"Data model error: %@", error);
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [[[CKTDataModel sharedDataModel] dinners] count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"homeViewCell";
     CKTHomeViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -69,7 +69,7 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CKTDinnerViewController *dinnerViewController =
     [[CKTDinnerViewController alloc] init];
@@ -80,5 +80,8 @@
     
     [self.navigationController pushViewController:dinnerViewController animated:YES];
 }
+
+
+
 
 @end

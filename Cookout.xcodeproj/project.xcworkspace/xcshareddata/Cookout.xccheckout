@@ -5,36 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>9061C9A1-D771-4C2B-969C-9BCD5C8D1FB2</string>
+	<string>CF07F607-2A2E-4F9B-ADB3-148B383A2DB0</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Cookout</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>1FFC9F6A-7AB8-4783-9CF2-AB00996989F9</key>
-		<string>ssh://github.com/cookout/Cookout.git</string>
+		<key>FEBFDE5B-2B0B-4BB0-BFDF-C4D3C0C0D0B5</key>
+		<string>https://github.com/cookout/CookoutIos.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Cookout.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>1FFC9F6A-7AB8-4783-9CF2-AB00996989F9</key>
+		<key>FEBFDE5B-2B0B-4BB0-BFDF-C4D3C0C0D0B5</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://github.com/cookout/Cookout.git</string>
+	<string>https://github.com/cookout/CookoutIos.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>1FFC9F6A-7AB8-4783-9CF2-AB00996989F9</string>
+	<string>FEBFDE5B-2B0B-4BB0-BFDF-C4D3C0C0D0B5</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>1FFC9F6A-7AB8-4783-9CF2-AB00996989F9</string>
+			<string>FEBFDE5B-2B0B-4BB0-BFDF-C4D3C0C0D0B5</string>
 			<key>IDESourceControlWCCName</key>
-			<string>Cookout</string>
+			<string>CookoutIos</string>
 		</dict>
 	</array>
 </dict>
