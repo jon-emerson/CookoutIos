@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		209593A41963C15D00C0C007 /* CKTCheckoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 209593A21963C15D00C0C007 /* CKTCheckoutViewController.m */; };
+		209593A51963C15D00C0C007 /* CKTCheckoutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 209593A31963C15D00C0C007 /* CKTCheckoutViewController.xib */; };
 		FC0B0701195A266200DF3BD2 /* CKTAsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B0700195A266200DF3BD2 /* CKTAsyncImageView.m */; };
 		FC0B0708195B7D6300DF3BD2 /* CKTServerCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B0707195B7D6300DF3BD2 /* CKTServerCommunicator.m */; };
 		FC0B070B195B8AE300DF3BD2 /* CKTDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B070A195B8AE300DF3BD2 /* CKTDataModel.m */; };
@@ -47,6 +49,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		209593A11963C15D00C0C007 /* CKTCheckoutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTCheckoutViewController.h; sourceTree = "<group>"; };
+		209593A21963C15D00C0C007 /* CKTCheckoutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKTCheckoutViewController.m; sourceTree = "<group>"; };
+		209593A31963C15D00C0C007 /* CKTCheckoutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CKTCheckoutViewController.xib; sourceTree = "<group>"; };
 		FC0B06FF195A266200DF3BD2 /* CKTAsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTAsyncImageView.h; sourceTree = "<group>"; };
 		FC0B0700195A266200DF3BD2 /* CKTAsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKTAsyncImageView.m; sourceTree = "<group>"; };
 		FC0B0706195B7D6300DF3BD2 /* CKTServerCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTServerCommunicator.h; sourceTree = "<group>"; };
@@ -172,6 +177,9 @@
 				FC2FFFC119514AA6000C8AF7 /* CKTDinnerViewController.xib */,
 				FC0B07251963315000DF3BD2 /* CKTFacebookSessionListener.h */,
 				FC0B07221962638800DF3BD2 /* CKTFacebookSessionManager.h */,
+				209593A11963C15D00C0C007 /* CKTCheckoutViewController.h */,
+				209593A21963C15D00C0C007 /* CKTCheckoutViewController.m */,
+				209593A31963C15D00C0C007 /* CKTCheckoutViewController.xib */,
 				FC0B07231962638800DF3BD2 /* CKTFacebookSessionManager.m */,
 				FC9B5083194FD5A000C32D97 /* CKTHomeViewCell.h */,
 				FC9B5084194FD5A000C32D97 /* CKTHomeViewCell.m */,
@@ -295,6 +303,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC0B071B195CE52500DF3BD2 /* cookout-logo-160.png in Resources */,
+				209593A51963C15D00C0C007 /* CKTCheckoutViewController.xib in Resources */,
 				FC9B503A194FBFAC00C32D97 /* InfoPlist.strings in Resources */,
 				FC9B5087194FD5A000C32D97 /* CKTHomeViewCell.xib in Resources */,
 				FC9B5042194FBFAC00C32D97 /* Images.xcassets in Resources */,
@@ -320,6 +329,7 @@
 				FC9B5060194FC77000C32D97 /* CKTHomeViewController.m in Sources */,
 				FC2FFFC619514AE0000C8AF7 /* CKTDinner.m in Sources */,
 				FC2FFFC219514AA6000C8AF7 /* CKTDinnerViewController.m in Sources */,
+				209593A41963C15D00C0C007 /* CKTCheckoutViewController.m in Sources */,
 				FC9B503C194FBFAC00C32D97 /* main.m in Sources */,
 				FC0B070E195B8BA700DF3BD2 /* CKTChef.m in Sources */,
 				FC0B0708195B7D6300DF3BD2 /* CKTServerCommunicator.m in Sources */,

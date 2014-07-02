@@ -16,6 +16,8 @@
 @property (copy, readonly) NSString *imageFilename;
 @property (copy, readonly) NSArray *ingredients;
 @property (copy, readonly) NSString *description;
+@property (readonly) float price;
+@property (readonly) NSInteger numAvailable;
 
 // Designated initalizer for BNRItem.
 - (instancetype)initWithDinnerId:(NSString *)dinnerId

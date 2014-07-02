@@ -24,9 +24,8 @@
     if (self) {
         // Initialization code
         [[CKTFacebookSessionManager sharedFacebookSessionManager] addListener:self];
-
+        
         // Setup the custom bar style for Cookout
-        self.barTintColor = UIColorFromRGB(0xED462F);
         self.barStyle = UIBarStyleBlack;
         self.backgroundColor = UIColorFromRGB(0xED462F);
         self.translucent = NO;

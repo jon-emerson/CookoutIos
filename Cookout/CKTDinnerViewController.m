@@ -10,6 +10,7 @@
 #import "CKTChef.h"
 #import "CKTDataModel.h"
 #import "CKTDinnerViewController.h"
+#import "CKTCheckoutViewController.h"
 
 @interface CKTDinnerViewController ()
 @property (weak, nonatomic) IBOutlet CKTAsyncImageView *foodImage;
@@ -18,6 +19,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *subtitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *ingredientsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *price;
+@property (weak, nonatomic) IBOutlet UIStepper *quantityStepper;
+@property (weak, nonatomic) IBOutlet UITextField *quantity;
+@property (weak, nonatomic) IBOutlet UIButton *orderButton;
+@property (weak, nonatomic) IBOutlet UIView * starRatings;
+@property (weak, nonatomic) IBOutlet UILabel * quantityAvailable;
 
 @end
 
@@ -34,10 +41,29 @@
     return self;
 }
 
+- (IBAction)incrementDecrementOrder:(id)sender
+{
+    // Handle increment & decrement of order size
+    NSNumber *stepperValue = [NSNumber numberWithDouble:self.quantityStepper.value];
+    self.quantity.text = [stepperValue stringValue];
+}
+
+- (IBAction)placeOrder:(id)sender
+{
+    // Handle order button hit
+    
+    // Create an instance of the CKTCheckoutViewController and push
+    // it on the nav controller stack
+    CKTCheckoutViewController * checkout = [[CKTCheckoutViewController alloc] init];
+    [self.navigationController pushViewController:checkout animated:YES];
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    self.quantity.text = @"1";
     // Do any additional setup after loading the view from its nib.
     CKTChef *chef = [CKTDataModel.sharedDataModel chefWithId:self.dinner.chefId];
     self.foodImage.imageURL = [self.dinner imageUrl];
