@@ -11,6 +11,7 @@
 		209593A51963C15D00C0C007 /* CKTCheckoutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 209593A31963C15D00C0C007 /* CKTCheckoutViewController.xib */; };
 		209593A81964839200C0C007 /* CKTOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 209593A71964839200C0C007 /* CKTOrder.m */; };
 		209593AB196483B300C0C007 /* CKTUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 209593AA196483B300C0C007 /* CKTUser.m */; };
+		209593AE1964A81800C0C007 /* CKTAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 209593AD1964A81800C0C007 /* CKTAddress.m */; };
 		FC0B0701195A266200DF3BD2 /* CKTAsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B0700195A266200DF3BD2 /* CKTAsyncImageView.m */; };
 		FC0B0708195B7D6300DF3BD2 /* CKTServerCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B0707195B7D6300DF3BD2 /* CKTServerCommunicator.m */; };
 		FC0B070B195B8AE300DF3BD2 /* CKTDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B070A195B8AE300DF3BD2 /* CKTDataModel.m */; };
@@ -58,6 +59,8 @@
 		209593A71964839200C0C007 /* CKTOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKTOrder.m; sourceTree = "<group>"; };
 		209593A9196483B300C0C007 /* CKTUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTUser.h; sourceTree = "<group>"; };
 		209593AA196483B300C0C007 /* CKTUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKTUser.m; sourceTree = "<group>"; };
+		209593AC1964A81800C0C007 /* CKTAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTAddress.h; sourceTree = "<group>"; };
+		209593AD1964A81800C0C007 /* CKTAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKTAddress.m; sourceTree = "<group>"; };
 		FC0B06FF195A266200DF3BD2 /* CKTAsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTAsyncImageView.h; sourceTree = "<group>"; };
 		FC0B0700195A266200DF3BD2 /* CKTAsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKTAsyncImageView.m; sourceTree = "<group>"; };
 		FC0B0706195B7D6300DF3BD2 /* CKTServerCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTServerCommunicator.h; sourceTree = "<group>"; };
@@ -180,6 +183,8 @@
 				FC2FFFC519514AE0000C8AF7 /* CKTDinner.m */,
 				FC2FFFBF19514AA6000C8AF7 /* CKTDinnerViewController.h */,
 				FC2FFFC019514AA6000C8AF7 /* CKTDinnerViewController.m */,
+				209593AC1964A81800C0C007 /* CKTAddress.h */,
+				209593AD1964A81800C0C007 /* CKTAddress.m */,
 				FC2FFFC119514AA6000C8AF7 /* CKTDinnerViewController.xib */,
 				FC0B07251963315000DF3BD2 /* CKTFacebookSessionListener.h */,
 				FC0B07221962638800DF3BD2 /* CKTFacebookSessionManager.h */,
@@ -344,6 +349,7 @@
 				209593AB196483B300C0C007 /* CKTUser.m in Sources */,
 				FC9B503C194FBFAC00C32D97 /* main.m in Sources */,
 				FC0B070E195B8BA700DF3BD2 /* CKTChef.m in Sources */,
+				209593AE1964A81800C0C007 /* CKTAddress.m in Sources */,
 				FC0B0708195B7D6300DF3BD2 /* CKTServerCommunicator.m in Sources */,
 				FC0B07241962638800DF3BD2 /* CKTFacebookSessionManager.m in Sources */,
 				FC0B070B195B8AE300DF3BD2 /* CKTDataModel.m in Sources */,

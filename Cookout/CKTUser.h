@@ -7,21 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CKTAddress.h"
 
 @interface CKTUser : NSObject
 //TODO: Should these properties be copy
 @property (copy, readonly) NSString *FBUserId;
 @property (copy, readonly) NSString *name;
-@property (copy, readonly) NSString *phone;
-@property (copy, readonly) NSString *email;
-
-// User's delivery address
-@property (nonatomic, copy) NSString * streetAddressLine1;
-@property (nonatomic, copy) NSString * streetAddressLine2;
-@property (nonatomic, copy) NSString * unit;
-@property (nonatomic, copy) NSString * city;
-@property (nonatomic, copy) NSString * state;
-@property (nonatomic, copy) NSString * country;
-@property (nonatomic, copy) NSString * zipcode;
-
+@property (copy, nonatomic, readwrite) NSString *phone;
+@property (copy, nonatomic, readwrite) NSString *email;
+@property (copy, nonatomic, readwrite) CKTAddress *deliveryAddress;
+@property (copy, nonatomic, readwrite) CKTAddress *billingAddress;
 @end
