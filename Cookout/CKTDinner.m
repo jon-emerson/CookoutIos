@@ -23,6 +23,10 @@
                             name:(NSString *)name
                           chefId:(NSString *)chefId
                    imageFilename:(NSString *)imageFilename
+                           price:(NSNumber *)price
+                    numAvailable:(NSNumber *)numAvailable
+                 orderByDateTime:(NSDate *)orderByDateTime
+                deliveryDateTime:(NSDate *)deliveryDateTime
                      ingredients:(NSArray *)ingredients
                      description:(NSString *)description
 {
@@ -33,6 +37,10 @@
         _name = name;
         _chefId = chefId;
         _imageFilename = imageFilename;
+        _price = price;
+        _numAvailable = numAvailable;
+        _orderByDateTime = orderByDateTime;
+        _deliveryDateTime = deliveryDateTime;
         _ingredients = ingredients;
         _description = description;
     }
@@ -46,10 +54,20 @@
     if ([dictionary valueForKey:@"ingredients"]) {
         [ingredients addObjectsFromArray:[dictionary valueForKey:@"ingredients"]];
     }
+    
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    [df setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+    NSDate *orderByDateTime = [df dateFromString: [dictionary valueForKey:@"orderByDateTime"]];
+    NSDate *deliveryDateTime = [df dateFromString: [dictionary valueForKey:@"deliveryDateTime"]];
+    
     return [self initWithDinnerId:[dictionary valueForKey:@"id"]
                              name:[dictionary valueForKey:@"name"]
                            chefId:[dictionary valueForKey:@"chefId"]
                     imageFilename:[dictionary valueForKey:@"imageFilename"]
+                            price:[dictionary valueForKey:@"price"]
+                     numAvailable:[dictionary valueForKey:@"numAvailable"]
+                  orderByDateTime:orderByDateTime
+                 deliveryDateTime:deliveryDateTime
                       ingredients:ingredients
                       description:[dictionary valueForKey:@"description"]];
 }
@@ -68,6 +86,10 @@
     [encoder encodeObject:_name forKey:@"name"];
     [encoder encodeObject:_chefId forKey:@"chefId"];
     [encoder encodeObject:_imageFilename forKey:@"imageFilename"];
+    [encoder encodeObject:_price forKey:@"price"];
+    [encoder encodeObject:_numAvailable forKey:@"numAvailable"];
+    [encoder encodeObject:_orderByDateTime forKey:@"orderByDateTime"];
+    [encoder encodeObject:_deliveryDateTime forKey:@"deliveryDateTime"];
     [encoder encodeObject:_ingredients forKey:@"ingredients"];
     [encoder encodeObject:_description forKey:@"description"];
 }
@@ -77,6 +99,10 @@
     _name = [decoder decodeObjectForKey:@"name"];
     _chefId = [decoder decodeObjectForKey:@"chefId"];
     _imageFilename = [decoder decodeObjectForKey:@"imageFilename"];
+    _price = [decoder decodeObjectForKey:@"price"];
+    _numAvailable = [decoder decodeObjectForKey:@"numAvailable"];
+    _orderByDateTime = [decoder decodeObjectForKey:@"orderByDateTime"];
+    _deliveryDateTime = [decoder decodeObjectForKey:@"deliveryDateTime"];
     _ingredients = [decoder decodeObjectForKey:@"ingredients"];
     _description = [decoder decodeObjectForKey:@"description"];
     return self;

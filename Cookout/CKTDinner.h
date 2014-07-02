@@ -14,16 +14,22 @@
 @property (copy, readonly) NSString *name;
 @property (copy, readonly) NSString *chefId;
 @property (copy, readonly) NSString *imageFilename;
+@property (copy, readonly) NSNumber *price;
+@property (copy, readonly) NSNumber *numAvailable;
+@property (copy, readonly) NSDate *orderByDateTime;
+@property (copy, readonly) NSDate *deliveryDateTime;
 @property (copy, readonly) NSArray *ingredients;
 @property (copy, readonly) NSString *description;
-@property (readonly) float price;
-@property (readonly) NSInteger numAvailable;
 
 // Designated initalizer for BNRItem.
 - (instancetype)initWithDinnerId:(NSString *)dinnerId
                             name:(NSString *)name
                           chefId:(NSString *)chefId
                    imageFilename:(NSString *)imageFilename
+                           price:(NSNumber *)price
+                    numAvailable:(NSNumber *)numAvailable
+                 orderByDateTime:(NSDate *)orderByDateTime
+                deliveryDateTime:(NSDate *)deliveryDateTime
                      ingredients:(NSArray *)ingredients
                      description:(NSString *)description;
 
