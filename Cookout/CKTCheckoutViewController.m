@@ -7,8 +7,6 @@
 //
 
 #import "CKTCheckoutViewController.h"
-#import "CKTDataModel.h"
-#import "CKTFacebookSessionManager.h"
 
 
 @interface CKTCheckoutViewController ()

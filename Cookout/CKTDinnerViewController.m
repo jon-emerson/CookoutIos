@@ -11,6 +11,8 @@
 #import "CKTDataModel.h"
 #import "CKTDinnerViewController.h"
 #import "CKTCheckoutViewController.h"
+#import "CKTUser.h"
+#import "CKTOrder.h"
 
 @interface CKTDinnerViewController ()
 @property (weak, nonatomic) IBOutlet CKTAsyncImageView *foodImage;
@@ -55,6 +57,17 @@
     // Create an instance of the CKTCheckoutViewController and push
     // it on the nav controller stack
     CKTCheckoutViewController * checkout = [[CKTCheckoutViewController alloc] init];
+    
+    // Create an order object to capture the order state
+    CKTOrder * newOrder = [[CKTOrder alloc]init];
+    newOrder.dinner = self.dinner;
+    newOrder.orderQuantity = [[NSNumber alloc] initWithDouble:self.quantityStepper.value];
+    
+    // Setup user entity in order
+    // newOrder.user = self.user;
+    checkout.order = newOrder;
+    
+    NSLog(@"Got here");
     [self.navigationController pushViewController:checkout animated:YES];
 }
 

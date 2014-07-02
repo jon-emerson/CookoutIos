@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CKTOrder.h"
+#import "CKTDataModel.h"
+#import "CKTFacebookSessionManager.h"
+#import "CKTUser.h"
 
 @interface CKTCheckoutViewController : UIViewController
+
+@property (nonatomic, strong) CKTOrder * order;
 
 @end

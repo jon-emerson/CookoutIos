@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		209593A41963C15D00C0C007 /* CKTCheckoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 209593A21963C15D00C0C007 /* CKTCheckoutViewController.m */; };
 		209593A51963C15D00C0C007 /* CKTCheckoutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 209593A31963C15D00C0C007 /* CKTCheckoutViewController.xib */; };
+		209593A81964839200C0C007 /* CKTOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 209593A71964839200C0C007 /* CKTOrder.m */; };
+		209593AB196483B300C0C007 /* CKTUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 209593AA196483B300C0C007 /* CKTUser.m */; };
 		FC0B0701195A266200DF3BD2 /* CKTAsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B0700195A266200DF3BD2 /* CKTAsyncImageView.m */; };
 		FC0B0708195B7D6300DF3BD2 /* CKTServerCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B0707195B7D6300DF3BD2 /* CKTServerCommunicator.m */; };
 		FC0B070B195B8AE300DF3BD2 /* CKTDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B070A195B8AE300DF3BD2 /* CKTDataModel.m */; };
@@ -52,6 +54,10 @@
 		209593A11963C15D00C0C007 /* CKTCheckoutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTCheckoutViewController.h; sourceTree = "<group>"; };
 		209593A21963C15D00C0C007 /* CKTCheckoutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKTCheckoutViewController.m; sourceTree = "<group>"; };
 		209593A31963C15D00C0C007 /* CKTCheckoutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CKTCheckoutViewController.xib; sourceTree = "<group>"; };
+		209593A61964839200C0C007 /* CKTOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTOrder.h; sourceTree = "<group>"; };
+		209593A71964839200C0C007 /* CKTOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKTOrder.m; sourceTree = "<group>"; };
+		209593A9196483B300C0C007 /* CKTUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTUser.h; sourceTree = "<group>"; };
+		209593AA196483B300C0C007 /* CKTUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKTUser.m; sourceTree = "<group>"; };
 		FC0B06FF195A266200DF3BD2 /* CKTAsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTAsyncImageView.h; sourceTree = "<group>"; };
 		FC0B0700195A266200DF3BD2 /* CKTAsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKTAsyncImageView.m; sourceTree = "<group>"; };
 		FC0B0706195B7D6300DF3BD2 /* CKTServerCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTServerCommunicator.h; sourceTree = "<group>"; };
@@ -181,6 +187,10 @@
 				209593A11963C15D00C0C007 /* CKTCheckoutViewController.h */,
 				209593A21963C15D00C0C007 /* CKTCheckoutViewController.m */,
 				209593A31963C15D00C0C007 /* CKTCheckoutViewController.xib */,
+				209593A61964839200C0C007 /* CKTOrder.h */,
+				209593A71964839200C0C007 /* CKTOrder.m */,
+				209593A9196483B300C0C007 /* CKTUser.h */,
+				209593AA196483B300C0C007 /* CKTUser.m */,
 				FC9B5083194FD5A000C32D97 /* CKTHomeViewCell.h */,
 				FC9B5084194FD5A000C32D97 /* CKTHomeViewCell.m */,
 				FC9B5085194FD5A000C32D97 /* CKTHomeViewCell.xib */,
@@ -330,6 +340,8 @@
 				FC2FFFC619514AE0000C8AF7 /* CKTDinner.m in Sources */,
 				FC2FFFC219514AA6000C8AF7 /* CKTDinnerViewController.m in Sources */,
 				209593A41963C15D00C0C007 /* CKTCheckoutViewController.m in Sources */,
+				209593A81964839200C0C007 /* CKTOrder.m in Sources */,
+				209593AB196483B300C0C007 /* CKTUser.m in Sources */,
 				FC9B503C194FBFAC00C32D97 /* main.m in Sources */,
 				FC0B070E195B8BA700DF3BD2 /* CKTChef.m in Sources */,
 				FC0B0708195B7D6300DF3BD2 /* CKTServerCommunicator.m in Sources */,
