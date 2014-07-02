@@ -18,5 +18,6 @@
 - (void)addDinner:(CKTDinner *)dinner;
 - (void)addChef:(CKTChef *)chef;
 - (BOOL)saveToDisk;
-
+- (void)addUser:(NSObject *) u;
+- (NSObject *)getUser;
 @end

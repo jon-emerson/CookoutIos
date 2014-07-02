@@ -61,6 +61,7 @@
              if (!error) {
                  NSString *helloStr = [NSString stringWithFormat:@"Hi %@!", [result first_name]];
                  self.navigationItem.rightBarButtonItem.title = helloStr;
+                 [CKTDataModel.sharedDataModel addUser:result];
              } else {
                  // An error occurred, we need to handle the error
                  // See: https://developers.facebook.com/docs/ios/errors

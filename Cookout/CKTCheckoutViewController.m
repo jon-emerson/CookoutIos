@@ -8,6 +8,8 @@
 
 #import "CKTCheckoutViewController.h"
 #import "CKTDataModel.h"
+#import "CKTFacebookSessionManager.h"
+
 
 @interface CKTCheckoutViewController ()
 
@@ -34,6 +36,13 @@
     
     
     // See if user is signed in - if not prompt sign in
+     NSObject * user = [[CKTDataModel sharedDataModel] getUser];
+    
+    if (user)
+    {
+        // User is signed in - yaay!
+        NSLog(@"User name is %@",user);
+    }
     
     
     // If signed in, check if delivery address and credit card information

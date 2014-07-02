@@ -11,7 +11,7 @@
 @interface CKTDataModel ()
 @property (nonatomic, retain) NSMutableArray *dinnersArray;
 @property (nonatomic, retain) NSMutableDictionary *chefDictionary;
-@property (nonatomic, strong) NSObject * user;
+@property (nonatomic, copy) NSObject * user;
 @end
 
 @implementation CKTDataModel
@@ -57,6 +57,16 @@
 - (CKTChef *)chefWithId:(NSString *)id
 {
     return [self.chefDictionary valueForKey:id];
+}
+
+- (void) addUser:(NSObject *) u
+{
+    self.user = u;
+}
+
+- (NSObject *) getUser
+{
+    return self.user;
 }
 
 + (NSString *)itemArchivePath
