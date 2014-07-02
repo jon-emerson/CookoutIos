@@ -19,12 +19,27 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     // Override point for customization after application launch.
+    
+    // Create a cookout home view controller
     CKTHomeViewController *hvc = [[CKTHomeViewController alloc] init];
+    
     UINavigationController *navController = [[UINavigationController alloc] initWithNavigationBarClass:[CKTNavigationBar class] toolbarClass:nil];
+
+    // Push the home view controller on the nav controller
     navController.viewControllers = @[hvc];
     
+    // Set the nav controller as the rootview controller of the window
     self.window.rootViewController = navController;
-
+    
+    // Add a red rectangle UIView at the top of the screen, behind the status bar
+    // Only do this on iOS7 devices
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
+        UIView *statusBar = [[UIView alloc] init];
+        statusBar.frame = CGRectMake(0, 0, self.window.frame.size.width, 20);
+        statusBar.backgroundColor = UIColorFromRGB(0xED462F);
+        [self.window.rootViewController.view addSubview:statusBar];
+    }
+    
     [self.window makeKeyAndVisible];
     return YES;
 }

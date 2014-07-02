@@ -16,6 +16,38 @@
 
 @implementation CKTHomeViewController
 
+- (instancetype) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    
+    if(self) {
+        // Setup the navbar for the home view
+        UINavigationItem *navItem = self.navigationItem;
+        
+        // Add the cookout logo as the titleView
+        UIImage *image = [UIImage imageNamed:@"cookout-logo-160.png"];
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+        navItem.titleView = imageView;
+        
+        // Add the settings pane as the left bar button item
+        navItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"\u2630"
+                                                                     style: UIBarButtonItemStylePlain
+                                                                    target:self
+                                                                    action:@selector(openSettingsMenu)];
+        /* Add the login button as a right bar button item
+        navItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Login"
+                                                                      style: UIBarButtonItemStylePlain
+                                                                     target:self
+                                                                     action:@selector(openSettingsMenu)];*/
+    }
+    return self;
+}
+
+- (void) openSettingsMenu
+{
+    // Logic for opening and displaying the settings menu in the homescreen
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 210;

@@ -28,6 +28,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        UINavigationItem *navItem = self.navigationItem;
+        navItem.title = @"Today's Specials";
     }
     return self;
 }

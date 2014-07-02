@@ -24,28 +24,25 @@
     if (self) {
         // Initialization code
         [[CKTFacebookSessionManager sharedFacebookSessionManager] addListener:self];
+
+        // Setup the custom bar style for Cookout
+        self.barTintColor = UIColorFromRGB(0xED462F);
+        self.barStyle = UIBarStyleBlack;
+        self.backgroundColor = UIColorFromRGB(0xED462F);
+        self.translucent = NO;
+        self.tintColor = [UIColor whiteColor];
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+
     }
     return self;
 }
 
 - (void)drawRect:(CGRect)rect
-{
-    // Make the bar red with white text.
-    self.barStyle = UIBarStyleBlack;
-    self.backgroundColor = UIColorFromRGB(0xED462F);
-    self.translucent = NO;
-    self.tintColor = [UIColor whiteColor];
-
-    // Add the cookout logo.
-	UIImage *image = [UIImage imageNamed:@"cookout-logo-160.png"];
-    int x = (self.frame.size.width - 80) / 2;
-    int y = self.frame.size.height - 30;
-	[image drawInRect:CGRectMake(x, y, 80, 16)];
-
+{    
     // Add the login button.
     self.authenticationButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [self.authenticationButton addTarget:self action:@selector(handleLoginRequest:)
-                 forControlEvents:UIControlEventTouchUpInside];
+                        forControlEvents:UIControlEventTouchUpInside];
     self.authenticationButton.titleLabel.font = [UIFont systemFontOfSize:12];
     self.authenticationButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     self.authenticationButton.frame = CGRectMake(self.bounds.size.width - 100, 7, 90, 30);
