@@ -66,8 +66,6 @@
     // Setup user entity in order
     // newOrder.user = self.user;
     checkout.order = newOrder;
-    
-    NSLog(@"Got here");
     [self.navigationController pushViewController:checkout animated:YES];
 }
 

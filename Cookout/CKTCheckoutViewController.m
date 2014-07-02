@@ -7,10 +7,13 @@
 //
 
 #import "CKTCheckoutViewController.h"
-
+#import "CKTAsyncImageView.h"
 
 @interface CKTCheckoutViewController ()
-
+@property (nonatomic, weak) IBOutlet UILabel * orderQuantity;
+@property (nonatomic, weak) IBOutlet UILabel * totalPrice;
+@property (weak, nonatomic) IBOutlet CKTAsyncImageView *foodImage;
+@property (nonatomic, weak) IBOutlet UILabel * foodLabel;   
 @end
 
 @implementation CKTCheckoutViewController
@@ -29,15 +32,16 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
     // Display order summary
-    
+    self.orderQuantity.text = [[NSString alloc] initWithFormat:@"%@ x", self.order.orderQuantity.stringValue];
+    self.foodImage.imageURL = [self.order.dinner imageUrl];
+    self.totalPrice.text = [[NSString alloc] initWithFormat:@"$%.2f", ([self.order.dinner.price floatValue]*[self.order.orderQuantity floatValue])];
+    self.foodLabel.text = [self.order.dinner name];
     
     // See if user is signed in - if not prompt sign in
      NSObject * user = [[CKTDataModel sharedDataModel] getUser];
     
-    if (user)
-    {
+    if (user) {
         // User is signed in - yaay!
         NSLog(@"User name is %@",user);
     }
