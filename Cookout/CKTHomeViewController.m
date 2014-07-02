@@ -13,6 +13,8 @@
 #import "CKTHomeViewController.h"
 #import "CKTHomeViewCell.h"
 #import "CKTServerCommunicator.h"
+#import "CKTFacebookSessionManager.h"
+
 
 @implementation CKTHomeViewController
 
@@ -21,6 +23,10 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     
     if(self) {
+        
+        // Listen for Facebook sesssion updates
+        [[CKTFacebookSessionManager sharedFacebookSessionManager] addListener:self];
+
         // Setup the navbar for the home view
         UINavigationItem *navItem = self.navigationItem;
         
@@ -34,13 +40,41 @@
                                                                      style: UIBarButtonItemStylePlain
                                                                     target:self
                                                                     action:@selector(openSettingsMenu)];
-        /* Add the login button as a right bar button item
+        // Add the login button as a right bar button item
         navItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Login"
                                                                       style: UIBarButtonItemStylePlain
                                                                      target:self
-                                                                     action:@selector(openSettingsMenu)];*/
+                                                                     action:@selector(handleLoginRequest:)];
     }
     return self;
+}
+
+- (void)handleFacebookSessionStateChange
+{
+    FBSession *session = [[CKTFacebookSessionManager sharedFacebookSessionManager] session];
+    NSLog(@"facebook state change: %u", session.state);
+    
+    
+    if (session.isOpen) {
+        [FBRequestConnection startForMeWithCompletionHandler:
+         ^(FBRequestConnection *connection, id<FBGraphUser> result, NSError *error) {
+             if (!error) {
+                 NSString *helloStr = [NSString stringWithFormat:@"Hi %@!", [result first_name]];
+                 self.navigationItem.rightBarButtonItem.title = helloStr;
+             } else {
+                 // An error occurred, we need to handle the error
+                 // See: https://developers.facebook.com/docs/ios/errors
+                 self.navigationItem.rightBarButtonItem.title = @"Login";
+             }
+         }];
+    } else {
+        self.navigationItem.rightBarButtonItem.title = @"Login";
+    }
+}
+
+- (void)handleLoginRequest:(UIButton*)sender
+{
+    [[CKTFacebookSessionManager sharedFacebookSessionManager] login];
 }
 
 - (void) openSettingsMenu

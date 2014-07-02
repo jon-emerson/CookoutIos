@@ -63,7 +63,9 @@
 {
     [super viewDidLoad];
     
+    // Set the default quantity of the dinner order
     self.quantity.text = @"1";
+    
     // Do any additional setup after loading the view from its nib.
     CKTChef *chef = [CKTDataModel.sharedDataModel chefWithId:self.dinner.chefId];
     self.foodImage.imageURL = [self.dinner imageUrl];

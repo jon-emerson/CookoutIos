@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CKTNavigationBar : UINavigationBar <CKTFacebookSessionListener>
+@interface CKTNavigationBar : UINavigationBar 
 
 @end

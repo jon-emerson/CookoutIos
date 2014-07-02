@@ -7,6 +7,7 @@
 //
 
 #import "CKTCheckoutViewController.h"
+#import "CKTDataModel.h"
 
 @interface CKTCheckoutViewController ()
 
@@ -19,6 +20,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.navigationItem.title = @"Place Order";
     }
     return self;
 }
@@ -27,6 +29,17 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    // Display order summary
+    
+    
+    // See if user is signed in - if not prompt sign in
+    
+    
+    // If signed in, check if delivery address and credit card information
+    // are available for the user. If not prompt entry of address and CC
+    
+    
 }
 
 - (void)didReceiveMemoryWarning

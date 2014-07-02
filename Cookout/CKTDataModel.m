@@ -11,6 +11,7 @@
 @interface CKTDataModel ()
 @property (nonatomic, retain) NSMutableArray *dinnersArray;
 @property (nonatomic, retain) NSMutableDictionary *chefDictionary;
+@property (nonatomic, strong) NSObject * user;
 @end
 
 @implementation CKTDataModel
