@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CKTDataModelChangeDelegate.h"
 #import "CKTFacebookSessionListener.h"
 
-@interface CKTHomeViewController : UITableViewController <CKTFacebookSessionListener>
+@interface CKTHomeViewController : UITableViewController <CKTFacebookSessionListener, CKTDataModelChangeDelegate>
 
 @end

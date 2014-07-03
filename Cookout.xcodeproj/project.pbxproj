@@ -36,6 +36,7 @@
 		FC0B0720195CEF8200DF3BD2 /* CKTNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B071F195CEF8200DF3BD2 /* CKTNavigationBar.m */; };
 		FC0B07241962638800DF3BD2 /* CKTFacebookSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B07231962638800DF3BD2 /* CKTFacebookSessionManager.m */; };
 		FC0B072919634D8000DF3BD2 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0B072819634D8000DF3BD2 /* FacebookSDK.framework */; };
+		FC0B07321965E30600DF3BD2 /* CKTJSONResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B07311965E30600DF3BD2 /* CKTJSONResponseSerializer.m */; };
 		FC2FFFC219514AA6000C8AF7 /* CKTDinnerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2FFFC019514AA6000C8AF7 /* CKTDinnerViewController.m */; };
 		FC2FFFC319514AA6000C8AF7 /* CKTDinnerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC2FFFC119514AA6000C8AF7 /* CKTDinnerViewController.xib */; };
 		FC2FFFC619514AE0000C8AF7 /* CKTDinner.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2FFFC519514AE0000C8AF7 /* CKTDinner.m */; };
@@ -128,6 +129,8 @@
 		FC0B07231962638800DF3BD2 /* CKTFacebookSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKTFacebookSessionManager.m; sourceTree = "<group>"; };
 		FC0B07251963315000DF3BD2 /* CKTFacebookSessionListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKTFacebookSessionListener.h; sourceTree = "<group>"; };
 		FC0B072819634D8000DF3BD2 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		FC0B07301965E30600DF3BD2 /* CKTJSONResponseSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTJSONResponseSerializer.h; sourceTree = "<group>"; };
+		FC0B07311965E30600DF3BD2 /* CKTJSONResponseSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKTJSONResponseSerializer.m; sourceTree = "<group>"; };
 		FC2FFFBF19514AA6000C8AF7 /* CKTDinnerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTDinnerViewController.h; sourceTree = "<group>"; };
 		FC2FFFC019514AA6000C8AF7 /* CKTDinnerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKTDinnerViewController.m; sourceTree = "<group>"; };
 		FC2FFFC119514AA6000C8AF7 /* CKTDinnerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CKTDinnerViewController.xib; sourceTree = "<group>"; };
@@ -184,10 +187,10 @@
 		20858A7D19656DEF007769AE /* AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
-				20858A9A19656E24007769AE /* AFHTTPRequestOperationLogger.h */,
-				20858A9B19656E24007769AE /* AFHTTPRequestOperationLogger.m */,
 				20858A7E19656DEF007769AE /* AFHTTPRequestOperation.h */,
 				20858A7F19656DEF007769AE /* AFHTTPRequestOperation.m */,
+				20858A9A19656E24007769AE /* AFHTTPRequestOperationLogger.h */,
+				20858A9B19656E24007769AE /* AFHTTPRequestOperationLogger.m */,
 				20858A8019656DEF007769AE /* AFHTTPRequestOperationManager.h */,
 				20858A8119656DEF007769AE /* AFHTTPRequestOperationManager.m */,
 				20858A8219656DEF007769AE /* AFHTTPSessionManager.h */,
@@ -235,23 +238,23 @@
 		209593C71964DE8000C0C007 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				209593BE1964CD8300C0C007 /* CKTAddressCCEntryViewController.h */,
+				209593BF1964CD8300C0C007 /* CKTAddressCCEntryViewController.m */,
+				209593C01964CD8300C0C007 /* CKTAddressCCEntryViewController.xib */,
+				209593A11963C15D00C0C007 /* CKTCheckoutViewController.h */,
+				209593A21963C15D00C0C007 /* CKTCheckoutViewController.m */,
+				209593BC1964C41500C0C007 /* CKTCheckoutViewController.xib */,
+				209593B71964BDED00C0C007 /* CKTCreateAccountViewController.h */,
+				209593B81964BDED00C0C007 /* CKTCreateAccountViewController.m */,
+				209593B91964BDED00C0C007 /* CKTCreateAccountViewController.xib */,
+				FC2FFFBF19514AA6000C8AF7 /* CKTDinnerViewController.h */,
+				FC2FFFC019514AA6000C8AF7 /* CKTDinnerViewController.m */,
+				FC2FFFC119514AA6000C8AF7 /* CKTDinnerViewController.xib */,
 				FC9B5083194FD5A000C32D97 /* CKTHomeViewCell.h */,
 				FC9B5084194FD5A000C32D97 /* CKTHomeViewCell.m */,
 				FC9B5085194FD5A000C32D97 /* CKTHomeViewCell.xib */,
 				FC9B505E194FC77000C32D97 /* CKTHomeViewController.h */,
 				FC9B505F194FC77000C32D97 /* CKTHomeViewController.m */,
-				FC2FFFBF19514AA6000C8AF7 /* CKTDinnerViewController.h */,
-				FC2FFFC019514AA6000C8AF7 /* CKTDinnerViewController.m */,
-				FC2FFFC119514AA6000C8AF7 /* CKTDinnerViewController.xib */,
-				209593A11963C15D00C0C007 /* CKTCheckoutViewController.h */,
-				209593A21963C15D00C0C007 /* CKTCheckoutViewController.m */,
-				209593BC1964C41500C0C007 /* CKTCheckoutViewController.xib */,
-				209593BE1964CD8300C0C007 /* CKTAddressCCEntryViewController.h */,
-				209593BF1964CD8300C0C007 /* CKTAddressCCEntryViewController.m */,
-				209593C01964CD8300C0C007 /* CKTAddressCCEntryViewController.xib */,
-				209593B71964BDED00C0C007 /* CKTCreateAccountViewController.h */,
-				209593B81964BDED00C0C007 /* CKTCreateAccountViewController.m */,
-				209593B91964BDED00C0C007 /* CKTCreateAccountViewController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -279,13 +282,13 @@
 		FC9B502E194FBFAC00C32D97 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				209594691965310F00C0C007 /* SystemConfiguration.framework */,
-				209594671965310200C0C007 /* Security.framework */,
-				20959465196530F600C0C007 /* MobileCoreServices.framework */,
 				20959463196530D800C0C007 /* CFNetwork.framework */,
 				FC9B5031194FBFAC00C32D97 /* CoreGraphics.framework */,
 				FC0B072819634D8000DF3BD2 /* FacebookSDK.framework */,
 				FC9B502F194FBFAC00C32D97 /* Foundation.framework */,
+				20959465196530F600C0C007 /* MobileCoreServices.framework */,
+				209594671965310200C0C007 /* Security.framework */,
+				209594691965310F00C0C007 /* SystemConfiguration.framework */,
 				FC9B5033194FBFAC00C32D97 /* UIKit.framework */,
 				FC9B5048194FBFAC00C32D97 /* XCTest.framework */,
 			);
@@ -299,18 +302,20 @@
 				FC9B503F194FBFAC00C32D97 /* CKTAppDelegate.m */,
 				FC0B06FF195A266200DF3BD2 /* CKTAsyncImageView.h */,
 				FC0B0700195A266200DF3BD2 /* CKTAsyncImageView.m */,
-				209593C61964DDF400C0C007 /* Data Model */,
-				209593C71964DE8000C0C007 /* Controllers */,
 				FC0B07251963315000DF3BD2 /* CKTFacebookSessionListener.h */,
 				FC0B07221962638800DF3BD2 /* CKTFacebookSessionManager.h */,
 				FC0B07231962638800DF3BD2 /* CKTFacebookSessionManager.m */,
+				FC0B07301965E30600DF3BD2 /* CKTJSONResponseSerializer.h */,
+				FC0B07311965E30600DF3BD2 /* CKTJSONResponseSerializer.m */,
 				209593C31964DC8800C0C007 /* CKTLoginManager.h */,
 				209593C41964DC8800C0C007 /* CKTLoginManager.m */,
 				FC0B071E195CEF8200DF3BD2 /* CKTNavigationBar.h */,
 				FC0B071F195CEF8200DF3BD2 /* CKTNavigationBar.m */,
 				FC0B0706195B7D6300DF3BD2 /* CKTServerCommunicator.h */,
 				FC0B0707195B7D6300DF3BD2 /* CKTServerCommunicator.m */,
+				209593C71964DE8000C0C007 /* Controllers */,
 				FC0B071A195CE52500DF3BD2 /* cookout-logo-160.png */,
+				209593C61964DDF400C0C007 /* Data Model */,
 				FC9B5041194FBFAC00C32D97 /* Images.xcassets */,
 				FC9B5036194FBFAC00C32D97 /* Supporting Files */,
 			);
@@ -474,6 +479,7 @@
 				FC0B0720195CEF8200DF3BD2 /* CKTNavigationBar.m in Sources */,
 				FC0B0701195A266200DF3BD2 /* CKTAsyncImageView.m in Sources */,
 				FC9B5086194FD5A000C32D97 /* CKTHomeViewCell.m in Sources */,
+				FC0B07321965E30600DF3BD2 /* CKTJSONResponseSerializer.m in Sources */,
 				20858A9C19656E24007769AE /* AFHTTPRequestOperationLogger.m in Sources */,
 				20858A9419656DEF007769AE /* AFNetworkReachabilityManager.m in Sources */,
 				20858A9819656DEF007769AE /* AFURLResponseSerialization.m in Sources */,
