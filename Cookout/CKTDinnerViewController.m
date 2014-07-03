@@ -86,7 +86,7 @@
     self.descriptionLabel.text = [self.dinner description];
     self.descriptionLabel.numberOfLines = 0;
     [self.descriptionLabel sizeToFit];
-    
+    self.price.text = [[NSString alloc] initWithFormat:@"$%@",self.dinner.price];
     NSArray *ingredients = [self.dinner ingredients];
     if ([ingredients count] > 0) {
         self.ingredientsLabel.text = ingredients[0];

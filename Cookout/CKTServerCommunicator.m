@@ -36,19 +36,29 @@
 {
     NSURL *url = [[NSURL alloc] initWithString:@"http://immense-beyond-2989.herokuapp.com/order"];
     
+    NSMutableURLRequest * postRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    postRequest.HTTPMethod = @"POST";
+    NSString *params = [[NSString alloc] initWithFormat:@"userId=%@&addressId=%@&dinnerId=%@&deliveryInstructions=%@",
+                        order.user.userId, order.user.deliveryAddress.addressId,order.dinner.dinnerId,order.deliveryInstructions];
+    
+    NSData *data = [params dataUsingEncoding:NSUTF8StringEncoding];
+    [postRequest addValue:@"8bit" forHTTPHeaderField:@"Content-Transfer-Encoding"];
+    [postRequest addValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [postRequest addValue:[NSString stringWithFormat:@"%i", [data length]] forHTTPHeaderField:@"Content-Length"];
+    [postRequest setHTTPBody:data];
+
+    
     // Send the following things in the post request
     // dinner id, address id, user id, special instructions
-    /*[NSURLConnection sendAsynchronousRequest:[[NSURLRequest alloc] initWithURL:url]
+    [NSURLConnection sendAsynchronousRequest:postRequest
                                        queue:[[NSOperationQueue alloc] init]
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
                                if (error) {
                                    [d dataModelError:error];
                                } else {
-                                   NSString *jsonStr = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] substringFromIndex:[jsonPrefix length]];
-                                   [CKTDataModelBuilder populateDataModelFromJSON:jsonStr];
                                    [d dataModelInitialized];
                                }
-                           }];*/
+                           }];
 
 }
 

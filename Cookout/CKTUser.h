@@ -11,7 +11,7 @@
 
 @interface CKTUser : NSObject
 //TODO: Should these properties be copy
-@property (copy, readonly) NSString *FBUserId;
+@property (copy, readonly) NSString *userId;
 @property (copy, readonly) NSString *name;
 @property (copy, nonatomic, readwrite) NSString *phone;
 @property (copy, nonatomic, readwrite) NSString *email;

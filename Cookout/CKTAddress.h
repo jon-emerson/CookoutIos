@@ -10,6 +10,7 @@
 
 @interface CKTAddress : NSObject
 // User's delivery address
+@property (nonatomic, copy) NSString * addressId;
 @property (nonatomic, copy) NSString * streetAddressLine1;
 @property (nonatomic, copy) NSString * streetAddressLine2;
 @property (nonatomic, copy) NSString * unit;
