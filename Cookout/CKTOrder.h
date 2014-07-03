@@ -15,4 +15,5 @@
 @property (nonatomic, strong) CKTUser * user;
 @property (nonatomic, strong) CKTDinner * dinner;
 @property (nonatomic, copy) NSNumber * orderQuantity;
+@property (nonatomic, copy) NSString * deliveryInstructions;
 @end

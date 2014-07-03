@@ -8,7 +8,9 @@
 
 #import <CoreLocation/CoreLocation.h>
 #import "CKTDataModelChangeDelegate.h"
+#import "CKTOrder.h"
 
 @interface CKTServerCommunicator : NSObject
 + (void)initializeDataModel:(id <CKTDataModelChangeDelegate>)delegate;
++ (void)postOrder:(CKTOrder *)order delegate:(id <CKTDataModelChangeDelegate>)d;
 @end

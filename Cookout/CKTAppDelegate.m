@@ -8,9 +8,9 @@
 
 #import "CKTAppDelegate.h"
 #import "CKTDefines.h"
-#import "CKTFacebookSessionManager.h"
 #import "CKTHomeViewController.h"
 #import "CKTNavigationBar.h"
+#include "CKTLoginManager.h"
 
 @implementation CKTAppDelegate
 
@@ -18,7 +18,11 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
+
     // Override point for customization after application launch.
+
+    // Check Facebook login state
+    [CKTLoginManager openFBSession];
     
     // Create a cookout home view controller
     CKTHomeViewController *hvc = [[CKTHomeViewController alloc] init];

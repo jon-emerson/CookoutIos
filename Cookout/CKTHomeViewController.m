@@ -31,9 +31,10 @@
         UINavigationItem *navItem = self.navigationItem;
         
         // Add the cookout logo as the titleView
-        UIImage *image = [UIImage imageNamed:@"cookout-logo-160.png"];
+        /*UIImage *image = [UIImage imageNamed:@"cookout-logo-160.png"];
         UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-        navItem.titleView = imageView;
+        navItem.titleView = imageView;*/
+        navItem.title = @"Vessel";
         
         // Add the settings pane as the left bar button item
         navItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"\u2630"
