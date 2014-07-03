@@ -47,7 +47,7 @@
     
     NSMutableDictionary *parameters = @{@"userId":(uId)?uId:@"-1", @"addressId":(aId)?aId:@"-1",
                                  @"dinnerId":(dId)?dId:@"-1", @"orderQuantity":(oQ)?oQ:@"-1",
-                                 @"specialRequests":(sR)?sR:@"None"};
+                                 @"specialRequests":(sR)?sR:@"From the app"};
     
     [manager POST:baseURL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);

@@ -10,6 +10,7 @@
 
 #import "CKTChef.h"
 #import "CKTDinner.h"
+#import "CKTUser.h"
 
 @interface CKTDataModel : NSObject <NSCoding>
 + (instancetype)sharedDataModel;
@@ -19,5 +20,5 @@
 - (void)addChef:(CKTChef *)chef;
 - (BOOL)saveToDisk;
 - (void)addUser:(NSObject *) u;
-- (NSObject *)getUser;
+- (CKTUser *)getUser;
 @end

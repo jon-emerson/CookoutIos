@@ -7,6 +7,7 @@
 //
 
 #import "CKTLoginManager.h"
+#import "CKTDataModel.h"
 
 @implementation CKTLoginManager
 
@@ -27,6 +28,10 @@
                                       }];
         
     }
+    
+    // Setup the active user's information in the CKTDataModel
+    CKTDataModel * dataModel = [CKTDataModel sharedDataModel];
+    
 }
 
 + (void) sessionStateChanged:(FBSession *)session state:(FBSessionState)state error:(NSError *)error

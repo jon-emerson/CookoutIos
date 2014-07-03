@@ -7,11 +7,12 @@
 //
 
 #import "CKTDataModel.h"
+#import "CKTUser.h"
 
 @interface CKTDataModel ()
 @property (nonatomic, retain) NSMutableArray *dinnersArray;
 @property (nonatomic, retain) NSMutableDictionary *chefDictionary;
-@property (nonatomic, copy) NSObject * user;
+@property (nonatomic, copy) CKTUser * user;
 @end
 
 @implementation CKTDataModel
@@ -59,7 +60,7 @@
     return [self.chefDictionary valueForKey:id];
 }
 
-- (void) addUser:(NSObject *) u
+- (void) addUser:(CKTUser *) u
 {
     self.user = u;
 }

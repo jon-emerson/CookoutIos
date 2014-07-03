@@ -21,18 +21,13 @@
     if (self) {
         // Custom initialization
         self.navigationItem.title = @"Create account";
-        //self.loginView.delegate = self;
+        self.loginView.delegate = self;
     }
     return self;
 }
 
 - (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView
 {
-    // The user is logged in. Jump to the next step in the
-    // onboarding flow
-    /*CKTAddressCCEntryViewController * addressCCSetup = [[CKTAddressCCEntryViewController alloc] init];
-    addressCCSetup.order = self.order;
-    [self.navigationController pushViewController:addressCCSetup animated:YES];*/
 }
 
 - (void)loginViewFetchedUserInfo:(FBLoginView *)loginView
@@ -50,17 +45,15 @@
 }
 - (void)viewDidAppear:(BOOL)animated
 {
-    CKTAddressCCEntryViewController * addressCCSetup = [[CKTAddressCCEntryViewController alloc] init];
+    /*CKTAddressCCEntryViewController * addressCCSetup = [[CKTAddressCCEntryViewController alloc] init];
     addressCCSetup.order = self.order;
-    [self.navigationController pushViewController:addressCCSetup animated:YES];
+    [self.navigationController pushViewController:addressCCSetup animated:YES];*/
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-    
-    NSLog(@"DID RECEIVE MEMORY WARNING");
 }
 
 @end
