@@ -11,14 +11,17 @@
 #import "CKTHomeViewController.h"
 #import "CKTNavigationBar.h"
 #include "CKTLoginManager.h"
+#import "AFHTTPRequestOperationLogger.h"
+
 
 @implementation CKTAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    //[[AFHTTPRequestOperationLogger sharedLogger] startLogging];
+    //[[AFHTTPRequestOperationLogger sharedLogger] setLevel:AFLoggerLevelDebug];
     
-
     // Override point for customization after application launch.
 
     // Check Facebook login state

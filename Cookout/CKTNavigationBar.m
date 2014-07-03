@@ -13,6 +13,7 @@
 #import "CKTNavigationBar.h"
 #import "CKTDataModel.h"
 
+
 @interface CKTNavigationBar ()
 @property (strong, nonatomic) UIButton *authenticationButton;
 @end

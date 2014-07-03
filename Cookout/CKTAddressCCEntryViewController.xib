@@ -15,7 +15,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uvh-mQ-4ij">
-                    <rect key="frame" x="98" y="442" width="125" height="30"/>
+                    <rect key="frame" x="98" y="188" width="125" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="1" green="0.16411375" blue="0.27604695019999997" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -24,7 +24,7 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="placeOrder:" destination="-1" eventType="touchUpInside" id="Ufq-vh-fOy"/>
+                        <action selector="placeOrder:" destination="-1" eventType="touchUpInside" id="z65-wM-ZZg"/>
                     </connections>
                 </button>
             </subviews>

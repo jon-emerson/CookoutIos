@@ -9,7 +9,9 @@
 #import "CKTDataModelChangeDelegate.h"
 #import "CKTServerCommunicator.h"
 #import "CKTDataModelBuilder.h"
-#include "CKTOrder.h"
+#import "CKTOrder.h"
+#import "AFHTTPRequestOperationManager.h"
+
 
 @implementation CKTServerCommunicator
 
@@ -34,32 +36,25 @@
 
 + (void)postOrder:(CKTOrder *)order delegate:(id <CKTDataModelChangeDelegate>)d
 {
-    NSURL *baseURL = [[NSURL alloc] initWithString:@"http://immense-beyond-2989.herokuapp.com"];
+    NSString *baseURL = @"http://immense-beyond-2989.herokuapp.com/order";
     
-/*    postRequest.HTTPMethod = @"POST";
-    NSString *params = [[NSString alloc] initWithFormat:@"userId=%@&addressId=%@&chefId=%@&dinnerId=%@&orderQuantity=%@&specialRequests=%@",order.user.userId,
-                        order.user.deliveryAddress.addressId,order.dinner.chefId,
-                        order.dinner.dinnerId,
-                        order.orderQuantity.stringValue
-                        ,order.specialRequests];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSString * uId = order.user.userId;
+    NSString * aId = order.user.deliveryAddress.addressId;
+    NSString * dId = order.dinner.dinnerId;
+    NSString * oQ = order.orderQuantity.stringValue;
+    NSString * sR = order.specialRequests;
     
-    NSData *data = [params dataUsingEncoding:NSUTF8StringEncoding];
-    [postRequest addValue:@"8bit" forHTTPHeaderField:@"Content-Transfer-Encoding"];
-    [postRequest addValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    [postRequest addValue:[NSString stringWithFormat:@"%i", [data length]] forHTTPHeaderField:@"Content-Length"];
-    [postRequest setHTTPBody:data];*/
-
-    // Send the following things in the post request
-    // dinner id, address id, user id, special instructions
-    /*[NSURLConnection sendAsynchronousRequest:postRequest
-                                       queue:[[NSOperationQueue alloc] init]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-                               if (error) {
-                                   [d dataModelError:error];
-                               } else {
-                                   [d dataModelInitialized];
-                               }
-                           }];*/
+    NSMutableDictionary *parameters = @{@"userId":(uId)?uId:@"-1", @"addressId":(aId)?aId:@"-1",
+                                 @"dinnerId":(dId)?dId:@"-1", @"orderQuantity":(oQ)?oQ:@"-1",
+                                 @"specialRequests":(sR)?sR:@"None"};
+    
+    [manager POST:baseURL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@  Operation: %@", error,operation);
+    }];
+    
 
 }
 
