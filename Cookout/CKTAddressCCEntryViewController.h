@@ -11,6 +11,8 @@
 #import "CKTOrder.h"
 
 @interface CKTAddressCCEntryViewController : UIViewController <CKTDataModelChangeDelegate>
-@property (weak, nonatomic) CKTOrder * order;
-- (IBAction)placeOrder:(id) sender;
+
+@property (weak, nonatomic) CKTOrder *order;
+- (IBAction)placeOrder:(id)sender;
+
 @end

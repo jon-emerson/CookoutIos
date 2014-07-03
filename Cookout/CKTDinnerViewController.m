@@ -25,9 +25,8 @@
 @property (weak, nonatomic) IBOutlet UIStepper *quantityStepper;
 @property (weak, nonatomic) IBOutlet UITextField *quantity;
 @property (weak, nonatomic) IBOutlet UIButton *orderButton;
-@property (weak, nonatomic) IBOutlet UIView * starRatings;
-@property (weak, nonatomic) IBOutlet UILabel * quantityAvailable;
-
+@property (weak, nonatomic) IBOutlet UIView *starRatings;
+@property (weak, nonatomic) IBOutlet UILabel *quantityAvailable;
 @end
 
 @implementation CKTDinnerViewController
@@ -68,7 +67,6 @@
     checkout.order = newOrder;
     [self.navigationController pushViewController:checkout animated:YES];
 }
-
 
 - (void)viewDidLoad
 {
