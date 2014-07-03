@@ -12,16 +12,16 @@
 
 @property (copy, readonly) NSString *chefId;
 @property (copy, readonly) NSString *name;
-@property (copy, readonly) NSString *imageFilename;
+@property (copy, readonly) NSString *imageUrl;
 @property (readonly) float starRating;
 
 // Designated initalizer for CKTChef.
 - (instancetype)initWithChefId:(NSString *)chefId
                           name:(NSString *)name
-                 imageFilename:(NSString *)imageFilename;
+                      imageUrl:(NSString *)imageUrl;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
-- (NSURL *)imageUrl;
+- (NSURL *)imageNSUrl;
 
 @end

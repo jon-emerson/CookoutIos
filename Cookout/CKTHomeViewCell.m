@@ -28,11 +28,11 @@
 - (void)populate:(CKTDinner *)dinner
 {
     [self unload];
-    
+
     CKTChef *chef = [CKTDataModel.sharedDataModel chefWithId:dinner.chefId];
     
-    self.foodImage.imageURL = [dinner imageUrl];
-    self.profileImage.imageURL = [chef imageUrl];
+    self.foodImage.imageURL = [dinner imageNSUrl];
+    self.profileImage.imageURL = [chef imageNSUrl];
     self.foodLabel.text = [dinner name];
     self.subtitleLabel.text = [chef name];
 }

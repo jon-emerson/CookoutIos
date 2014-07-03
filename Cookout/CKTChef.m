@@ -9,7 +9,7 @@
 #import "CKTChef.h"
 
 @interface CKTChef ()
-@property (nonatomic, strong) NSURL *imageUrl;
+@property (nonatomic, strong) NSURL *imageNSUrl;
 @end
 
 @implementation CKTChef
@@ -21,14 +21,14 @@
 
 - (instancetype)initWithChefId:(NSString *)chefId
                           name:(NSString *)name
-                 imageFilename:(NSString *)imageFilename
+                      imageUrl:(NSString *)imageUrl
 {
     self = [super init];
     
     if (self) {
         _chefId = chefId;
         _name = name;
-        _imageFilename = imageFilename;
+        _imageUrl = imageUrl;
     }
     
     return self;
@@ -38,29 +38,27 @@
 {
     NSString *chefId = [dictionary valueForKey:@"id"];
     NSString *name = [dictionary valueForKey:@"name"];
-    NSString *imageFilename = [dictionary valueForKey:@"imageFilename"];
-    return [self initWithChefId:chefId name:name imageFilename:imageFilename];
+    NSString *imageUrl = [dictionary valueForKey:@"imageUrl"];
+    return [self initWithChefId:chefId name:name imageUrl:imageUrl];
 }
 
-- (NSURL *)imageUrl {
-    if (!_imageUrl) {
-        _imageUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",
-                                              @"http://cookout-assets.s3-website-us-east-1.amazonaws.com/",
-                                              self.imageFilename]];
+- (NSURL *)imageNSUrl {
+    if (!_imageNSUrl) {
+        _imageNSUrl = [NSURL URLWithString:self.imageUrl];
     }
-    return _imageUrl;
+    return _imageNSUrl;
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
     [encoder encodeObject:_chefId forKey:@"chefId"];
     [encoder encodeObject:_name forKey:@"name"];
-    [encoder encodeObject:_imageFilename forKey:@"imageFilename"];
+    [encoder encodeObject:_imageUrl forKey:@"imageUrl"];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)decoder {
     _chefId = [decoder decodeObjectForKey:@"chefId"];
     _name = [decoder decodeObjectForKey:@"name"];
-    _imageFilename = [decoder decodeObjectForKey:@"imageFilename"];
+    _imageUrl = [decoder decodeObjectForKey:@"imageUrl"];
     return self;
 }
 

@@ -9,7 +9,7 @@
 #import "CKTDinner.h"
 
 @interface CKTDinner ()
-@property (nonatomic, strong) NSURL *imageUrl;
+@property (nonatomic, strong) NSURL *imageNSUrl;
 @end
 
 @implementation CKTDinner
@@ -22,7 +22,7 @@
 - (instancetype)initWithDinnerId:(NSString *)dinnerId
                             name:(NSString *)name
                           chefId:(NSString *)chefId
-                   imageFilename:(NSString *)imageFilename
+                        imageUrl:(NSString *)imageUrl
                            price:(NSNumber *)price
                     numAvailable:(NSNumber *)numAvailable
                  orderByDateTime:(NSDate *)orderByDateTime
@@ -36,7 +36,7 @@
         _dinnerId = dinnerId;
         _name = name;
         _chefId = chefId;
-        _imageFilename = imageFilename;
+        _imageUrl = imageUrl;
         _price = price;
         _numAvailable = numAvailable;
         _orderByDateTime = orderByDateTime;
@@ -63,7 +63,7 @@
     return [self initWithDinnerId:[dictionary valueForKey:@"id"]
                              name:[dictionary valueForKey:@"name"]
                            chefId:[dictionary valueForKey:@"chefId"]
-                    imageFilename:[dictionary valueForKey:@"imageFilename"]
+                         imageUrl:[dictionary valueForKey:@"imageUrl"]
                             price:[dictionary valueForKey:@"price"]
                      numAvailable:[dictionary valueForKey:@"numAvailable"]
                   orderByDateTime:orderByDateTime
@@ -72,20 +72,18 @@
                       description:[dictionary valueForKey:@"description"]];
 }
 
-- (NSURL *)imageUrl {
-    if (!_imageUrl) {
-        _imageUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",
-                          @"http://cookout-assets.s3-website-us-east-1.amazonaws.com/",
-                          self.imageFilename]];
+- (NSURL *)imageNSUrl {
+    if (!_imageNSUrl) {
+        _imageNSUrl = [NSURL URLWithString:self.imageUrl];
     }
-    return _imageUrl;
+    return _imageNSUrl;
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
     [encoder encodeObject:_dinnerId forKey:@"dinnerId"];
     [encoder encodeObject:_name forKey:@"name"];
     [encoder encodeObject:_chefId forKey:@"chefId"];
-    [encoder encodeObject:_imageFilename forKey:@"imageFilename"];
+    [encoder encodeObject:_imageUrl forKey:@"imageUrl"];
     [encoder encodeObject:_price forKey:@"price"];
     [encoder encodeObject:_numAvailable forKey:@"numAvailable"];
     [encoder encodeObject:_orderByDateTime forKey:@"orderByDateTime"];
@@ -98,7 +96,7 @@
     _dinnerId = [decoder decodeObjectForKey:@"dinnerId"];
     _name = [decoder decodeObjectForKey:@"name"];
     _chefId = [decoder decodeObjectForKey:@"chefId"];
-    _imageFilename = [decoder decodeObjectForKey:@"imageFilename"];
+    _imageUrl = [decoder decodeObjectForKey:@"imageUrl"];
     _price = [decoder decodeObjectForKey:@"price"];
     _numAvailable = [decoder decodeObjectForKey:@"numAvailable"];
     _orderByDateTime = [decoder decodeObjectForKey:@"orderByDateTime"];

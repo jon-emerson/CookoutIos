@@ -13,7 +13,7 @@
 @property (copy, readonly) NSString *dinnerId;
 @property (copy, readonly) NSString *name;
 @property (copy, readonly) NSString *chefId;
-@property (copy, readonly) NSString *imageFilename;
+@property (copy, readonly) NSString *imageUrl;
 @property (copy, readonly) NSNumber *price;
 @property (copy, readonly) NSNumber *numAvailable;
 @property (copy, readonly) NSDate *orderByDateTime;
@@ -25,7 +25,7 @@
 - (instancetype)initWithDinnerId:(NSString *)dinnerId
                             name:(NSString *)name
                           chefId:(NSString *)chefId
-                   imageFilename:(NSString *)imageFilename
+                        imageUrl:(NSString *)imageUrl
                            price:(NSNumber *)price
                     numAvailable:(NSNumber *)numAvailable
                  orderByDateTime:(NSDate *)orderByDateTime
@@ -35,6 +35,6 @@
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
-- (NSURL *)imageUrl;
+- (NSURL *)imageNSUrl;
 
 @end
