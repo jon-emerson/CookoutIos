@@ -17,6 +17,11 @@
 		209593C11964CD8300C0C007 /* CKTAddressCCEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 209593BF1964CD8300C0C007 /* CKTAddressCCEntryViewController.m */; };
 		209593C21964CD8300C0C007 /* CKTAddressCCEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 209593C01964CD8300C0C007 /* CKTAddressCCEntryViewController.xib */; };
 		209593C51964DC8800C0C007 /* CKTLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 209593C41964DC8800C0C007 /* CKTLoginManager.m */; };
+		20959462196530AC00C0C007 /* libRestKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2095945919652AEB00C0C007 /* libRestKit.a */; };
+		20959464196530D800C0C007 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20959463196530D800C0C007 /* CFNetwork.framework */; };
+		20959466196530F600C0C007 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20959465196530F600C0C007 /* MobileCoreServices.framework */; };
+		209594681965310200C0C007 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 209594671965310200C0C007 /* Security.framework */; };
+		2095946A1965310F00C0C007 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 209594691965310F00C0C007 /* SystemConfiguration.framework */; };
 		FC0B0701195A266200DF3BD2 /* CKTAsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B0700195A266200DF3BD2 /* CKTAsyncImageView.m */; };
 		FC0B0708195B7D6300DF3BD2 /* CKTServerCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B0707195B7D6300DF3BD2 /* CKTServerCommunicator.m */; };
 		FC0B070B195B8AE300DF3BD2 /* CKTDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B070A195B8AE300DF3BD2 /* CKTDataModel.m */; };
@@ -47,6 +52,41 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		2095945819652AEB00C0C007 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2095945119652AEA00C0C007 /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25160D1614564E810060A5C5;
+			remoteInfo = RestKit;
+		};
+		2095945A19652AEB00C0C007 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2095945119652AEA00C0C007 /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25160D2614564E820060A5C5;
+			remoteInfo = RestKitTests;
+		};
+		2095945C19652AEB00C0C007 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2095945119652AEA00C0C007 /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25160E62145651060060A5C5;
+			remoteInfo = RestKitFramework;
+		};
+		2095945E19652AEB00C0C007 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2095945119652AEA00C0C007 /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25160E78145651060060A5C5;
+			remoteInfo = RestKitFrameworkTests;
+		};
+		209594601965308400C0C007 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2095945119652AEA00C0C007 /* RestKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 25160D1514564E810060A5C5;
+			remoteInfo = RestKit;
+		};
 		FC9B504C194FBFAC00C32D97 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FC9B5024194FBFAC00C32D97 /* Project object */;
@@ -74,6 +114,11 @@
 		209593C01964CD8300C0C007 /* CKTAddressCCEntryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CKTAddressCCEntryViewController.xib; sourceTree = "<group>"; };
 		209593C31964DC8800C0C007 /* CKTLoginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTLoginManager.h; sourceTree = "<group>"; };
 		209593C41964DC8800C0C007 /* CKTLoginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKTLoginManager.m; sourceTree = "<group>"; };
+		2095945119652AEA00C0C007 /* RestKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RestKit.xcodeproj; path = RestKit/RestKit.xcodeproj; sourceTree = "<group>"; };
+		20959463196530D800C0C007 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		20959465196530F600C0C007 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		209594671965310200C0C007 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		209594691965310F00C0C007 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		FC0B06FF195A266200DF3BD2 /* CKTAsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTAsyncImageView.h; sourceTree = "<group>"; };
 		FC0B0700195A266200DF3BD2 /* CKTAsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKTAsyncImageView.m; sourceTree = "<group>"; };
 		FC0B0706195B7D6300DF3BD2 /* CKTServerCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTServerCommunicator.h; sourceTree = "<group>"; };
@@ -126,6 +171,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2095946A1965310F00C0C007 /* SystemConfiguration.framework in Frameworks */,
+				209594681965310200C0C007 /* Security.framework in Frameworks */,
+				20959466196530F600C0C007 /* MobileCoreServices.framework in Frameworks */,
+				20959464196530D800C0C007 /* CFNetwork.framework in Frameworks */,
+				20959462196530AC00C0C007 /* libRestKit.a in Frameworks */,
 				FC9B5032194FBFAC00C32D97 /* CoreGraphics.framework in Frameworks */,
 				FC0B072919634D8000DF3BD2 /* FacebookSDK.framework in Frameworks */,
 				FC9B5034194FBFAC00C32D97 /* UIKit.framework in Frameworks */,
@@ -193,9 +243,21 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
+		2095945219652AEA00C0C007 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2095945919652AEB00C0C007 /* libRestKit.a */,
+				2095945B19652AEB00C0C007 /* RestKitTests.octest */,
+				2095945D19652AEB00C0C007 /* RestKit.framework */,
+				2095945F19652AEB00C0C007 /* RestKitFrameworkTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		FC9B5023194FBFAC00C32D97 = {
 			isa = PBXGroup;
 			children = (
+				2095945119652AEA00C0C007 /* RestKit.xcodeproj */,
 				FC9B5035194FBFAC00C32D97 /* Cookout */,
 				FC9B504E194FBFAC00C32D97 /* CookoutTests */,
 				FC9B502E194FBFAC00C32D97 /* Frameworks */,
@@ -215,6 +277,10 @@
 		FC9B502E194FBFAC00C32D97 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				209594691965310F00C0C007 /* SystemConfiguration.framework */,
+				209594671965310200C0C007 /* Security.framework */,
+				20959465196530F600C0C007 /* MobileCoreServices.framework */,
+				20959463196530D800C0C007 /* CFNetwork.framework */,
 				FC9B5031194FBFAC00C32D97 /* CoreGraphics.framework */,
 				FC0B072819634D8000DF3BD2 /* FacebookSDK.framework */,
 				FC9B502F194FBFAC00C32D97 /* Foundation.framework */,
@@ -292,6 +358,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				209594611965308400C0C007 /* PBXTargetDependency */,
 			);
 			name = Cookout;
 			productName = Cookout;
@@ -341,6 +408,12 @@
 			mainGroup = FC9B5023194FBFAC00C32D97;
 			productRefGroup = FC9B502D194FBFAC00C32D97 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 2095945219652AEA00C0C007 /* Products */;
+					ProjectRef = 2095945119652AEA00C0C007 /* RestKit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				FC9B502B194FBFAC00C32D97 /* Cookout */,
@@ -348,6 +421,37 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		2095945919652AEB00C0C007 /* libRestKit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRestKit.a;
+			remoteRef = 2095945819652AEB00C0C007 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2095945B19652AEB00C0C007 /* RestKitTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = RestKitTests.octest;
+			remoteRef = 2095945A19652AEB00C0C007 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2095945D19652AEB00C0C007 /* RestKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = RestKit.framework;
+			remoteRef = 2095945C19652AEB00C0C007 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2095945F19652AEB00C0C007 /* RestKitFrameworkTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = RestKitFrameworkTests.octest;
+			remoteRef = 2095945E19652AEB00C0C007 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		FC9B502A194FBFAC00C32D97 /* Resources */ = {
@@ -414,6 +518,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		209594611965308400C0C007 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = RestKit;
+			targetProxy = 209594601965308400C0C007 /* PBXContainerItemProxy */;
+		};
 		FC9B504D194FBFAC00C32D97 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = FC9B502B194FBFAC00C32D97 /* Cookout */;
@@ -523,7 +632,13 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cookout/Cookout-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"\"$(BUILT_PRODUCTS_DIR)/../../Headers\"",
+				);
 				INFOPLIST_FILE = "Cookout/Cookout-Info.plist";
+				"OTHER_LDFLAGS[arch=*]" = "-Objc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -541,7 +656,13 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cookout/Cookout-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"\"$(BUILT_PRODUCTS_DIR)/../../Headers\"",
+				);
 				INFOPLIST_FILE = "Cookout/Cookout-Info.plist";
+				"OTHER_LDFLAGS[arch=*]" = "-Objc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

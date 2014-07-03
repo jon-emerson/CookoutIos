@@ -10,6 +10,8 @@
 	<string>Cookout</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>94F82988-495E-49B9-BFF2-FAFB9AE3548A</key>
+		<string>git://github.com/RestKit/RestKit.git</string>
 		<key>FEBFDE5B-2B0B-4BB0-BFDF-C4D3C0C0D0B5</key>
 		<string>https://github.com/cookout/CookoutIos.git</string>
 	</dict>
@@ -17,6 +19,8 @@
 	<string>Cookout.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>94F82988-495E-49B9-BFF2-FAFB9AE3548A</key>
+		<string>../../RestKit</string>
 		<key>FEBFDE5B-2B0B-4BB0-BFDF-C4D3C0C0D0B5</key>
 		<string>../..</string>
 	</dict>
@@ -35,6 +39,14 @@
 			<string>FEBFDE5B-2B0B-4BB0-BFDF-C4D3C0C0D0B5</string>
 			<key>IDESourceControlWCCName</key>
 			<string>CookoutIos</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>94F82988-495E-49B9-BFF2-FAFB9AE3548A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>RestKit</string>
 		</dict>
 	</array>
 </dict>

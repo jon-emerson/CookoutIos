@@ -11,6 +11,7 @@
 #import "CKTHomeViewController.h"
 #import "CKTNavigationBar.h"
 #include "CKTLoginManager.h"
+#import <RestKit/RestKit.h>
 
 @implementation CKTAppDelegate
 
