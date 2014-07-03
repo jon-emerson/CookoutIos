@@ -15,7 +15,7 @@
 
 @implementation CKTServerCommunicator
 
-+ (void)initializeDataModel:(id <CKTDataModelChangeDelegate>)delegate
++ (void)initializeDataModel:(id<CKTDataModelChangeDelegate>)dataModelChangeDelegate
 {
     // This is the prefix we must strip from any server response.
     NSString *jsonPrefix = @"&&&PREFIX&&&";
@@ -25,37 +25,40 @@
                                        queue:[[NSOperationQueue alloc] init]
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
         if (error) {
-            [delegate dataModelError:error];
+            [dataModelChangeDelegate dataModelError:error];
         } else {
-            NSString *jsonStr = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] substringFromIndex:[jsonPrefix length]];
+            NSString *jsonStr = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]
+                    substringFromIndex:[jsonPrefix length]];
             [CKTDataModelBuilder populateDataModelFromJSON:jsonStr];
-            [delegate dataModelInitialized];
+            [dataModelChangeDelegate dataModelInitialized];
         }
     }];
 }
 
-+ (void)postOrder:(CKTOrder *)order delegate:(id <CKTDataModelChangeDelegate>)d
++ (void)postOrder:(CKTOrder *)order delegate:(id<CKTDataModelChangeDelegate>)dataModelChangeDelegate
 {
     NSString *baseURL = @"http://immense-beyond-2989.herokuapp.com/order";
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSString * uId = order.user.userId;
-    NSString * aId = order.user.deliveryAddress.addressId;
-    NSString * dId = order.dinner.dinnerId;
-    NSString * oQ = order.orderQuantity.stringValue;
-    NSString * sR = order.specialRequests;
+    NSString *uId = order.user.userId;
+    NSString *aId = order.user.deliveryAddress.addressId;
+    NSString *dId = order.dinner.dinnerId;
+    NSString *oQ = order.orderQuantity.stringValue;
+    NSString *sR = order.specialRequests;
     
-    NSMutableDictionary *parameters = @{@"userId":(uId)?uId:@"-1", @"addressId":(aId)?aId:@"-1",
-                                 @"dinnerId":(dId)?dId:@"-1", @"orderQuantity":(oQ)?oQ:@"-1",
-                                 @"specialRequests":(sR)?sR:@"None"};
+    NSDictionary *parameters = @{@"userId":(uId) ? uId : @"-1",
+                                 @"addressId":(aId) ? aId : @"-1",
+                                 @"dinnerId":(dId) ? dId :@"-1",
+                                 @"orderQuantity":(oQ) ? oQ : @"-1",
+                                 @"specialRequests":(sR) ? sR : @"None"};
     
-    [manager POST:baseURL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@  Operation: %@", error,operation);
-    }];
-    
-
+    [manager POST:baseURL parameters:parameters
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              NSLog(@"JSON: %@", responseObject);
+          }
+          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              NSLog(@"Error: %@  Operation: %@", error, operation);
+          }];
 }
 
 @end

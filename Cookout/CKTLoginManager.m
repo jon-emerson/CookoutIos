@@ -10,7 +10,7 @@
 
 @implementation CKTLoginManager
 
-+ (void) openFBSession
++ (void)openFBSession
 {
     [FBLoginView class];
     // Whenever a person opens the app, check for a cached session
@@ -23,14 +23,15 @@
                                           // Handler for session state changes
                                           // This method will be called EACH time the session state changes,
                                           // also for intermediate states and NOT just when the session open
-                                          [CKTLoginManager sessionStateChanged:session state:@(state) error:error];
+                                          [CKTLoginManager sessionStateChanged:session state:state error:error];
                                       }];
         
     }
 }
 
-+ (void) sessionStateChanged:(FBSession *)session state:(FBSessionState)state error:(NSError *)error
++ (void)sessionStateChanged:(FBSession *)session state:(FBSessionState)state error:(NSError *)error
 {
     NSLog(@"Facebook login state changed and I got here");
 }
+
 @end

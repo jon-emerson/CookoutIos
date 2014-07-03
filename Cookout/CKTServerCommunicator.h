@@ -11,6 +11,6 @@
 #import "CKTOrder.h"
 
 @interface CKTServerCommunicator : NSObject
-+ (void)initializeDataModel:(id <CKTDataModelChangeDelegate>)delegate;
-+ (void)postOrder:(CKTOrder *)order delegate:(id <CKTDataModelChangeDelegate>)d;
++ (void)initializeDataModel:(id<CKTDataModelChangeDelegate>)dataModelChangeDelegate;
++ (void)postOrder:(CKTOrder *)order delegate:(id<CKTDataModelChangeDelegate>)dataModelChangeDelegate;
 @end

@@ -56,10 +56,10 @@
     
     // Create an instance of the CKTCheckoutViewController and push
     // it on the nav controller stack
-    CKTCheckoutViewController * checkout = [[CKTCheckoutViewController alloc] init];
+    CKTCheckoutViewController *checkout = [[CKTCheckoutViewController alloc] init];
     
     // Create an order object to capture the order state
-    CKTOrder * newOrder = [[CKTOrder alloc]init];
+    CKTOrder *newOrder = [[CKTOrder alloc]init];
     newOrder.dinner = self.dinner;
     newOrder.orderQuantity = [[NSNumber alloc] initWithDouble:self.quantityStepper.value];
     
@@ -86,7 +86,7 @@
     self.descriptionLabel.text = [self.dinner description];
     self.descriptionLabel.numberOfLines = 0;
     [self.descriptionLabel sizeToFit];
-    self.price.text = [[NSString alloc] initWithFormat:@"$%@",self.dinner.price];
+    self.price.text = [[NSString alloc] initWithFormat:@"$%@", self.dinner.price];
     NSArray *ingredients = [self.dinner ingredients];
     if ([ingredients count] > 0) {
         self.ingredientsLabel.text = ingredients[0];

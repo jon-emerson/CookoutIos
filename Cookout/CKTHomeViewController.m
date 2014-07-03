@@ -18,12 +18,11 @@
 
 @implementation CKTHomeViewController
 
-- (instancetype) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     
-    if(self) {
-        
+    if (self) {
         // Listen for Facebook sesssion updates
         [[CKTFacebookSessionManager sharedFacebookSessionManager] addListener:self];
 
@@ -38,12 +37,12 @@
         
         // Add the settings pane as the left bar button item
         navItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"\u2630"
-                                                                     style: UIBarButtonItemStylePlain
+                                                                     style:UIBarButtonItemStylePlain
                                                                     target:self
                                                                     action:@selector(openSettingsMenu)];
         // Add the login button as a right bar button item
         navItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Login"
-                                                                      style: UIBarButtonItemStylePlain
+                                                                      style:UIBarButtonItemStylePlain
                                                                      target:self
                                                                      action:@selector(handleLoginRequest:)];
     }
@@ -54,8 +53,7 @@
 {
     FBSession *session = [[CKTFacebookSessionManager sharedFacebookSessionManager] session];
     NSLog(@"facebook state change: %u", session.state);
-    
-    
+
     if (session.isOpen) {
         [FBRequestConnection startForMeWithCompletionHandler:
          ^(FBRequestConnection *connection, id<FBGraphUser> result, NSError *error) {
@@ -79,7 +77,7 @@
     [[CKTFacebookSessionManager sharedFacebookSessionManager] login];
 }
 
-- (void) openSettingsMenu
+- (void)openSettingsMenu
 {
     // Logic for opening and displaying the settings menu in the homescreen
 }
@@ -89,21 +87,14 @@
     return 210;
 }
 
-- (NSURL *)makeUrl:(NSString *)filename
-{
-    return [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",
-                                 @"http://cookout-assets.s3-website-us-east-1.amazonaws.com/",
-                                 filename]];
-}
-
-- (void) viewDidLoad {
+- (void)viewDidLoad {
     [super viewDidLoad];
 
     self.tableView.separatorColor = [UIColor clearColor];
     [CKTServerCommunicator initializeDataModel:self];
 }
 
-- (void) dataModelInitialized
+- (void)dataModelInitialized
 {
     NSLog(@"Data model initialized!");
     
@@ -112,17 +103,17 @@
     });
 }
 
-- (void) dataModelError:(NSError *)error
+- (void)dataModelError:(NSError *)error
 {
     NSLog(@"Data model error: %@", error);
 }
 
-- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [[[CKTDataModel sharedDataModel] dinners] count];
 }
 
-- (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"homeViewCell";
     CKTHomeViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -137,10 +128,9 @@
     return cell;
 }
 
-- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CKTDinnerViewController *dinnerViewController =
-    [[CKTDinnerViewController alloc] init];
+    CKTDinnerViewController *dinnerViewController = [[CKTDinnerViewController alloc] init];
     
     NSArray *dinners = [[CKTDataModel sharedDataModel] dinners];
     CKTDinner *selectedDinner = dinners[indexPath.row];
@@ -148,8 +138,5 @@
     
     [self.navigationController pushViewController:dinnerViewController animated:YES];
 }
-
-
-
 
 @end

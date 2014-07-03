@@ -28,10 +28,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    NSLog (@"THIS VIEW LOADED");
+    NSLog(@"THIS VIEW LOADED");
 }
 
-- (IBAction)placeOrder:(id) sender
+- (IBAction)placeOrder:(id)sender
 {
     // Post the order to the server
     [CKTServerCommunicator postOrder:self.order delegate:self];
