@@ -6,12 +6,12 @@
 //  Copyright (c) 2014 Cookout. All rights reserved.
 //
 
-#import "CKTDataModelChangeDelegate.h"
-#import "CKTServerCommunicator.h"
-#import "CKTDataModelBuilder.h"
-#import "CKTOrder.h"
 #import "AFHTTPRequestOperationManager.h"
-
+#import "CKTDataModelBuilder.h"
+#import "CKTDataModelChangeDelegate.h"
+#import "CKTJSONResponseSerializer.h"
+#import "CKTOrder.h"
+#import "CKTServerCommunicator.h"
 
 @implementation CKTServerCommunicator
 
@@ -40,6 +40,7 @@
     NSString *baseURL = @"http://immense-beyond-2989.herokuapp.com/order";
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [[CKTJSONResponseSerializer alloc] init];
     NSString *uId = order.user.userId;
     NSString *aId = order.user.deliveryAddress.addressId;
     NSString *dId = order.dinner.dinnerId;
