@@ -17,22 +17,17 @@
 
 + (void)initializeDataModel:(id<CKTDataModelChangeDelegate>)dataModelChangeDelegate
 {
-    // This is the prefix we must strip from any server response.
-    NSString *jsonPrefix = @"&&&PREFIX&&&";
-    
-    NSURL *url = [[NSURL alloc] initWithString:@"http://immense-beyond-2989.herokuapp.com/readDinners"];
-    [NSURLConnection sendAsynchronousRequest:[[NSURLRequest alloc] initWithURL:url]
-                                       queue:[[NSOperationQueue alloc] init]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-                               if (error) {
-                                   [dataModelChangeDelegate dataModelError:error];
-                               } else {
-                                   NSString *jsonStr = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]
-                                                        substringFromIndex:[jsonPrefix length]];
-                                   [CKTDataModelBuilder populateDataModelFromJSON:jsonStr];
-                                   [dataModelChangeDelegate dataModelInitialized];
-                               }
-                           }];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [[CKTJSONResponseSerializer alloc] init];
+    [manager GET:@"http://immense-beyond-2989.herokuapp.com/readDinners" parameters:@{}
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              NSDictionary *json = (NSDictionary *)responseObject;
+              [CKTDataModelBuilder populateDataModelFromJSON:json];
+              [dataModelChangeDelegate dataModelInitialized];
+          }
+          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              [dataModelChangeDelegate dataModelError:error];
+          }];
 }
 
 + (void)postOrder:(CKTOrder *)order delegate:(id<CKTDataModelChangeDelegate>)dataModelChangeDelegate
