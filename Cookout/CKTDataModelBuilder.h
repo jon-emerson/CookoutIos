@@ -10,6 +10,6 @@
 
 @interface CKTDataModelBuilder : NSObject
 
-+ (void)populateDataModelFromJSON:(NSString *)jsonStr;
++ (void)populateDataModelFromJSON:(NSDictionary *)jsonStr;
 
 @end
