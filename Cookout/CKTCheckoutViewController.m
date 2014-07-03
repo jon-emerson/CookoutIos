@@ -35,17 +35,19 @@
     [super viewDidLoad];
     self.needsOnboarding.hidden = NO;
     [self.needsOnboarding setNeedsDisplay];
+
     // Do any additional setup after loading the view from its nib.
     // Display order summary
     self.orderQuantity.text = [[NSString alloc] initWithFormat:@"%@ x", self.order.orderQuantity.stringValue];
-    self.foodImage.imageURL = [self.order.dinner imageUrl];
-    self.totalPrice.text = [[NSString alloc] initWithFormat:@"$%.2f", ([self.order.dinner.price floatValue]*[self.order.orderQuantity floatValue])];
+    self.foodImage.imageURL = [self.order.dinner imageNSUrl];
+    self.totalPrice.text = [[NSString alloc] initWithFormat:@"$%.2f",
+                            ([self.order.dinner.price floatValue] * [self.order.orderQuantity floatValue])];
     self.foodLabel.text = [self.order.dinner name];
     
     
     // Handle autolayout messiness and allow scrolling - create a subview of UIScrollView that
     // contains all the UI elements. (done in XIB). Retrieve parent scroll view
-    UIScrollView * scrollView = self.view;
+    UIScrollView *scrollView = (UIScrollView *)self.view;
     
     // Retrieve the child UIView that contains all the UI elements
     UIView *child = scrollView.subviews[0];
@@ -63,53 +65,39 @@
     
     if ([self isValidUser]) {
         // User is signed in - yaay!
-        if([self hasValidDeliveryAddress] && [self hasValidCCInfo])
-        {
+        if([self hasValidDeliveryAddress] && [self hasValidCCInfo]) {
             // Setup checkout
-        }
-        else
-        {
+        } else {
              self.needsOnboarding.hidden = NO;
         }
-    }
-    else
-    {
+    } else {
         // Get user to sign in using FB
         self.needsOnboarding.hidden = NO;
-        
     }
-    
     
     // If signed in, check if delivery address and credit card information
     // are available for the user. If not prompt entry of address and CC
     
 }
 
-- (IBAction)doOnboarding: (id) sender
+- (IBAction)doOnboarding:(id)sender
 {
     // Onboard the user
-    CKTCreateAccountViewController * createAccount = [[CKTCreateAccountViewController alloc]init];
+    CKTCreateAccountViewController * createAccount = [[CKTCreateAccountViewController alloc] init];
     createAccount.order = self.order;
     [self.navigationController pushViewController:createAccount animated:YES];
-    
 }
-
 
 - (BOOL)isValidUser
 {
     // See if user is signed in - if not prompt sign in
-    NSObject * user = [[CKTDataModel sharedDataModel] getUser];
-    if(user)
-    {
-        return YES;
-    }
-    return NO;
+    NSObject *user = [[CKTDataModel sharedDataModel] getUser];
+    return !!user;
 }
 
 - (BOOL)hasValidDeliveryAddress
 {
-    if(self.order.user.deliveryAddress)
-    {
+    if (self.order.user.deliveryAddress) {
         return YES;
     }
     return NO;
@@ -118,12 +106,6 @@
 - (BOOL)hasValidCCInfo
 {
     return YES;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

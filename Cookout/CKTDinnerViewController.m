@@ -76,11 +76,11 @@
     
     // Set the default quantity of the dinner order
     self.quantity.text = @"1";
-    
+
     // Do any additional setup after loading the view from its nib.
     CKTChef *chef = [CKTDataModel.sharedDataModel chefWithId:self.dinner.chefId];
-    self.foodImage.imageURL = [self.dinner imageUrl];
-    self.profileImage.imageURL = [chef imageUrl];
+    self.foodImage.imageURL = [self.dinner imageNSUrl];
+    self.profileImage.imageURL = [chef imageNSUrl];
     self.foodLabel.text = [self.dinner name];
     self.subtitleLabel.text = [chef name];
     self.descriptionLabel.text = [self.dinner description];
@@ -96,7 +96,7 @@
     
     // Handle autolayout messiness and allow scrolling - create a subview of UIScrollView that
     // contains all the UI elements. (done in XIB). Retrieve parent scroll view
-    UIScrollView * scrollView = self.view;
+    UIScrollView *scrollView = (UIScrollView *)self.view;
     
     // Retrieve the child UIView that contains all the UI elements
     UIView *child = scrollView.subviews[0];
@@ -105,15 +105,15 @@
     // equal to the bottom of the child UI view. This will size the scroll view correctly
     // and make the view scrollable
     [scrollView addConstraint:[NSLayoutConstraint constraintWithItem:child
-                                                              attribute:NSLayoutAttributeBottom
-                                                              relatedBy:NSLayoutRelationEqual
+                                                           attribute:NSLayoutAttributeBottom
+                                                           relatedBy:NSLayoutRelationEqual
                                                               toItem:scrollView
-                                                              attribute:NSLayoutAttributeBottom
-                                                              multiplier:1.0
-                                                              constant:0.0]];
+                                                           attribute:NSLayoutAttributeBottom
+                                                          multiplier:1.0
+                                                            constant:0.0]];
 }
 
-- (void) didReceiveMemoryWarning
+- (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

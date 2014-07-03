@@ -14,6 +14,6 @@
 
 @interface CKTCheckoutViewController : UIViewController
 
-@property (nonatomic, strong) CKTOrder * order;
+@property (nonatomic, strong) CKTOrder *order;
 
 @end
