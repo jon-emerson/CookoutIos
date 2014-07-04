@@ -17,10 +17,15 @@
 
 @implementation CKTServerCommunicator
 
-+ (void)initializeDataModel:(id<CKTDataModelChangeDelegate>)dataModelChangeDelegate
++ (void)syncDataModel:(id<CKTDataModelChangeDelegate>)dataModelChangeDelegate
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [[CKTJSONResponseSerializer alloc] init];
+    
+    // Look at existing data model - possible states
+    // (1) completely unintiliazed
+    // (2) initialized with stale data
+    
     [manager GET:@"http://immense-beyond-2989.herokuapp.com/readDinners" parameters:@{}
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               NSDictionary *json = (NSDictionary *)responseObject;
@@ -110,6 +115,7 @@
     
     [manager POST:URL parameters:parameters
           success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+              NSLog(@"%@", responseObject);
               [delegate addressSaved:responseObject];
           }
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {

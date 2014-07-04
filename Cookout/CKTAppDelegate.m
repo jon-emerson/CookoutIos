@@ -11,7 +11,8 @@
 #import "CKTHomeViewController.h"
 #import "CKTNavigationBar.h"
 #include "CKTLoginManager.h"
-#import "AFHTTPRequestOperationLogger.h"
+#import "CKTDataModel.h"
+#import "CKTServerCommunicator.h"
 
 
 @implementation CKTAppDelegate
@@ -24,9 +25,15 @@
     
     // Override point for customization after application launch.
     
+    // The app has launched; async load last know state of data model from disk
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [CKTDataModel sharedDataModel];
+    });
+    
     // Create a cookout home view controller
     CKTHomeViewController *hvc = [[CKTHomeViewController alloc] init];
-    
+
+
     UINavigationController *navController = [[UINavigationController alloc] initWithNavigationBarClass:[CKTNavigationBar class] toolbarClass:nil];
 
     // Push the home view controller on the nav controller
@@ -34,6 +41,11 @@
     
     // Set the nav controller as the rootview controller of the window
     self.window.rootViewController = navController;
+    
+    // Dispatch async task to fetch latest state from server
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [CKTServerCommunicator syncDataModel:hvc];
+    });
     
     // Add a red rectangle UIView at the top of the screen, behind the status bar
     // Only do this on iOS7 devices

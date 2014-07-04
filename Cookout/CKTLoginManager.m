@@ -11,6 +11,11 @@
 
 @implementation CKTLoginManager
 
++(void)openCookoutSession:(id) delegate
+{
+    
+}
+
 + (void)openFBSession:(id) delegate
 {
     [FBLoginView class];

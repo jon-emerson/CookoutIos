@@ -130,19 +130,27 @@
     address.unit = @"-1";
     [sharedModel.getUser.addresses addObject:address];
     
+    NSLog(@"Dispatching save address call");
     // Save address to the server
-    [CKTServerCommunicator setUserAddress:address user:[sharedModel getUser]];    
+    [CKTServerCommunicator setUserAddress:address user:[sharedModel getUser] delegate:self];
 }
 
 // Handle the request CKT Server's error response to CKT Session Request
 -(void)sessionRequestError:(NSError *)error
 {
+    // Address did not save correctly
+    // TODO: show error to user and return to view
     
 }
 
 -(void)addressSaved:(NSDictionary *)responseObject
 {
-    
+    // The user's address was saved succesfully.
+    // This means the user has a cookout session and a delivery address
+    // Pop this view of the stack and go back to the checkout screen
+    NSNumber * didSessionRequestSucceed = [responseObject valueForKey:@"success"];
+    if(didSessionRequestSucceed)
+        [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)addressSaveFailed:(NSError *)error
 {
