@@ -10,8 +10,10 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "CKTAddressCCEntryViewController.h"
 #import "CKTOrder.h"
+#import "CKTSessionHandlerDelegate.h"
+#import "CKTAddressSaveHandler.h"
 
-@interface CKTCreateAccountViewController : UIViewController <FBLoginViewDelegate>
+@interface CKTCreateAccountViewController : UIViewController <FBLoginViewDelegate,CKTSessionHandlerDelegate,CKTAddressSaveHandler>
 @property (weak, nonatomic) CKTOrder * order;
 - (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView;
 - (void)loginViewFetchedUserInfo:(FBLoginView *)loginView

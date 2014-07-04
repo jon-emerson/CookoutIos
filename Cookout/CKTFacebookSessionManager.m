@@ -92,7 +92,7 @@
         return;
     }
     
-    [FBSession openActiveSessionWithReadPermissions:@[@"public_profile"] // , @"user_friends", @"email"]
+    [FBSession openActiveSessionWithReadPermissions:@[@"public_profile", @"email"] // , @"user_friends", @"email"]
                                        allowLoginUI:YES
                                   completionHandler:
          ^(FBSession *session, FBSessionState state, NSError *error) {

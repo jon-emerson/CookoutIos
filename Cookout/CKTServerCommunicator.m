@@ -12,6 +12,8 @@
 #import "CKTJSONResponseSerializer.h"
 #import "CKTServerCommunicator.h"
 #import "CKTOrder.h"
+#import "CKTSessionHandlerDelegate.h"
+#import "CKTAddressSaveHandler.h"
 
 @implementation CKTServerCommunicator
 
@@ -37,7 +39,7 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [[CKTJSONResponseSerializer alloc] init];
     NSString *uId = order.user.userId;
-    NSString *aId = order.user.deliveryAddress.addressId;
+    NSString *aId = order.user.addresses;
     NSString *dId = order.dinner.dinnerId;
     NSString *oQ = order.orderQuantity.stringValue;
     NSString *sR = order.specialRequests;
@@ -56,5 +58,64 @@
               NSLog(@"Error: %@  Operation: %@", error, operation);
           }];
 }
+
++(void)getCKTSession:(FBAccessTokenData *)fbToken delegate:(id<CKTSessionHandlerDelegate>)delegate
+{
+    
+    NSString * URL = @"https://immense-beyond-2989.herokuapp.com/getSession";
+    NSDictionary *parameters = @{@"fbAccessToken":fbToken.accessToken};
+
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [[CKTJSONResponseSerializer alloc] init];
+
+    [manager POST:URL parameters:parameters
+          success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+              [delegate sessionRequestResponse:responseObject];
+          }
+          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              [delegate sessionRequestError:error];
+          }];
+}
+
++(void)createUser:(CKTUser *)user
+{
+    NSString * URL = @"https://immense-beyond-2989.herokuapp.com/createUser";
+    NSArray * keys = @[@"fbAccessToken",@"name",@"email",@"phone"];
+    NSDictionary * parameters = [user dictionaryWithValuesForKeys:keys];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [[CKTJSONResponseSerializer alloc] init];
+    
+    [manager POST:URL parameters:parameters
+          success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+              NSLog(@"JSON: %@", responseObject);
+          }
+          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              NSLog(@"Error: %@  Operation: %@", error, operation);
+          }];
+}
+
++(void)setUserAddress:(CKTAddress *)address user:(CKTUser *)user delegate:(id<CKTAddressSaveHandler>)delegate
+{
+    NSString * URL = @"https://immense-beyond-2989.herokuapp.com/addAddress";
+    NSArray * addressKeys = @[@"addressLine1",@"addressLine2",@"unit",@"city",@"state",@"country",@"zipcode"];
+    NSArray * userKeys = @[@"sessionId"];
+
+    NSMutableDictionary * parameters = [[address dictionaryWithValuesForKeys:addressKeys]mutableCopy];
+    NSMutableDictionary * userParams = [user dictionaryWithValuesForKeys:userKeys];
+    
+    [parameters addEntriesFromDictionary:userParams];
+  
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [[CKTJSONResponseSerializer alloc] init];
+    
+    [manager POST:URL parameters:parameters
+          success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+              [delegate addressSaved:responseObject];
+          }
+          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              [delegate addressSaveFailed:error];
+          }];
+}
+
 
 @end

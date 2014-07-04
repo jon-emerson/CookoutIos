@@ -12,5 +12,5 @@
 
 @interface CKTLoginManager : NSObject
 + (void)sessionStateChanged:session state:(FBSessionState)state error:(NSError *)error;
-+ (void)openFBSession;
++ (void)openFBSession: (id) delegate;
 @end

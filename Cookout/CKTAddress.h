@@ -12,8 +12,8 @@
 
 // User's delivery address
 @property (nonatomic, copy) NSString *addressId;
-@property (nonatomic, copy) NSString *streetAddressLine1;
-@property (nonatomic, copy) NSString *streetAddressLine2;
+@property (nonatomic, copy) NSString *addressLine1;
+@property (nonatomic, copy) NSString *addressLine2;
 @property (nonatomic, copy) NSString *unit;
 @property (nonatomic, copy) NSString *city;
 @property (nonatomic, copy) NSString *state;

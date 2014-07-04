@@ -23,9 +23,6 @@
     //[[AFHTTPRequestOperationLogger sharedLogger] setLevel:AFLoggerLevelDebug];
     
     // Override point for customization after application launch.
-
-    // Check Facebook login state
-    [CKTLoginManager openFBSession];
     
     // Create a cookout home view controller
     CKTHomeViewController *hvc = [[CKTHomeViewController alloc] init];

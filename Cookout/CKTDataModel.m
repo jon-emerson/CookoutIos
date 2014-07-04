@@ -12,7 +12,7 @@
 @interface CKTDataModel ()
 @property (nonatomic, retain) NSMutableArray *dinnersArray;
 @property (nonatomic, retain) NSMutableDictionary *chefDictionary;
-@property (nonatomic, copy) CKTUser * user;
+@property (nonatomic, retain) CKTUser * user;
 @end
 
 @implementation CKTDataModel
@@ -65,10 +65,11 @@
     self.user = u;
 }
 
-- (NSObject *) getUser
+- (CKTUser *) getUser
 {
     return self.user;
 }
+
 
 + (NSString *)itemArchivePath
 {

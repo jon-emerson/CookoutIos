@@ -11,10 +11,11 @@
 
 @interface CKTUser : NSObject
 //TODO: Should these properties be copy
-@property (copy, readonly) NSString *userId;
-@property (copy, readonly) NSString *name;
+@property (copy, readwrite) NSString *userId;
+@property (copy, readwrite) NSString *name;
+@property (copy, readwrite) NSString *sessionId;
+@property (copy, readwrite) NSString *fbAccessToken;
 @property (copy, nonatomic, readwrite) NSString *phone;
 @property (copy, nonatomic, readwrite) NSString *email;
-@property (copy, nonatomic, readwrite) CKTAddress *deliveryAddress;
-@property (copy, nonatomic, readwrite) CKTAddress *billingAddress;
+@property (copy, nonatomic, readwrite) NSMutableArray *addresses;
 @end

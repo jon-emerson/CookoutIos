@@ -68,6 +68,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		202BC51B1966529000FC444A /* CKTAddressSaveHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTAddressSaveHandler.h; sourceTree = "<group>"; };
+		20403BA219660EC4008BF4F0 /* CKTSessionHandlerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTSessionHandlerDelegate.h; sourceTree = "<group>"; };
 		20858A7E19656DEF007769AE /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		20858A7F19656DEF007769AE /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		20858A8019656DEF007769AE /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -313,6 +315,8 @@
 				FC0B071F195CEF8200DF3BD2 /* CKTNavigationBar.m */,
 				FC0B0706195B7D6300DF3BD2 /* CKTServerCommunicator.h */,
 				FC0B0707195B7D6300DF3BD2 /* CKTServerCommunicator.m */,
+				202BC51B1966529000FC444A /* CKTAddressSaveHandler.h */,
+				20403BA219660EC4008BF4F0 /* CKTSessionHandlerDelegate.h */,
 				209593C71964DE8000C0C007 /* Controllers */,
 				FC0B071A195CE52500DF3BD2 /* cookout-logo-160.png */,
 				209593C61964DDF400C0C007 /* Data Model */,

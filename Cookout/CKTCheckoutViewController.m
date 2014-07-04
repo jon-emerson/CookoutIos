@@ -97,10 +97,7 @@
 
 - (BOOL)hasValidDeliveryAddress
 {
-    if (self.order.user.deliveryAddress) {
-        return YES;
-    }
-    return NO;
+        return NO;
 }
 
 - (BOOL)hasValidCCInfo

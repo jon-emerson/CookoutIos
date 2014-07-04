@@ -9,8 +9,12 @@
 #import <CoreLocation/CoreLocation.h>
 #import "CKTDataModelChangeDelegate.h"
 #import "CKTOrder.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 @interface CKTServerCommunicator : NSObject
-+ (void)initializeDataModel:(id<CKTDataModelChangeDelegate>)dataModelChangeDelegate;
-+ (void)postOrder:(CKTOrder *)order delegate:(id<CKTDataModelChangeDelegate>)dataModelChangeDelegate;
++(void)initializeDataModel:(id<CKTDataModelChangeDelegate>)dataModelChangeDelegate;
++(void)postOrder:(CKTOrder *)order delegate:(id<CKTDataModelChangeDelegate>)dataModelChangeDelegate;
++(void)getCKTSession:(FBAccessTokenData *)fbToken delegate:(id)delegate;
++(void)createUser:(CKTUser *)user;
++(void)setUserAddress:(CKTAddress *) address user:(CKTUser *) user;
 @end
