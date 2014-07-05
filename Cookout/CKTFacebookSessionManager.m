@@ -37,31 +37,41 @@
 {
     self = [super init];
     
-    if (self) {
+    if (self)
+    {
         _listeners = [[NSMutableArray alloc] init];
-        
-        if (!self.session.isOpen) {
+        if (!self.session.isOpen)
+        {
             // create a fresh session object
             _session = [[FBSession alloc] init];
             
-            // if we don't have a cached token, a call to open here would cause UX for login to
-            // occur; we don't want that to happen unless the user clicks the login button, and so
-            // we check here to make sure we have a token before calling open
-            if (self.session.state == FBSessionStateCreatedTokenLoaded) {
+            // if we have a cached token, use it to login and activate the session
+            if (self.session.state == FBSessionStateCreatedTokenLoaded)
+            {
                 // even though we had a cached token, we need to login to make the session usable
                 [self.session openWithCompletionHandler:^(FBSession *session,
-                                                                 FBSessionState status,
-                                                                 NSError *error) {
+                                                          FBSessionState status,
+                                                          NSError *error) {
                     [self dispatchStateChange];
                 }];
-            } else {
-                [self dispatchStateChange];
             }
-        } else {
+            else
+            {
+                // Make a UI less attempt to refresh the session token
+                [FBSession openActiveSessionWithReadPermissions:@[@"public_profile", @"email"]
+                                                   allowLoginUI:NO
+                                              completionHandler:
+                 ^(FBSession *session, FBSessionState state, NSError *error) {
+                     _session = session;
+                     [self dispatchStateChange];
+                 }];
+            }
+        }
+        else
+        {
             [self dispatchStateChange];
         }
     }
-    
     return self;
 };
 
@@ -99,6 +109,29 @@
              _session = session;
              [self dispatchStateChange];
          }];
+}
+
+- (void)quietLogin
+{
+    NSLog(@"FBSession.activeSession.state = %u", FBSession.activeSession.state);
+    
+    // If the session state is any of the two "open" states when the button is clicked
+    if (FBSession.activeSession.state == FBSessionStateOpen
+        || FBSession.activeSession.state == FBSessionStateOpenTokenExtended) {
+        
+        // The user is already logged in.  Just dispatch an event so that the UI
+        // properly updates itself.
+        [self dispatchStateChange];
+        return;
+    }
+    // Attempt a silent login
+    [FBSession openActiveSessionWithReadPermissions:@[@"public_profile", @"email"] // , @"user_friends", @"email"]
+                                       allowLoginUI:NO
+                                  completionHandler:
+     ^(FBSession *session, FBSessionState state, NSError *error) {
+         _session = session;
+         [self dispatchStateChange];
+     }];
 }
 
 - (void)addListener:(id<CKTFacebookSessionListener>)listener

@@ -8,53 +8,59 @@
 
 #import "CKTLoginManager.h"
 #import "CKTDataModel.h"
+#import "CKTServerCommunicator.h"
+#import "CKTFacebookSessionListener.h"
+#import "CKTFacebookSessionManager.h"
 
 @implementation CKTLoginManager
-
-+(void)openCookoutSession:(id) delegate
++(instancetype)sharedLoginManager
 {
-    
+    static CKTLoginManager *sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        if (!sharedInstance) {
+            sharedInstance = [[CKTLoginManager alloc] init];
+        }
+    });
+    return sharedInstance;
 }
 
-+ (void)openFBSession:(id) delegate
+// Start FB session
+-(void)startFBSession
 {
-    [FBLoginView class];
-    NSLog(@"Opening FB Session in Login Manager");
+    NSLog(@"Opening FB session");
+    CKTFacebookSessionManager * fbMgr = [CKTFacebookSessionManager sharedFacebookSessionManager];
     
-    // if our session has a cached token ready, we open it; note that it is important
-    // that we open the session before notification wiring is in place
-    
-    
-    [FBSession openActiveSessionWithReadPermissions:@[@"public_profile", @"email"]
-                                           allowLoginUI:NO
-                                      completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
-                                          // Handler for session state changes
-                                          // This method will be called EACH time the session state changes,
-                                          // also for intermediate states and NOT just when the session open
-                                          [delegate sessionStateChanged:session state:state error:error];
-                                      }];
-    
+    // Register login manager as a state change listener
+    [fbMgr addListener:self];
+    [fbMgr quietLogin];
+}
 
-    
-    /*if([FBSession openActiveSessionWithReadPermissions:@[@"public_profile", @"email"]
-                                           allowLoginUI:NO
-                                      completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
-                                          // Handler for session state changes
-                                          // This method will be called EACH time the session state changes,
-                                          // also for intermediate states and NOT just when the session open
-                                          [delegate sessionStateChanged:session state:state error:error];
-                                      }])
+// Handle FB session state changes
+- (void)handleFacebookSessionStateChange
+{
+    // If a valid facebook session is available, and no CKT session id available
+    // then send the CKT server a request to exchange the FB session for a CKT session
+    NSLog(@"Facebook session state change");
+    CKTDataModel * sharedModel = [CKTDataModel sharedDataModel];
+    if([sharedModel getUser].sessionId)
     {
-                                          
-        NSLog(@"Active session tapped");
-                            
+        // Don't care about FB session changes, the user has a valid CKT Session
+        NSLog(@"State change doesn't matter, got CKT Token");
+        return;
     }
     else
     {
-        
-    }*/
-    
+        NSLog(@"State change does matter - get me a CKT Token");
+        // ok check if the user has a valid FB session. If not, don't force UI here.
+        if(FBSession.activeSession.state == FBSessionStateOpen
+           || FBSession.activeSession.state == FBSessionStateOpenTokenExtended)
+        {
+            // Exchange the FB session token for a cookout session
+            [CKTServerCommunicator exchangeFbToken:FBSession.activeSession.accessTokenData];
+        }
+        else return;
+    }
 }
-
 
 @end

@@ -23,9 +23,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     
     if (self) {
-        // Listen for Facebook sesssion updates
-        //[[CKTFacebookSessionManager sharedFacebookSessionManager] addListener:self];
-
+        
         // Setup the navbar for the home view
         UINavigationItem *navItem = self.navigationItem;
         
@@ -62,13 +60,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.separatorColor = [UIColor clearColor];
-//    [CKTServerCommunicator initializeDataModel:self];
+    
+    // Home view controller has loaded. Check if the data model has been initialized locally
+    if([CKTDataModel sharedDataModel].dinners)
+    {
+        // Local saved data is available - populate the views with existing data
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    }
+    
+    //[CKTServerCommunicator initializeDataModel:self];
 }
 
 - (void)dataModelInitialized
 {
-    NSLog(@"Data model initialized!");
-    
+    // Sync with the cookout server completed
+    // the data model was updated - reload the table
+    NSLog(@"Data model synced!");
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tableView reloadData];
     });

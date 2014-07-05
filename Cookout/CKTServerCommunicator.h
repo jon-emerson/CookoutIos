@@ -15,7 +15,8 @@
 @interface CKTServerCommunicator : NSObject
 +(void)syncDataModel:(id<CKTDataModelChangeDelegate>)dataModelChangeDelegate;
 +(void)postOrder:(CKTOrder *)order delegate:(id<CKTDataModelChangeDelegate>)dataModelChangeDelegate;
-+(void)getCKTSession:(FBAccessTokenData *)fbToken delegate:(id)delegate;
++(void)startSession;
++(void)exchangeFbToken:(FBAccessTokenData *)fbToken;
 +(void)createUser:(CKTUser *)user;
 +(void)setUserAddress:(CKTAddress *) address user:(CKTUser *) user delegate:(id<CKTAddressSaveHandler>)delegate;
 @end

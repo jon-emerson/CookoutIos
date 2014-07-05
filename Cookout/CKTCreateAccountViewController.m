@@ -14,6 +14,7 @@
 @interface CKTCreateAccountViewController ()
 @property (weak, nonatomic) IBOutlet FBLoginView *loginView;
 @property (weak, nonatomic) IBOutlet UIView *addressEntryView;
+@property (weak, nonatomic) IBOutlet UIView *loginSection;
 
 @property (weak, nonatomic) IBOutlet UIButton *save;
 @property (weak, nonatomic) IBOutlet UITextField *addressLine1;
@@ -55,12 +56,12 @@
     // Do any additional setup after loading the view from its nib.
 }
 
--(void)sessionStateChanged:(FBSession *)session state:(FBSessionState)state error:(NSError *)error
+/*-(void)sessionStateChanged:(FBSession *)session state:(FBSessionState)state error:(NSError *)error
 {
     // If a valid session is opened, send the session token to the server and request
     // user credentials
     [CKTServerCommunicator getCKTSession:session.accessTokenData delegate:self];
-}
+}*/
 
 // Handle the request CKT Server's success response to CKT Session Request
 -(void)sessionRequestResponse:(NSDictionary *)responseObject;
@@ -69,6 +70,7 @@
     // If this is the case, then the user doesn't exist yet in the backend
     // and has to be created via createUser call
     NSNumber * didSessionRequestSucceed = [responseObject valueForKey:@"success"];
+    NSLog(@"VALUE OF dis sesso%@",didSessionRequestSucceed);
     CKTDataModel * sharedModel = [CKTDataModel sharedDataModel];
     
     //NSLog(@"%@", [responseObject valueForKey:@"fbUserId"]);
@@ -127,7 +129,7 @@
     address.state = self.state.text;
     address.country = self.country.text;
     address.zipcode = self.zipcode.text;
-    address.unit = @"-1";
+    address.unit = @"1";
     [sharedModel.getUser.addresses addObject:address];
     
     NSLog(@"Dispatching save address call");
@@ -159,11 +161,32 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    // Check if there is an active FB session and if so
-    // Do this after didAppear so that the async response handler can respond
-    // and push new views on to the nav controller (it's unsafe to push or pop
-    // view controllers until viewDidAppear).
-    [CKTLoginManager openFBSession:self];
+    // Check if there is an active CKT session
+    // and if so
+    self.loginView.readPermissions = @[@"email", @"public_profile"];
+    
+    CKTDataModel * sharedModel = [CKTDataModel sharedDataModel];
+    if([sharedModel getUser].sessionId)
+    {
+        // Check if user already has an address
+          NSLog(@"valid");
+        if([sharedModel getUser].addresses)
+        {
+            // My work here is done
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        else
+        {
+            // Show the address entry interface
+            self.addressEntryView.hidden = false;
+        }
+    }
+    else
+    {
+        // No valid session. Prompt Facebook sign in
+        self.addressEntryView.hidden = true;
+        self.loginSection.hidden = false;
+    }
 }
 
 - (void)didReceiveMemoryWarning

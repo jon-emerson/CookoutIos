@@ -21,4 +21,5 @@
 - (BOOL)saveToDisk;
 - (void)addUser:(NSObject *) u;
 - (CKTUser *)getUser;
+- (void)setSession: (NSString *) sId;
 @end

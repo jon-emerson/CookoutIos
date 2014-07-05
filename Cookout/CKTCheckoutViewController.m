@@ -16,6 +16,10 @@
 @property (weak, nonatomic) IBOutlet CKTAsyncImageView *foodImage;
 @property (nonatomic, weak) IBOutlet UILabel * foodLabel;
 @property (nonatomic, weak) IBOutlet UIView * needsOnboarding;
+@property (nonatomic, weak) IBOutlet UIView * orderConfirmation;
+@property (nonatomic, weak) IBOutlet UIButton * placeOrder;
+@property (nonatomic, weak) IBOutlet UIPickerView * addressPicker;
+-(IBAction)placeOrderAction:(id) sender;
 @end
 
 @implementation CKTCheckoutViewController
@@ -30,12 +34,15 @@
     return self;
 }
 
-- (void)viewDidLoad
+-(IBAction)placeOrderAction:(id)sender
 {
-    [super viewDidLoad];
-    self.needsOnboarding.hidden = NO;
-    [self.needsOnboarding setNeedsDisplay];
+    
+}
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
     // Do any additional setup after loading the view from its nib.
     // Display order summary
     self.orderQuantity.text = [[NSString alloc] initWithFormat:@"%@ x", self.order.orderQuantity.stringValue];
@@ -63,21 +70,29 @@
                                                           multiplier:1.0
                                                             constant:0.0]];
     
-    if ([self isValidUser]) {
+
+    
+    if ([self isValidUser])
+    {
         // User is signed in - yaay!
         if([self hasValidDeliveryAddress] && [self hasValidCCInfo]) {
             // Setup checkout
-        } else {
-             self.needsOnboarding.hidden = NO;
+            self.needsOnboarding.hidden = true;
+            self.orderConfirmation.hidden = false;
         }
-    } else {
-        // Get user to sign in using FB
-        self.needsOnboarding.hidden = NO;
+        else
+        {
+             // Uh-oh no valid CC or address - open the door to onboarding ville.
+            self.needsOnboarding.hidden = false;
+            self.orderConfirmation.hidden = true;
+        }
     }
-    
-    // If signed in, check if delivery address and credit card information
-    // are available for the user. If not prompt entry of address and CC
-    
+    else
+    {
+        // Get user to sign in using FB
+        self.needsOnboarding.hidden = false;
+        self.orderConfirmation.hidden = true;
+    }
 }
 
 - (IBAction)doOnboarding:(id)sender
@@ -91,13 +106,19 @@
 - (BOOL)isValidUser
 {
     // See if user is signed in - if not prompt sign in
-    NSObject *user = [[CKTDataModel sharedDataModel] getUser];
-    return !!user;
+    NSLog(@"isValidUser session id %@", [[CKTDataModel sharedDataModel] getUser].sessionId);
+    if([[CKTDataModel sharedDataModel] getUser].sessionId)
+    {
+        return YES;
+    }
+    else return NO;
 }
 
 - (BOOL)hasValidDeliveryAddress
 {
-        return NO;
+    if([[CKTDataModel sharedDataModel]getUser].addresses)
+        return YES;
+    else return NO;
 }
 
 - (BOOL)hasValidCCInfo

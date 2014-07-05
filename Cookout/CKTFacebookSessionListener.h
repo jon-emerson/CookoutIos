@@ -7,9 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <FacebookSDK/FacebookSDK.h>
 
 @protocol CKTFacebookSessionListener <NSObject>
-
 - (void)handleFacebookSessionStateChange;
-
 @end

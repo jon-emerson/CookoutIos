@@ -14,6 +14,8 @@
 #import "CKTOrder.h"
 #import "CKTSessionHandlerDelegate.h"
 #import "CKTAddressSaveHandler.h"
+#import "CKTDataModel.h"
+#import "CKTLoginManager.h"
 
 @implementation CKTServerCommunicator
 
@@ -21,10 +23,8 @@
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [[CKTJSONResponseSerializer alloc] init];
-    
-    // Look at existing data model - possible states
-    // (1) completely unintiliazed
-    // (2) initialized with stale data
+
+    // Fire off an unauthenticated request to get an initial sense of dinners.
     
     [manager GET:@"http://immense-beyond-2989.herokuapp.com/readDinners" parameters:@{}
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -64,9 +64,28 @@
           }];
 }
 
-+(void)getCKTSession:(FBAccessTokenData *)fbToken delegate:(id<CKTSessionHandlerDelegate>)delegate
++(void)startSession
 {
-    
+    // The app has started - (1) Check if there is already CKTSession Token available
+    CKTDataModel * sharedModel = [CKTDataModel sharedDataModel];
+    if([sharedModel getUser].sessionId)
+    {
+        // already have a cookout session id. Life is good
+        NSLog(@"Already have session token. Life is good");
+        return;
+    }
+    else
+    {
+        // Initiate login manager to check for a facebook token
+        // If login manager finds a token, it will call CKTServerCommunicator
+        // to attempt to exchange the token for a CKTSession
+        NSLog(@"Get an FB token and attempt exchange");
+        [[CKTLoginManager sharedLoginManager] startFBSession];
+    }
+}
+
++(void)exchangeFbToken:(FBAccessTokenData *)fbToken
+{
     NSString * URL = @"https://immense-beyond-2989.herokuapp.com/getSession";
     NSDictionary *parameters = @{@"fbAccessToken":fbToken.accessToken};
 
@@ -75,10 +94,19 @@
 
     [manager POST:URL parameters:parameters
           success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
-              [delegate sessionRequestResponse:responseObject];
+              NSString *s = [responseObject valueForKey:@"success"];
+              if(s.intValue == 1)
+              {
+                  NSLog(@"Token exchange succeeded! CK token %@", responseObject);
+                  // Save the CKTToken to the user object and rejoice
+                  NSString * sId = [responseObject valueForKey:@"sessionId"];
+                  [[CKTDataModel sharedDataModel] setSession:sId];
+              }
           }
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-              [delegate sessionRequestError:error];
+              // Tough luck - the server didn't want to exchange the token.
+              // No worries, log the error and move on
+              NSLog(@"Token exchange failed. %@", error);
           }];
 }
 
@@ -109,16 +137,18 @@
     NSMutableDictionary * userParams = [user dictionaryWithValuesForKeys:userKeys];
     
     [parameters addEntriesFromDictionary:userParams];
+    
+    NSLog(@"%@", parameters);
   
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [[CKTJSONResponseSerializer alloc] init];
-    
     [manager POST:URL parameters:parameters
           success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
               NSLog(@"%@", responseObject);
               [delegate addressSaved:responseObject];
           }
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              NSLog(@"%@", error);
               [delegate addressSaveFailed:error];
           }];
 }

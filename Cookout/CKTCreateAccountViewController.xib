@@ -11,6 +11,7 @@
                 <outlet property="addressLine2" destination="FgK-UF-NzS" id="NBV-c4-bvO"/>
                 <outlet property="city" destination="t71-LO-xc3" id="BzB-KK-L3p"/>
                 <outlet property="country" destination="uis-fX-9DW" id="P9t-xw-Ccp"/>
+                <outlet property="loginSection" destination="apl-MX-nOa" id="51I-SK-9YY"/>
                 <outlet property="loginView" destination="JQq-ce-iT3" id="Ilz-2d-gwd"/>
                 <outlet property="save" destination="CCg-aY-1ae" id="dLk-Z6-ZLb"/>
                 <outlet property="state" destination="S4r-oD-TVK" id="ceW-fc-A8Y"/>
@@ -122,16 +123,9 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
                 <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="apl-MX-nOa">
-                    <rect key="frame" x="28" y="354" width="265" height="148"/>
+                    <rect key="frame" x="35" y="259" width="265" height="148"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Or sign-in with" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FYN-Sf-Wfh">
-                            <rect key="frame" x="76" y="20" width="112" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JQq-ce-iT3" customClass="FBLoginView">
                             <rect key="frame" x="20" y="49" width="225" height="79"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

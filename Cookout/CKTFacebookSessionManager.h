@@ -19,6 +19,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application;
 - (void)applicationWillTerminate:(UIApplication *)application;
 - (void)login;
+- (void)quietLogin;
 - (void)addListener:(id<CKTFacebookSessionListener>)listener;
 
 @end

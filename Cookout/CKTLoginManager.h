@@ -10,7 +10,8 @@
 #import <Foundation/Foundation.h>
 #import "CKTFacebookSessionManager.h"
 
-@interface CKTLoginManager : NSObject
-+ (void)sessionStateChanged:session state:(FBSessionState)state error:(NSError *)error;
-+ (void)openFBSession: (id) delegate;
+@interface CKTLoginManager : NSObject <CKTFacebookSessionListener>
++(instancetype)sharedLoginManager;
+-(void)startFBSession;
+- (void)handleFacebookSessionStateChange;
 @end

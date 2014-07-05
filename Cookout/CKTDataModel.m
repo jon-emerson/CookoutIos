@@ -24,8 +24,10 @@
     dispatch_once(&onceToken, ^{
         sharedInstance = [NSKeyedUnarchiver unarchiveObjectWithFile:[CKTDataModel itemArchivePath]];
         if (!sharedInstance) {
+            NSLog(@"Didn't find a local data model - creating a new one");
             sharedInstance = [[CKTDataModel alloc] init];
         }
+        else NSLog(@"Local data model restored!");
     });
     return sharedInstance;
 }
@@ -36,6 +38,7 @@
     if (self) {
         self.dinnersArray = [[NSMutableArray alloc] init];
         self.chefDictionary = [[NSMutableDictionary alloc] init];
+        self.user = [[CKTUser alloc]init];
     }
     return self;
 }
@@ -62,7 +65,12 @@
 
 - (void) addUser:(CKTUser *) u
 {
-    self.user = u;
+    //self.user = u;
+}
+
+-(void) setSession: (NSString *) sId
+{
+    self.user.sessionId = [sId copy];
 }
 
 - (CKTUser *) getUser
@@ -96,6 +104,7 @@
 }
 
 - (BOOL)saveToDisk {
+    NSLog(@"Saving data model to local disk");
     return [NSKeyedArchiver archiveRootObject:self toFile:[CKTDataModel itemArchivePath]];
 }
 

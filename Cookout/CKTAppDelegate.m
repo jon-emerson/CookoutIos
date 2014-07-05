@@ -20,11 +20,14 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    //[[AFHTTPRequestOperationLogger sharedLogger] startLogging];
-    //[[AFHTTPRequestOperationLogger sharedLogger] setLevel:AFLoggerLevelDebug];
     
-    // Override point for customization after application launch.
+    #ifdef CKT_NETWORK_DEBUG
+        [[AFHTTPRequestOperationLogger sharedLogger] startLogging];
+        [[AFHTTPRequestOperationLogger sharedLogger] setLevel:AFLoggerLevelDebug];
+    #endif
     
+    [FBLoginView class];
+
     // The app has launched; async load last know state of data model from disk
     dispatch_async(dispatch_get_main_queue(), ^{
         [CKTDataModel sharedDataModel];
@@ -32,7 +35,6 @@
     
     // Create a cookout home view controller
     CKTHomeViewController *hvc = [[CKTHomeViewController alloc] init];
-
 
     UINavigationController *navController = [[UINavigationController alloc] initWithNavigationBarClass:[CKTNavigationBar class] toolbarClass:nil];
 
@@ -42,9 +44,12 @@
     // Set the nav controller as the rootview controller of the window
     self.window.rootViewController = navController;
     
-    // Dispatch async task to fetch latest state from server
     dispatch_async(dispatch_get_main_queue(), ^{
+        // Dispatch async task to fetch latest state from server
         [CKTServerCommunicator syncDataModel:hvc];
+        
+        // Attempt to start a cookout session
+        [CKTServerCommunicator startSession];
     });
     
     // Add a red rectangle UIView at the top of the screen, behind the status bar
@@ -66,9 +71,11 @@
          annotation:(id)annotation {
     // attempt to extract a token from the url
     FBSession *session = [CKTFacebookSessionManager sharedFacebookSessionManager].session;
-    return [FBAppCall handleOpenURL:url
+    [FBAppCall handleOpenURL:url
                   sourceApplication:sourceApplication
                         withSession:session];
+    [[CKTFacebookSessionManager sharedFacebookSessionManager] quietLogin];
+    return true;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -96,6 +103,9 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
+    // Save current data model to disk
+    [[CKTDataModel sharedDataModel] saveToDisk];
+    
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     [[CKTFacebookSessionManager sharedFacebookSessionManager] applicationWillTerminate:application];
 }
