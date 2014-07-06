@@ -8,14 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <FacebookSDK/FacebookSDK.h>
-#import "CKTAddressCCEntryViewController.h"
 #import "CKTOrder.h"
 #import "CKTSessionHandlerDelegate.h"
+#include "CKTFacebookSessionListener.h"
 #import "CKTAddressSaveHandler.h"
 
-@interface CKTCreateAccountViewController : UIViewController <FBLoginViewDelegate,CKTSessionHandlerDelegate,CKTAddressSaveHandler>
+@interface CKTCreateAccountViewController : UIViewController <CKTFacebookSessionListener,CKTSessionHandlerDelegate,CKTAddressSaveHandler>
 @property (weak, nonatomic) CKTOrder * order;
-- (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView;
-- (void)loginViewFetchedUserInfo:(FBLoginView *)loginView
-                            user:(id<FBGraphUser>)user;
+-(void)handleFacebookSessionStateChange;
 @end

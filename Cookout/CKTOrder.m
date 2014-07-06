@@ -10,4 +10,18 @@
 
 @implementation CKTOrder
 
+-(instancetype)init
+{
+    self = [super init];
+    if(self)
+    {
+        // Initialize an empty user object
+        self.dinner = [[CKTDinner alloc]init];
+        self.user = [[CKTUser alloc]init];
+        self.orderQuantity = [[NSNumber alloc]init];
+        self.specialRequests = [[NSString alloc]init];
+    }
+    return self;
+}
+
 @end

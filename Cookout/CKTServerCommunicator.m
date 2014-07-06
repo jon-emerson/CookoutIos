@@ -112,6 +112,10 @@
 
 +(void)createUser:(CKTUser *)user
 {
+    // If a user already exists, the return that user
+    if([[CKTDataModel sharedDataModel]getUser].sessionId)
+        return;
+
     NSString * URL = @"https://immense-beyond-2989.herokuapp.com/createUser";
     NSArray * keys = @[@"fbAccessToken",@"name",@"email",@"phone"];
     NSDictionary * parameters = [user dictionaryWithValuesForKeys:keys];
@@ -130,7 +134,7 @@
 +(void)setUserAddress:(CKTAddress *)address user:(CKTUser *)user delegate:(id<CKTAddressSaveHandler>)delegate
 {
     NSString * URL = @"https://immense-beyond-2989.herokuapp.com/addAddress";
-    NSArray * addressKeys = @[@"addressLine1",@"addressLine2",@"unit",@"city",@"state",@"country",@"zipcode"];
+    NSArray * addressKeys = @[@"addressLine1",@"addressLine2",@"unit",@"city",@"state",@"country",@"zipCode"];
     NSArray * userKeys = @[@"sessionId"];
 
     NSMutableDictionary * parameters = [[address dictionaryWithValuesForKeys:addressKeys]mutableCopy];

@@ -10,11 +10,12 @@
 #import "CKTLoginManager.h"
 #import "CKTServerCommunicator.h"
 #import "CKTDataModel.h"
+#include "CKTFacebookSessionListener.h"
 
 @interface CKTCreateAccountViewController ()
-@property (weak, nonatomic) IBOutlet FBLoginView *loginView;
 @property (weak, nonatomic) IBOutlet UIView *addressEntryView;
 @property (weak, nonatomic) IBOutlet UIView *loginSection;
+@property (weak, nonatomic) IBOutlet UIButton *loginButton;
 
 @property (weak, nonatomic) IBOutlet UIButton *save;
 @property (weak, nonatomic) IBOutlet UITextField *addressLine1;
@@ -24,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *country;
 @property (weak, nonatomic) IBOutlet UITextField *zipcode;
 -(IBAction)saveAddress:(id) sender;
+-(IBAction)doFacebookLogin:(id) sender;
 @end
 
 @implementation CKTCreateAccountViewController 
@@ -34,8 +36,10 @@
     if (self) {
         // Custom initialization
         self.navigationItem.title = @"Create account";
-        self.loginView.delegate = self;
-}
+        
+        // Register myself as a listener for FB login events
+        [[CKTFacebookSessionManager sharedFacebookSessionManager]addListener:self];
+    }
     return self;
 }
 
@@ -115,6 +119,34 @@
     // Proceed to final checkout
 }
 
+-(void)handleFacebookSessionStateChange
+{
+    // Facebook session state changed. I may have to change onscreen items
+    if(FBSession.activeSession.state == FBSessionStateOpen
+       || FBSession.activeSession.state == FBSessionStateOpenTokenExtended)
+    {
+        // Remove Facebook login section from screen
+        self.loginSection.hidden = true;
+        
+        // Check if the user has an address setup
+        if([[CKTDataModel sharedDataModel] getUser].addresses)
+        {
+            // My work here is done
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        else
+        {
+            // Show the address entry interface
+            self.addressEntryView.hidden = false;
+        }
+    }
+    else
+    {
+        self.loginSection.hidden = false;
+        self.addressEntryView.hidden = true;
+    }
+}
+
 -(IBAction)saveAddress:(id) sender
 {
     // Validate the address fields entered by the user
@@ -128,13 +160,19 @@
     address.city = self.city.text;
     address.state = self.state.text;
     address.country = self.country.text;
-    address.zipcode = self.zipcode.text;
+    address.zipCode = self.zipcode.text;
     address.unit = @"1";
-    [sharedModel.getUser.addresses addObject:address];
+    [sharedModel addAddress:address];
     
     NSLog(@"Dispatching save address call");
     // Save address to the server
     [CKTServerCommunicator setUserAddress:address user:[sharedModel getUser] delegate:self];
+}
+
+-(IBAction)doFacebookLogin:(id) sender
+{
+    // Do facebook login
+    [[CKTLoginManager sharedLoginManager] startFBSessionWithLoginUI];
 }
 
 // Handle the request CKT Server's error response to CKT Session Request
@@ -162,14 +200,11 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     // Check if there is an active CKT session
-    // and if so
-    self.loginView.readPermissions = @[@"email", @"public_profile"];
-    
     CKTDataModel * sharedModel = [CKTDataModel sharedDataModel];
     if([sharedModel getUser].sessionId)
     {
         // Check if user already has an address
-          NSLog(@"valid");
+        NSLog(@"valid");
         if([sharedModel getUser].addresses)
         {
             // My work here is done
@@ -183,9 +218,34 @@
     }
     else
     {
-        // No valid session. Prompt Facebook sign in
-        self.addressEntryView.hidden = true;
-        self.loginSection.hidden = false;
+        // No valid cookout session. Check if there is already a Facebook session
+        if([[CKTLoginManager sharedLoginManager] isFacebookSessionOpen])
+        {
+            // Ok the user has already signed and authorized CKT for FB
+            // Issue a create user call to the CKT server
+            
+            self.loginSection.hidden = true;
+            
+            [CKTServerCommunicator createUser:[sharedModel getUser]];
+            
+            if([sharedModel getUser].addresses)
+            {
+                // User address already setup!
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+            else
+            {
+                // Prompt address entry
+                self.addressEntryView.hidden = false;
+                self.loginSection.hidden = true;
+            }
+        }
+        else
+        {
+            // Prompt Facebook sign in
+            self.addressEntryView.hidden = true;
+            self.loginSection.hidden = false;
+        }
     }
 }
 

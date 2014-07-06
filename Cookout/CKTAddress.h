@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CKTAddress : NSObject
+@interface CKTAddress : NSObject <NSCopying>
 
 // User's delivery address
 @property (nonatomic, copy) NSString *addressId;
@@ -18,6 +18,6 @@
 @property (nonatomic, copy) NSString *city;
 @property (nonatomic, copy) NSString *state;
 @property (nonatomic, copy) NSString *country;
-@property (nonatomic, copy) NSString *zipcode;
+@property (nonatomic, copy) NSString *zipCode;
 
 @end

@@ -40,7 +40,7 @@
     if (self)
     {
         _listeners = [[NSMutableArray alloc] init];
-        if (!self.session.isOpen)
+        /*if (!self.session.isOpen)
         {
             // create a fresh session object
             _session = [[FBSession alloc] init];
@@ -70,7 +70,7 @@
         else
         {
             [self dispatchStateChange];
-        }
+        }*/
     }
     return self;
 };

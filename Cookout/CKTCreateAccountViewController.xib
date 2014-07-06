@@ -11,8 +11,8 @@
                 <outlet property="addressLine2" destination="FgK-UF-NzS" id="NBV-c4-bvO"/>
                 <outlet property="city" destination="t71-LO-xc3" id="BzB-KK-L3p"/>
                 <outlet property="country" destination="uis-fX-9DW" id="P9t-xw-Ccp"/>
+                <outlet property="loginButton" destination="JhD-b6-hd7" id="cDb-q9-4Hs"/>
                 <outlet property="loginSection" destination="apl-MX-nOa" id="51I-SK-9YY"/>
-                <outlet property="loginView" destination="JQq-ce-iT3" id="Ilz-2d-gwd"/>
                 <outlet property="save" destination="CCg-aY-1ae" id="dLk-Z6-ZLb"/>
                 <outlet property="state" destination="S4r-oD-TVK" id="ceW-fc-A8Y"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -123,14 +123,21 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
                 <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="apl-MX-nOa">
-                    <rect key="frame" x="35" y="259" width="265" height="148"/>
+                    <rect key="frame" x="28" y="210" width="265" height="148"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JQq-ce-iT3" customClass="FBLoginView">
-                            <rect key="frame" x="20" y="49" width="225" height="79"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JhD-b6-hd7">
+                            <rect key="frame" x="40" y="106" width="184" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="1" green="0.16411375" blue="0.27604695019999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="Login with Facebook">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="doFacebookLogin:" destination="-1" eventType="touchUpInside" id="z74-i7-qBL"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>

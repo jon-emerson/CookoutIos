@@ -17,5 +17,5 @@
 @property (copy, readwrite) NSString *fbAccessToken;
 @property (copy, nonatomic, readwrite) NSString *phone;
 @property (copy, nonatomic, readwrite) NSString *email;
-@property (copy, nonatomic, readwrite) NSMutableArray *addresses;
+@property (retain, nonatomic, readwrite) NSMutableArray *addresses;
 @end

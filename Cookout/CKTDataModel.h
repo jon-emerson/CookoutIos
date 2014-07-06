@@ -20,6 +20,7 @@
 - (void)addChef:(CKTChef *)chef;
 - (BOOL)saveToDisk;
 - (void)addUser:(NSObject *) u;
+- (void)addAddress:(CKTAddress *)address;
 - (CKTUser *)getUser;
 - (void)setSession: (NSString *) sId;
 @end

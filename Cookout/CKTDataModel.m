@@ -73,6 +73,13 @@
     self.user.sessionId = [sId copy];
 }
 
+-(void) addAddress: (CKTAddress *) address
+{
+    if(!self.user.addresses)
+        self.user.addresses = [[NSMutableArray alloc]init];
+    [self.user.addresses addObject:address];
+}
+
 - (CKTUser *) getUser
 {
     return self.user;

@@ -13,5 +13,7 @@
 @interface CKTLoginManager : NSObject <CKTFacebookSessionListener>
 +(instancetype)sharedLoginManager;
 -(void)startFBSession;
-- (void)handleFacebookSessionStateChange;
+-(void)handleFacebookSessionStateChange;
+-(void)startFBSessionWithLoginUI;
+-(BOOL)isFacebookSessionOpen;
 @end

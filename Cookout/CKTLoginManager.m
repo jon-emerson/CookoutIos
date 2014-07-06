@@ -1,4 +1,4 @@
-//
+    //
 //  CKTLoginManager.m
 //  Cookout
 //
@@ -36,6 +36,19 @@
     [fbMgr quietLogin];
 }
 
+// Start an FB session with login UI
+-(void)startFBSessionWithLoginUI
+{
+    CKTFacebookSessionManager * fbMgr = [CKTFacebookSessionManager sharedFacebookSessionManager];
+    [fbMgr login];
+}
+
+-(BOOL)isFacebookSessionOpen
+{
+    return (FBSession.activeSession.state == FBSessionStateOpen
+            || FBSession.activeSession.state == FBSessionStateOpenTokenExtended);
+}
+
 // Handle FB session state changes
 - (void)handleFacebookSessionStateChange
 {
@@ -51,12 +64,13 @@
     }
     else
     {
-        NSLog(@"State change does matter - get me a CKT Token");
+        NSLog(@"State change does matter - get me a CKT Token.");
         // ok check if the user has a valid FB session. If not, don't force UI here.
         if(FBSession.activeSession.state == FBSessionStateOpen
            || FBSession.activeSession.state == FBSessionStateOpenTokenExtended)
         {
             // Exchange the FB session token for a cookout session
+            NSLog(@"Active FB session, let's exchange it");
             [CKTServerCommunicator exchangeFbToken:FBSession.activeSession.accessTokenData];
         }
         else return;

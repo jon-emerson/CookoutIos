@@ -10,5 +10,14 @@
 
 @implementation CKTUser
 
+-(instancetype)init
+{
+    self = [super init];
+    if(self)
+    {
+        // Initialize an empty user object
+    }
+    return self;
+}
 
 @end

@@ -71,11 +71,14 @@
          annotation:(id)annotation {
     // attempt to extract a token from the url
     FBSession *session = [CKTFacebookSessionManager sharedFacebookSessionManager].session;
-    [FBAppCall handleOpenURL:url
+    
+    NSLog(@"Returned from call to FB. %@", session);
+    
+    return [FBAppCall handleOpenURL:url
                   sourceApplication:sourceApplication
                         withSession:session];
-    [[CKTFacebookSessionManager sharedFacebookSessionManager] quietLogin];
-    return true;
+    //[[CKTFacebookSessionManager sharedFacebookSessionManager] quietLogin];
+
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
