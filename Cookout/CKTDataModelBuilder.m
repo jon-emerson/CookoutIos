@@ -15,10 +15,10 @@
 {
     CKTDataModel *dataModel = [CKTDataModel sharedDataModel];
 
-    NSArray *chefs = [json valueForKey:@"chefs"];
-    NSLog(@"Chef count: %d", chefs.count);
-    for (NSDictionary *chefDictionary in chefs) {
-        [dataModel addChef:[[CKTChef alloc] initWithDictionary:chefDictionary]];
+    NSArray *users = [json valueForKey:@"users"];
+    NSLog(@"User count: %d", users.count);
+    for (NSDictionary *userDictionary in users) {
+        [dataModel addUser:[[CKTUser alloc] initWithDictionary:userDictionary]];
     }
 
     NSArray *dinners = [json valueForKey:@"dinners"];

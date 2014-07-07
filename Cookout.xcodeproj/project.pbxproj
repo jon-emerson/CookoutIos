@@ -28,7 +28,6 @@
 		FC0B0701195A266200DF3BD2 /* CKTAsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B0700195A266200DF3BD2 /* CKTAsyncImageView.m */; };
 		FC0B0708195B7D6300DF3BD2 /* CKTServerCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B0707195B7D6300DF3BD2 /* CKTServerCommunicator.m */; };
 		FC0B070B195B8AE300DF3BD2 /* CKTDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B070A195B8AE300DF3BD2 /* CKTDataModel.m */; };
-		FC0B070E195B8BA700DF3BD2 /* CKTChef.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B070D195B8BA700DF3BD2 /* CKTChef.m */; };
 		FC0B0711195B947F00DF3BD2 /* CKTDataModelBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B0710195B947F00DF3BD2 /* CKTDataModelBuilder.m */; };
 		FC0B0720195CEF8200DF3BD2 /* CKTNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B071F195CEF8200DF3BD2 /* CKTNavigationBar.m */; };
 		FC0B07241962638800DF3BD2 /* CKTFacebookSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B07231962638800DF3BD2 /* CKTFacebookSessionManager.m */; };
@@ -52,6 +51,7 @@
 		FC9B5060194FC77000C32D97 /* CKTHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC9B505F194FC77000C32D97 /* CKTHomeViewController.m */; };
 		FC9B5086194FD5A000C32D97 /* CKTHomeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC9B5084194FD5A000C32D97 /* CKTHomeViewCell.m */; };
 		FC9B5087194FD5A000C32D97 /* CKTHomeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC9B5085194FD5A000C32D97 /* CKTHomeViewCell.xib */; };
+		FCA8B9C3196B4A93008DA6EA /* CKTCurrentUser.m in Sources */ = {isa = PBXBuildFile; fileRef = FCA8B9C2196B4A93008DA6EA /* CKTCurrentUser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,8 +112,6 @@
 		FC0B0707195B7D6300DF3BD2 /* CKTServerCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKTServerCommunicator.m; sourceTree = "<group>"; };
 		FC0B0709195B8AE300DF3BD2 /* CKTDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTDataModel.h; sourceTree = "<group>"; };
 		FC0B070A195B8AE300DF3BD2 /* CKTDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKTDataModel.m; sourceTree = "<group>"; };
-		FC0B070C195B8BA700DF3BD2 /* CKTChef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTChef.h; sourceTree = "<group>"; };
-		FC0B070D195B8BA700DF3BD2 /* CKTChef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKTChef.m; sourceTree = "<group>"; };
 		FC0B070F195B947F00DF3BD2 /* CKTDataModelBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTDataModelBuilder.h; sourceTree = "<group>"; };
 		FC0B0710195B947F00DF3BD2 /* CKTDataModelBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKTDataModelBuilder.m; sourceTree = "<group>"; };
 		FC0B0717195BCFDF00DF3BD2 /* CKTDataModelChangeDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKTDataModelChangeDelegate.h; sourceTree = "<group>"; };
@@ -152,6 +150,8 @@
 		FC9B5083194FD5A000C32D97 /* CKTHomeViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTHomeViewCell.h; sourceTree = "<group>"; };
 		FC9B5084194FD5A000C32D97 /* CKTHomeViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKTHomeViewCell.m; sourceTree = "<group>"; };
 		FC9B5085194FD5A000C32D97 /* CKTHomeViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CKTHomeViewCell.xib; sourceTree = "<group>"; };
+		FCA8B9C1196B4A93008DA6EA /* CKTCurrentUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTCurrentUser.h; sourceTree = "<group>"; };
+		FCA8B9C2196B4A93008DA6EA /* CKTCurrentUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKTCurrentUser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,8 +212,8 @@
 			children = (
 				209593AC1964A81800C0C007 /* CKTAddress.h */,
 				209593AD1964A81800C0C007 /* CKTAddress.m */,
-				FC0B070C195B8BA700DF3BD2 /* CKTChef.h */,
-				FC0B070D195B8BA700DF3BD2 /* CKTChef.m */,
+				FCA8B9C1196B4A93008DA6EA /* CKTCurrentUser.h */,
+				FCA8B9C2196B4A93008DA6EA /* CKTCurrentUser.m */,
 				FC0B0709195B8AE300DF3BD2 /* CKTDataModel.h */,
 				FC0B070A195B8AE300DF3BD2 /* CKTDataModel.m */,
 				FC0B070F195B947F00DF3BD2 /* CKTDataModelBuilder.h */,
@@ -456,12 +456,12 @@
 				20858A9119656DEF007769AE /* AFHTTPRequestOperation.m in Sources */,
 				209593AB196483B300C0C007 /* CKTUser.m in Sources */,
 				FC9B503C194FBFAC00C32D97 /* main.m in Sources */,
-				FC0B070E195B8BA700DF3BD2 /* CKTChef.m in Sources */,
 				209593AE1964A81800C0C007 /* CKTAddress.m in Sources */,
 				FC0B0708195B7D6300DF3BD2 /* CKTServerCommunicator.m in Sources */,
 				209593BA1964BDED00C0C007 /* CKTCreateAccountViewController.m in Sources */,
 				20858A9319656DEF007769AE /* AFHTTPSessionManager.m in Sources */,
 				FC0B07241962638800DF3BD2 /* CKTFacebookSessionManager.m in Sources */,
+				FCA8B9C3196B4A93008DA6EA /* CKTCurrentUser.m in Sources */,
 				FC0B070B195B8AE300DF3BD2 /* CKTDataModel.m in Sources */,
 				209593C51964DC8800C0C007 /* CKTLoginManager.m in Sources */,
 				20858A9219656DEF007769AE /* AFHTTPRequestOperationManager.m in Sources */,

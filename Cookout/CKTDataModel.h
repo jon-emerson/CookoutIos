@@ -8,21 +8,23 @@
 
 #import <Foundation/Foundation.h>
 
-#import "CKTChef.h"
+#import "CKTAddress.h"
+#import "CKTCurrentUser.h"
 #import "CKTDinner.h"
 #import "CKTUser.h"
 
 @interface CKTDataModel : NSObject <NSCoding>
 
+@property (nonatomic, retain) CKTCurrentUser *currentUser;
+
 + (instancetype)sharedDataModel;
 - (NSArray *)dinners;
-- (CKTChef *)chefWithId:(NSString *)id;
+- (CKTUser *)userWithId:(NSString *)id;
 - (void)addDinner:(CKTDinner *)dinner;
-- (void)addChef:(CKTChef *)chef;
+- (void)addUser:(CKTUser *)user;
 - (BOOL)saveToDisk;
-- (void)addUser:(NSObject *) u;
 - (void)addAddress:(CKTAddress *)address;
-- (CKTUser *)getUser;
+- (CKTCurrentUser *)currentUser;
 - (void)setSession:(NSString *) sId;
 
 @end

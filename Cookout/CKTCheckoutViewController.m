@@ -93,7 +93,8 @@
 - (IBAction)doOnboarding:(id)sender
 {
     // Onboard the user
-    CKTCreateAccountViewController *createAccount = [[CKTCreateAccountViewController alloc] init];
+    CKTCreateAccountViewController *createAccount =
+            [[CKTCreateAccountViewController alloc] init];
     createAccount.order = self.order;
     [self.navigationController pushViewController:createAccount animated:YES];
 }
@@ -101,13 +102,14 @@
 - (BOOL)isValidUser
 {
     // See if user is signed in - if not prompt sign in
-    NSLog(@"isValidUser session id %@", CKTDataModel.sharedDataModel.getUser.sessionId);
-    return !!CKTDataModel.sharedDataModel.getUser.sessionId;
+    NSLog(@"isValidUser session id %@",
+          CKTDataModel.sharedDataModel.currentUser.sessionId);
+    return !!CKTDataModel.sharedDataModel.currentUser.sessionId;
 }
 
 - (BOOL)hasValidDeliveryAddress
 {
-    return !![CKTDataModel.sharedDataModel.getUser.addresses count];
+    return !![CKTDataModel.sharedDataModel.currentUser.addresses count];
 }
 
 - (BOOL)hasValidCCInfo

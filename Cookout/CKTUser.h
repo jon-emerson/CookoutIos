@@ -1,21 +1,27 @@
 //
-//  CKTUser.h
+//  CKTChef.h
 //  Cookout
-//  Model for a Cookout user
-//  Created by Chandrashekar Raghavan on 7/2/14.
+//
+//  Created by Jonathan Emerson on 6/25/14.
 //  Copyright (c) 2014 Cookout. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "CKTAddress.h"
 
-@interface CKTUser : NSObject
-//TODO: Should these properties be copy
-@property (copy, readwrite) NSString *userId;
-@property (copy, readwrite) NSString *name;
-@property (copy, readwrite) NSString *sessionId;
-@property (copy, readwrite) NSString *fbAccessToken;
-@property (copy, nonatomic, readwrite) NSString *phone;
-@property (copy, nonatomic, readwrite) NSString *email;
-@property (retain, nonatomic, readwrite) NSMutableArray *addresses;
+@interface CKTUser : NSObject <NSCoding>
+
+@property (copy, readonly) NSString *userId;
+@property (copy, readonly) NSString *name;
+@property (copy, readonly) NSString *imageUrl;
+@property (readonly) float starRating;
+
+// Designated initalizer for CKTChef.
+- (instancetype)initWithUserId:(NSString *)userId
+                          name:(NSString *)name
+                      imageUrl:(NSString *)imageUrl;
+
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary;
+
+- (NSURL *)imageNSUrl;
+
 @end

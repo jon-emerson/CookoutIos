@@ -57,7 +57,7 @@
     // then send the CKT server a request to exchange the FB session for a CKT session
     NSLog(@"Facebook session state change");
     CKTDataModel *sharedModel = [CKTDataModel sharedDataModel];
-    if (sharedModel.getUser.sessionId) {
+    if (sharedModel.currentUser.sessionId) {
         // Don't care about FB session changes, the user has a valid CKT Session
         NSLog(@"State change doesn't matter, got CKT Token");
         return;

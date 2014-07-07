@@ -6,13 +6,12 @@
 //  Copyright (c) 2014 Cookout. All rights reserved.
 //
 
+#import "CKTCurrentUser.h"
 #import "CKTDataModel.h"
-#import "CKTUser.h"
 
 @interface CKTDataModel ()
 @property (nonatomic, retain) NSMutableArray *dinnersArray;
-@property (nonatomic, retain) NSMutableDictionary *chefDictionary;
-@property (nonatomic, retain) CKTUser *user;
+@property (nonatomic, retain) NSMutableDictionary *userDictionary;
 @end
 
 @implementation CKTDataModel
@@ -36,9 +35,13 @@
 {
     self = [super init];
     if (self) {
-        self.dinnersArray = [[NSMutableArray alloc] init];
-        self.chefDictionary = [[NSMutableDictionary alloc] init];
-        self.user = [[CKTUser alloc]init];
+        _dinnersArray = [[NSMutableArray alloc] init];
+        _userDictionary = [[NSMutableDictionary alloc] init];
+        
+        // TODO(anyone): DO NOT allocate this client-side.  Variables here
+        // should be a reflection of the client-side.  If the server-side has
+        // no notion of who the current user is, this should be nil.
+        _currentUser = [[CKTCurrentUser alloc] init];
     }
     return self;
 }
@@ -53,37 +56,27 @@
     [self.dinnersArray addObject:dinner];
 }
 
-- (void)addChef:(CKTChef *)chef
+- (void)addUser:(CKTUser *)user
 {
-    [self.chefDictionary setObject:chef forKey:chef.chefId];
+    [self.userDictionary setObject:user forKey:user.userId];
 }
 
-- (CKTChef *)chefWithId:(NSString *)id
+- (CKTUser *)userWithId:(NSString *)id
 {
-    return [self.chefDictionary valueForKey:id];
+    return [self.userDictionary valueForKey:id];
 }
 
-- (void) addUser:(CKTUser *)u
+- (void)setSession:(NSString *)sId
 {
-    //self.user = u;
+    self.currentUser.sessionId = [sId copy];
 }
 
-- (void) setSession:(NSString *)sId
+- (void)addAddress:(CKTAddress *)address
 {
-    self.user.sessionId = [sId copy];
-}
-
-- (void) addAddress:(CKTAddress *)address
-{
-    if (!self.user.addresses) {
-        self.user.addresses = [[NSMutableArray alloc] init];
+    if (!self.currentUser.addresses) {
+        self.currentUser.addresses = [[NSMutableArray alloc] init];
     }
-    [self.user.addresses addObject:address];
-}
-
-- (CKTUser *) getUser
-{
-    return self.user;
+    [self.currentUser.addresses addObject:address];
 }
 
 + (NSString *)itemArchivePath
@@ -101,12 +94,12 @@
     // work after user upgrades.  But just throwing everything out and re-
     // fetching it from the server isn't that bad.
     [encoder encodeObject:_dinnersArray forKey:@"dinnersArray"];
-    [encoder encodeObject:_chefDictionary forKey:@"chefDictionary"];
+    [encoder encodeObject:_userDictionary forKey:@"userDictionary"];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)decoder {
     _dinnersArray = [decoder decodeObjectForKey:@"dinnersArray"];
-    _chefDictionary = [decoder decodeObjectForKey:@"chefDictionary"];
+    _userDictionary = [decoder decodeObjectForKey:@"userDictionary"];
     return self;
 }
 

@@ -81,16 +81,16 @@
 
     if (didSessionRequestSucceed) {
         // Add the CKT Session Id to CKT User
-        CKTUser *u;
+        CKTCurrentUser *u;
         
-        if (!sharedModel.getUser) {
-            u = [[CKTUser alloc] init];
-            [sharedModel addUser:u];
+        if (!sharedModel.currentUser) {
+            u = [[CKTCurrentUser alloc] init];
+            sharedModel.currentUser = u;
         }
-        u = sharedModel.getUser;
-        
+        u = sharedModel.currentUser;
+
         u.sessionId = [responseObject valueForKey:@"sessionId"];
-        NSLog(@"Session ID is %@",u.sessionId);
+        NSLog(@"Session ID is %@", u.sessionId);
         
         // Check if delivery address is available in the user object
         if (!u.addresses) {
@@ -101,13 +101,10 @@
             // Addresses are setup. We should pop this view controller
             [self.navigationController popViewControllerAnimated:YES];
         }
-    }
-    
-    // The user doesn't exist on the server. Need to send a createUser
-    // request.
-    else
-    {
-        [CKTServerCommunicator createUser:[sharedModel getUser]];
+    } else {
+        // The user doesn't exist on the server. Need to send a createUser
+        // request.
+        [CKTServerCommunicator createCurrentUser:sharedModel.currentUser];
     }
     
     // Proceed to final checkout
@@ -122,7 +119,7 @@
         self.loginSection.hidden = true;
         
         // Check if the user has an address setup
-        if (CKTDataModel.sharedDataModel.getUser.addresses) {
+        if (CKTDataModel.sharedDataModel.currentUser.addresses) {
             // My work here is done
             [self.navigationController popViewControllerAnimated:YES];
         } else {
@@ -135,7 +132,7 @@
     }
 }
 
-- (IBAction)saveAddress:(id) sender
+- (IBAction)saveAddress:(id)sender
 {
     // Validate the address fields entered by the user
     // TODO: some validations
@@ -153,8 +150,11 @@
     [sharedModel addAddress:address];
     
     NSLog(@"Dispatching save address call");
-    // Save address to the server
-    [CKTServerCommunicator setUserAddress:address user:[sharedModel getUser] delegate:self];
+
+    // Save address to the server.
+    [CKTServerCommunicator setUserAddress:address
+                              currentUser:sharedModel.currentUser
+                                 delegate:self];
 }
 
 - (IBAction)doFacebookLogin:(id)sender
@@ -190,10 +190,10 @@
 {
     // Check if there is an active CKT session
     CKTDataModel *sharedModel = [CKTDataModel sharedDataModel];
-    if (sharedModel.getUser.sessionId) {
+    if (sharedModel.currentUser.sessionId) {
         // Check if user already has an address
         NSLog(@"valid");
-        if (sharedModel.getUser.addresses) {
+        if (sharedModel.currentUser.addresses) {
             // My work here is done
             [self.navigationController popViewControllerAnimated:YES];
         } else {
@@ -207,10 +207,10 @@
             // Issue a create user call to the CKT server
             
             self.loginSection.hidden = YES;
-            
-            [CKTServerCommunicator createUser:sharedModel.getUser];
-            
-            if (sharedModel.getUser.addresses) {
+
+            [CKTServerCommunicator createCurrentUser:sharedModel.currentUser];
+           
+            if (sharedModel.currentUser.addresses) {
                 // User address already setup!
                 [self.navigationController popViewControllerAnimated:YES];
             } else {

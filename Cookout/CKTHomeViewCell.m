@@ -7,9 +7,9 @@
 //
 
 #import "CKTAsyncImageView.h"
-#import "CKTChef.h"
 #import "CKTDataModel.h"
 #import "CKTHomeViewCell.h"
+#import "CKTUser.h"
 
 @interface CKTHomeViewCell ()
 @property (strong, nonatomic) IBOutlet CKTAsyncImageView *foodImage;
@@ -29,12 +29,11 @@
 {
     [self unload];
 
-    CKTChef *chef = [CKTDataModel.sharedDataModel chefWithId:dinner.chefId];
-    
-    self.foodImage.imageURL = [dinner imageNSUrl];
-    self.profileImage.imageURL = [chef imageNSUrl];
-    self.foodLabel.text = [dinner name];
-    self.subtitleLabel.text = [chef name];
+    CKTUser *chef = [CKTDataModel.sharedDataModel userWithId:dinner.chefId];
+    self.foodImage.imageURL = dinner.imageNSUrl;
+    self.profileImage.imageURL = chef.imageNSUrl;
+    self.foodLabel.text = dinner.name;
+    self.subtitleLabel.text = chef.name;
 }
 
 - (void)unload

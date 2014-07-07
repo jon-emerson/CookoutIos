@@ -45,13 +45,13 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [[CKTJSONResponseSerializer alloc] init];
     NSString *uId = order.user.userId;
-    NSMutableArray *addresses = order.user.addresses;
     NSString *dId = order.dinner.dinnerId;
     NSString *oQ = order.orderQuantity.stringValue;
     NSString *sR = order.specialRequests;
     
     // Use an address from the addresses array.
     // TODO(cra): Let the user choose one.
+    NSArray *addresses = CKTDataModel.sharedDataModel.currentUser.addresses;
     NSString *aId = ((CKTAddress *) addresses[0]).addressId;
 
     NSDictionary *parameters = @{@"userId":(uId) ? uId : @"-1",
@@ -74,17 +74,17 @@
     // The app has started.
     // Step 1. Check if there is already CKTSession Token available.
     CKTDataModel *sharedModel = [CKTDataModel sharedDataModel];
-    if ([sharedModel getUser].sessionId) {
+    if (sharedModel.currentUser.sessionId) {
         // already have a cookout session id. Life is good
         NSLog(@"Already have session token. Life is good");
         return;
-    } else {
-        // Initiate login manager to check for a facebook token
-        // If login manager finds a token, it will call CKTServerCommunicator
-        // to attempt to exchange the token for a CKTSession
-        NSLog(@"Get an FB token and attempt exchange");
-        [[CKTLoginManager sharedLoginManager] startFBSession];
     }
+    
+    // Initiate login manager to check for a facebook token
+    // If login manager finds a token, it will call CKTServerCommunicator
+    // to attempt to exchange the token for a CKTSession
+    NSLog(@"Get an FB token and attempt exchange");
+    [[CKTLoginManager sharedLoginManager] startFBSession];
 }
 
 + (void)exchangeFbToken:(FBAccessTokenData *)fbToken
@@ -112,10 +112,10 @@
           }];
 }
 
-+ (void)createUser:(CKTUser *)user
++ (void)createCurrentUser:(CKTCurrentUser *)user
 {
-    // If a user already exists, the return that user
-    if ([[CKTDataModel sharedDataModel]getUser].sessionId) {
+    // If a user already exists, the return that user.
+    if (CKTDataModel.sharedDataModel.currentUser.sessionId) {
         return;
     }
     
@@ -135,7 +135,7 @@
 }
 
 + (void)setUserAddress:(CKTAddress *)address
-                  user:(CKTUser *)user
+           currentUser:(CKTCurrentUser *)currentUser
               delegate:(id<CKTAddressSaveHandler>)delegate
 {
     NSString *url = @"https://immense-beyond-2989.herokuapp.com/addAddress";
@@ -144,9 +144,9 @@
     NSArray *userKeys = @[@"sessionId"];
 
     NSMutableDictionary *parameters = [[address dictionaryWithValuesForKeys:addressKeys]mutableCopy];
-    NSDictionary* userParams = [user dictionaryWithValuesForKeys:userKeys];
-    
-    [parameters addEntriesFromDictionary:userParams];
+    NSDictionary *currentUserParams =
+            [currentUser dictionaryWithValuesForKeys:userKeys];
+    [parameters addEntriesFromDictionary:currentUserParams];
     
     NSLog(@"%@", parameters);
   

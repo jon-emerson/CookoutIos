@@ -7,12 +7,12 @@
 //
 
 #import "CKTAsyncImageView.h"
-#import "CKTChef.h"
+#import "CKTCheckoutViewController.h"
+#import "CKTCurrentUser.h"
 #import "CKTDataModel.h"
 #import "CKTDinnerViewController.h"
-#import "CKTCheckoutViewController.h"
-#import "CKTUser.h"
 #import "CKTOrder.h"
+#import "CKTUser.h"
 
 @interface CKTDinnerViewController ()
 @property (weak, nonatomic) IBOutlet CKTAsyncImageView *foodImage;
@@ -76,7 +76,7 @@
     self.quantity.text = @"1";
 
     // Do any additional setup after loading the view from its nib.
-    CKTChef *chef = [CKTDataModel.sharedDataModel chefWithId:self.dinner.chefId];
+    CKTUser *chef = [CKTDataModel.sharedDataModel userWithId:self.dinner.chefId];
     self.foodImage.imageURL = [self.dinner imageNSUrl];
     self.profileImage.imageURL = [chef imageNSUrl];
     self.foodLabel.text = [self.dinner name];
