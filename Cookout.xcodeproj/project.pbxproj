@@ -290,6 +290,7 @@
 		FC9B5035194FBFAC00C32D97 /* Cookout */ = {
 			isa = PBXGroup;
 			children = (
+				202BC51B1966529000FC444A /* CKTAddressSaveHandler.h */,
 				FC9B503E194FBFAC00C32D97 /* CKTAppDelegate.h */,
 				FC9B503F194FBFAC00C32D97 /* CKTAppDelegate.m */,
 				FC0B06FF195A266200DF3BD2 /* CKTAsyncImageView.h */,
@@ -305,7 +306,6 @@
 				FC0B071F195CEF8200DF3BD2 /* CKTNavigationBar.m */,
 				FC0B0706195B7D6300DF3BD2 /* CKTServerCommunicator.h */,
 				FC0B0707195B7D6300DF3BD2 /* CKTServerCommunicator.m */,
-				202BC51B1966529000FC444A /* CKTAddressSaveHandler.h */,
 				20403BA219660EC4008BF4F0 /* CKTSessionHandlerDelegate.h */,
 				209593C71964DE8000C0C007 /* Controllers */,
 				209593C61964DDF400C0C007 /* Data Model */,

@@ -6,14 +6,20 @@
 //  Copyright (c) 2014 Cookout. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import <FacebookSDK/FacebookSDK.h>
+#import <UIKit/UIKit.h>
+
+#import "CKTAddressSaveHandler.h"
+#import "CKTFacebookSessionListener.h"
 #import "CKTOrder.h"
 #import "CKTSessionHandlerDelegate.h"
-#include "CKTFacebookSessionListener.h"
-#import "CKTAddressSaveHandler.h"
 
-@interface CKTCreateAccountViewController : UIViewController <CKTFacebookSessionListener,CKTSessionHandlerDelegate,CKTAddressSaveHandler>
-@property (weak, nonatomic) CKTOrder * order;
--(void)handleFacebookSessionStateChange;
+@interface CKTCreateAccountViewController : UIViewController
+        <CKTFacebookSessionListener, CKTSessionHandlerDelegate,
+                CKTAddressSaveHandler>
+
+@property (weak, nonatomic) CKTOrder *order;
+
+- (void)handleFacebookSessionStateChange;
+
 @end

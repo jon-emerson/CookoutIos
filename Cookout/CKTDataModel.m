@@ -12,7 +12,7 @@
 @interface CKTDataModel ()
 @property (nonatomic, retain) NSMutableArray *dinnersArray;
 @property (nonatomic, retain) NSMutableDictionary *chefDictionary;
-@property (nonatomic, retain) CKTUser * user;
+@property (nonatomic, retain) CKTUser *user;
 @end
 
 @implementation CKTDataModel
@@ -63,20 +63,21 @@
     return [self.chefDictionary valueForKey:id];
 }
 
-- (void) addUser:(CKTUser *) u
+- (void) addUser:(CKTUser *)u
 {
     //self.user = u;
 }
 
--(void) setSession: (NSString *) sId
+- (void) setSession:(NSString *)sId
 {
     self.user.sessionId = [sId copy];
 }
 
--(void) addAddress: (CKTAddress *) address
+- (void) addAddress:(CKTAddress *)address
 {
-    if(!self.user.addresses)
-        self.user.addresses = [[NSMutableArray alloc]init];
+    if (!self.user.addresses) {
+        self.user.addresses = [[NSMutableArray alloc] init];
+    }
     [self.user.addresses addObject:address];
 }
 
@@ -84,7 +85,6 @@
 {
     return self.user;
 }
-
 
 + (NSString *)itemArchivePath
 {

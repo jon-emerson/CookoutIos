@@ -13,6 +13,7 @@
 #import "CKTUser.h"
 
 @interface CKTDataModel : NSObject <NSCoding>
+
 + (instancetype)sharedDataModel;
 - (NSArray *)dinners;
 - (CKTChef *)chefWithId:(NSString *)id;
@@ -22,5 +23,6 @@
 - (void)addUser:(NSObject *) u;
 - (void)addAddress:(CKTAddress *)address;
 - (CKTUser *)getUser;
-- (void)setSession: (NSString *) sId;
+- (void)setSession:(NSString *) sId;
+
 @end

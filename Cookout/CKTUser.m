@@ -13,8 +13,7 @@
 -(instancetype)init
 {
     self = [super init];
-    if(self)
-    {
+    if (self) {
         // Initialize an empty user object
     }
     return self;

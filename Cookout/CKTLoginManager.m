@@ -13,7 +13,8 @@
 #import "CKTFacebookSessionManager.h"
 
 @implementation CKTLoginManager
-+(instancetype)sharedLoginManager
+
++ (instancetype)sharedLoginManager
 {
     static CKTLoginManager *sharedInstance = nil;
     static dispatch_once_t onceToken;
@@ -26,10 +27,10 @@
 }
 
 // Start FB session
--(void)startFBSession
+- (void)startFBSession
 {
     NSLog(@"Opening FB session");
-    CKTFacebookSessionManager * fbMgr = [CKTFacebookSessionManager sharedFacebookSessionManager];
+    CKTFacebookSessionManager *fbMgr = [CKTFacebookSessionManager sharedFacebookSessionManager];
     
     // Register login manager as a state change listener
     [fbMgr addListener:self];
@@ -37,16 +38,16 @@
 }
 
 // Start an FB session with login UI
--(void)startFBSessionWithLoginUI
+- (void)startFBSessionWithLoginUI
 {
-    CKTFacebookSessionManager * fbMgr = [CKTFacebookSessionManager sharedFacebookSessionManager];
+    CKTFacebookSessionManager *fbMgr = [CKTFacebookSessionManager sharedFacebookSessionManager];
     [fbMgr login];
 }
 
--(BOOL)isFacebookSessionOpen
+- (BOOL)isFacebookSessionOpen
 {
-    return (FBSession.activeSession.state == FBSessionStateOpen
-            || FBSession.activeSession.state == FBSessionStateOpenTokenExtended);
+    return (FBSession.activeSession.state == FBSessionStateOpen ||
+            FBSession.activeSession.state == FBSessionStateOpenTokenExtended);
 }
 
 // Handle FB session state changes
@@ -55,20 +56,16 @@
     // If a valid facebook session is available, and no CKT session id available
     // then send the CKT server a request to exchange the FB session for a CKT session
     NSLog(@"Facebook session state change");
-    CKTDataModel * sharedModel = [CKTDataModel sharedDataModel];
-    if([sharedModel getUser].sessionId)
-    {
+    CKTDataModel *sharedModel = [CKTDataModel sharedDataModel];
+    if (sharedModel.getUser.sessionId) {
         // Don't care about FB session changes, the user has a valid CKT Session
         NSLog(@"State change doesn't matter, got CKT Token");
         return;
-    }
-    else
-    {
+    } else {
         NSLog(@"State change does matter - get me a CKT Token.");
         // ok check if the user has a valid FB session. If not, don't force UI here.
-        if(FBSession.activeSession.state == FBSessionStateOpen
-           || FBSession.activeSession.state == FBSessionStateOpenTokenExtended)
-        {
+        if (FBSession.activeSession.state == FBSessionStateOpen ||
+                FBSession.activeSession.state == FBSessionStateOpenTokenExtended) {
             // Exchange the FB session token for a cookout session
             NSLog(@"Active FB session, let's exchange it");
             [CKTServerCommunicator exchangeFbToken:FBSession.activeSession.accessTokenData];

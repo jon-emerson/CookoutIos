@@ -68,45 +68,39 @@
 }*/
 
 // Handle the request CKT Server's success response to CKT Session Request
--(void)sessionRequestResponse:(NSDictionary *)responseObject;
+- (void)sessionRequestResponse:(NSDictionary *)responseObject;
 {
     // Check if the server said success=0 or returned no sessionId
     // If this is the case, then the user doesn't exist yet in the backend
     // and has to be created via createUser call
-    NSNumber * didSessionRequestSucceed = [responseObject valueForKey:@"success"];
-    NSLog(@"VALUE OF dis sesso%@",didSessionRequestSucceed);
-    CKTDataModel * sharedModel = [CKTDataModel sharedDataModel];
+    NSNumber *didSessionRequestSucceed = [responseObject valueForKey:@"success"];
+    NSLog(@"VALUE OF dis sesso%@", didSessionRequestSucceed);
+    CKTDataModel *sharedModel = [CKTDataModel sharedDataModel];
     
     //NSLog(@"%@", [responseObject valueForKey:@"fbUserId"]);
 
-    if(didSessionRequestSucceed)
-    {
+    if (didSessionRequestSucceed) {
         // Add the CKT Session Id to CKT User
-        CKTUser * u;
+        CKTUser *u;
         
-        if(![sharedModel getUser])
-        {
-            u = [[CKTUser alloc]init];
+        if (!sharedModel.getUser) {
+            u = [[CKTUser alloc] init];
             [sharedModel addUser:u];
         }
-        u = [sharedModel getUser];
+        u = sharedModel.getUser;
         
         u.sessionId = [responseObject valueForKey:@"sessionId"];
         NSLog(@"Session ID is %@",u.sessionId);
         
         // Check if delivery address is available in the user object
-        if(!u.addresses)
-        {
+        if (!u.addresses) {
             // Addresses aren't already setup in the user object
             // Show the address entry screen to the user
             self.addressEntryView.hidden = NO;
-        }
-        else
-        {
+        } else {
             // Addresses are setup. We should pop this view controller
             [self.navigationController popViewControllerAnimated:YES];
         }
-        
     }
     
     // The user doesn't exist on the server. Need to send a createUser
@@ -119,42 +113,36 @@
     // Proceed to final checkout
 }
 
--(void)handleFacebookSessionStateChange
+- (void)handleFacebookSessionStateChange
 {
     // Facebook session state changed. I may have to change onscreen items
-    if(FBSession.activeSession.state == FBSessionStateOpen
-       || FBSession.activeSession.state == FBSessionStateOpenTokenExtended)
-    {
+    if (FBSession.activeSession.state == FBSessionStateOpen ||
+            FBSession.activeSession.state == FBSessionStateOpenTokenExtended) {
         // Remove Facebook login section from screen
         self.loginSection.hidden = true;
         
         // Check if the user has an address setup
-        if([[CKTDataModel sharedDataModel] getUser].addresses)
-        {
+        if (CKTDataModel.sharedDataModel.getUser.addresses) {
             // My work here is done
             [self.navigationController popViewControllerAnimated:YES];
-        }
-        else
-        {
+        } else {
             // Show the address entry interface
             self.addressEntryView.hidden = false;
         }
-    }
-    else
-    {
+    } else {
         self.loginSection.hidden = false;
         self.addressEntryView.hidden = true;
     }
 }
 
--(IBAction)saveAddress:(id) sender
+- (IBAction)saveAddress:(id) sender
 {
     // Validate the address fields entered by the user
     // TODO: some validations
     
     // Save address to the local data model
-    CKTDataModel * sharedModel = [CKTDataModel sharedDataModel];
-    CKTAddress * address = [[CKTAddress alloc] init];
+    CKTDataModel *sharedModel = [CKTDataModel sharedDataModel];
+    CKTAddress *address = [[CKTAddress alloc] init];
     address.addressLine1 = self.addressLine1.text;
     address.addressLine2 = self.addressLine2.text;
     address.city = self.city.text;
@@ -169,30 +157,31 @@
     [CKTServerCommunicator setUserAddress:address user:[sharedModel getUser] delegate:self];
 }
 
--(IBAction)doFacebookLogin:(id) sender
+- (IBAction)doFacebookLogin:(id)sender
 {
     // Do facebook login
     [[CKTLoginManager sharedLoginManager] startFBSessionWithLoginUI];
 }
 
 // Handle the request CKT Server's error response to CKT Session Request
--(void)sessionRequestError:(NSError *)error
+- (void)sessionRequestError:(NSError *)error
 {
     // Address did not save correctly
     // TODO: show error to user and return to view
     
 }
 
--(void)addressSaved:(NSDictionary *)responseObject
+- (void)addressSaved:(NSDictionary *)responseObject
 {
     // The user's address was saved succesfully.
     // This means the user has a cookout session and a delivery address
     // Pop this view of the stack and go back to the checkout screen
-    NSNumber * didSessionRequestSucceed = [responseObject valueForKey:@"success"];
-    if(didSessionRequestSucceed)
+    NSNumber *didSessionRequestSucceed = [responseObject valueForKey:@"success"];
+    if (didSessionRequestSucceed) {
         [self.navigationController popViewControllerAnimated:YES];
+    }
 }
--(void)addressSaveFailed:(NSError *)error
+- (void)addressSaveFailed:(NSError *)error
 {
     
 }
@@ -200,59 +189,41 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     // Check if there is an active CKT session
-    CKTDataModel * sharedModel = [CKTDataModel sharedDataModel];
-    if([sharedModel getUser].sessionId)
-    {
+    CKTDataModel *sharedModel = [CKTDataModel sharedDataModel];
+    if (sharedModel.getUser.sessionId) {
         // Check if user already has an address
         NSLog(@"valid");
-        if([sharedModel getUser].addresses)
-        {
+        if (sharedModel.getUser.addresses) {
             // My work here is done
             [self.navigationController popViewControllerAnimated:YES];
-        }
-        else
-        {
+        } else {
             // Show the address entry interface
-            self.addressEntryView.hidden = false;
+            self.addressEntryView.hidden = NO;
         }
-    }
-    else
-    {
+    } else {
         // No valid cookout session. Check if there is already a Facebook session
-        if([[CKTLoginManager sharedLoginManager] isFacebookSessionOpen])
-        {
+        if ([[CKTLoginManager sharedLoginManager] isFacebookSessionOpen]) {
             // Ok the user has already signed and authorized CKT for FB
             // Issue a create user call to the CKT server
             
-            self.loginSection.hidden = true;
+            self.loginSection.hidden = YES;
             
-            [CKTServerCommunicator createUser:[sharedModel getUser]];
+            [CKTServerCommunicator createUser:sharedModel.getUser];
             
-            if([sharedModel getUser].addresses)
-            {
+            if (sharedModel.getUser.addresses) {
                 // User address already setup!
                 [self.navigationController popViewControllerAnimated:YES];
-            }
-            else
-            {
+            } else {
                 // Prompt address entry
-                self.addressEntryView.hidden = false;
-                self.loginSection.hidden = true;
+                self.addressEntryView.hidden = NO;
+                self.loginSection.hidden = YES;
             }
-        }
-        else
-        {
+        } else {
             // Prompt Facebook sign in
-            self.addressEntryView.hidden = true;
-            self.loginSection.hidden = false;
+            self.addressEntryView.hidden = YES;
+            self.loginSection.hidden = NO;
         }
     }
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

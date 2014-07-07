@@ -116,8 +116,8 @@ NSString *const CKTAsyncImageErrorKey = @"error";
 	self.cancelled = NO;
     [[NSNotificationCenter defaultCenter] postNotificationName:CKTAsyncImageLoadDidFail
                                                         object:self.target
-                                                      userInfo:@{CKTAsyncImageURLKey: self.URL,
-                                                                 CKTAsyncImageErrorKey: error}];
+                                                      userInfo:@{CKTAsyncImageURLKey:self.URL,
+                                                                 CKTAsyncImageErrorKey:error}];
 }
 
 - (void)cacheImage:(UIImage *)image
@@ -174,7 +174,7 @@ NSString *const CKTAsyncImageErrorKey = @"error";
                 @autoreleasepool {
                     NSError *error = [NSError errorWithDomain:@"AsyncImageLoader"
                                                          code:0
-                                                     userInfo:@{NSLocalizedDescriptionKey: @"Invalid image data"}];
+                                                     userInfo:@{NSLocalizedDescriptionKey:@"Invalid image data"}];
                     [self performSelectorOnMainThread:@selector(loadFailedWithError:)
                                            withObject:error waitUntilDone:YES];
 				}

@@ -57,8 +57,8 @@
     
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
     [df setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
-    NSDate *orderByDateTime = [df dateFromString: [dictionary valueForKey:@"orderByDateTime"]];
-    NSDate *deliveryDateTime = [df dateFromString: [dictionary valueForKey:@"deliveryDateTime"]];
+    NSDate *orderByDateTime = [df dateFromString:[dictionary valueForKey:@"orderByDateTime"]];
+    NSDate *deliveryDateTime = [df dateFromString:[dictionary valueForKey:@"deliveryDateTime"]];
     
     return [self initWithDinnerId:[dictionary valueForKey:@"id"]
                              name:[dictionary valueForKey:@"name"]

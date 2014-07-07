@@ -62,8 +62,7 @@
     self.tableView.separatorColor = [UIColor clearColor];
     
     // Home view controller has loaded. Check if the data model has been initialized locally
-    if([CKTDataModel sharedDataModel].dinners)
-    {
+    if (CKTDataModel.sharedDataModel.dinners) {
         // Local saved data is available - populate the views with existing data
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];

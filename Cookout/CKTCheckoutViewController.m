@@ -11,15 +11,17 @@
 #import "CKTCreateAccountViewController.h"
 
 @interface CKTCheckoutViewController ()
-@property (nonatomic, weak) IBOutlet UILabel * orderQuantity;
-@property (nonatomic, weak) IBOutlet UILabel * totalPrice;
+
+@property (nonatomic, weak) IBOutlet UILabel *orderQuantity;
+@property (nonatomic, weak) IBOutlet UILabel *totalPrice;
 @property (weak, nonatomic) IBOutlet CKTAsyncImageView *foodImage;
-@property (nonatomic, weak) IBOutlet UILabel * foodLabel;
-@property (nonatomic, weak) IBOutlet UIView * needsOnboarding;
-@property (nonatomic, weak) IBOutlet UIView * orderConfirmation;
-@property (nonatomic, weak) IBOutlet UIButton * placeOrder;
-@property (nonatomic, weak) IBOutlet UIPickerView * addressPicker;
+@property (nonatomic, weak) IBOutlet UILabel *foodLabel;
+@property (nonatomic, weak) IBOutlet UIView *needsOnboarding;
+@property (nonatomic, weak) IBOutlet UIView *orderConfirmation;
+@property (nonatomic, weak) IBOutlet UIButton *placeOrder;
+@property (nonatomic, weak) IBOutlet UIPickerView *addressPicker;
 -(IBAction)placeOrderAction:(id) sender;
+
 @end
 
 @implementation CKTCheckoutViewController
@@ -29,12 +31,12 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.navigationItem.title = @"Place Order";
+        self.navigationItem.title = @"Place order";
     }
     return self;
 }
 
--(IBAction)placeOrderAction:(id)sender
+- (IBAction)placeOrderAction:(id)sender
 {
     
 }
@@ -69,36 +71,29 @@
                                                            attribute:NSLayoutAttributeBottom
                                                           multiplier:1.0
                                                             constant:0.0]];
-    
 
-    
-    if ([self isValidUser])
-    {
+    if ([self isValidUser]) {
         // User is signed in - yaay!
-        if([self hasValidDeliveryAddress] && [self hasValidCCInfo]) {
+        if ([self hasValidDeliveryAddress] && [self hasValidCCInfo]) {
             // Setup checkout
-            self.needsOnboarding.hidden = true;
-            self.orderConfirmation.hidden = false;
-        }
-        else
-        {
+            self.needsOnboarding.hidden = YES;
+            self.orderConfirmation.hidden = NO;
+        } else {
              // Uh-oh no valid CC or address - open the door to onboarding ville.
-            self.needsOnboarding.hidden = false;
-            self.orderConfirmation.hidden = true;
+            self.needsOnboarding.hidden = NO;
+            self.orderConfirmation.hidden = YES;
         }
-    }
-    else
-    {
+    } else {
         // Get user to sign in using FB
-        self.needsOnboarding.hidden = false;
-        self.orderConfirmation.hidden = true;
+        self.needsOnboarding.hidden = NO;
+        self.orderConfirmation.hidden = YES;
     }
 }
 
 - (IBAction)doOnboarding:(id)sender
 {
     // Onboard the user
-    CKTCreateAccountViewController * createAccount = [[CKTCreateAccountViewController alloc] init];
+    CKTCreateAccountViewController *createAccount = [[CKTCreateAccountViewController alloc] init];
     createAccount.order = self.order;
     [self.navigationController pushViewController:createAccount animated:YES];
 }
@@ -106,19 +101,13 @@
 - (BOOL)isValidUser
 {
     // See if user is signed in - if not prompt sign in
-    NSLog(@"isValidUser session id %@", [[CKTDataModel sharedDataModel] getUser].sessionId);
-    if([[CKTDataModel sharedDataModel] getUser].sessionId)
-    {
-        return YES;
-    }
-    else return NO;
+    NSLog(@"isValidUser session id %@", CKTDataModel.sharedDataModel.getUser.sessionId);
+    return !!CKTDataModel.sharedDataModel.getUser.sessionId;
 }
 
 - (BOOL)hasValidDeliveryAddress
 {
-    if([[CKTDataModel sharedDataModel]getUser].addresses)
-        return YES;
-    else return NO;
+    return !![CKTDataModel.sharedDataModel.getUser.addresses count];
 }
 
 - (BOOL)hasValidCCInfo

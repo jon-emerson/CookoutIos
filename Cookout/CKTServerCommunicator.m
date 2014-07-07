@@ -37,18 +37,23 @@
           }];
 }
 
-+ (void)postOrder:(CKTOrder *)order delegate:(id<CKTDataModelChangeDelegate>)dataModelChangeDelegate
++ (void)postOrder:(CKTOrder *)order
+         delegate:(id<CKTDataModelChangeDelegate>)dataModelChangeDelegate
 {
     NSString *baseURL = @"http://immense-beyond-2989.herokuapp.com/order";
 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [[CKTJSONResponseSerializer alloc] init];
     NSString *uId = order.user.userId;
-    NSString *aId = order.user.addresses;
+    NSMutableArray *addresses = order.user.addresses;
     NSString *dId = order.dinner.dinnerId;
     NSString *oQ = order.orderQuantity.stringValue;
     NSString *sR = order.specialRequests;
     
+    // Use an address from the addresses array.
+    // TODO(cra): Let the user choose one.
+    NSString *aId = ((CKTAddress *) addresses[0]).addressId;
+
     NSDictionary *parameters = @{@"userId":(uId) ? uId : @"-1",
                                  @"addressId":(aId) ? aId : @"-1",
                                  @"dinnerId":(dId) ? dId :@"-1",
@@ -64,18 +69,16 @@
           }];
 }
 
-+(void)startSession
++ (void)startSession
 {
-    // The app has started - (1) Check if there is already CKTSession Token available
-    CKTDataModel * sharedModel = [CKTDataModel sharedDataModel];
-    if([sharedModel getUser].sessionId)
-    {
+    // The app has started.
+    // Step 1. Check if there is already CKTSession Token available.
+    CKTDataModel *sharedModel = [CKTDataModel sharedDataModel];
+    if ([sharedModel getUser].sessionId) {
         // already have a cookout session id. Life is good
         NSLog(@"Already have session token. Life is good");
         return;
-    }
-    else
-    {
+    } else {
         // Initiate login manager to check for a facebook token
         // If login manager finds a token, it will call CKTServerCommunicator
         // to attempt to exchange the token for a CKTSession
@@ -84,22 +87,21 @@
     }
 }
 
-+(void)exchangeFbToken:(FBAccessTokenData *)fbToken
++ (void)exchangeFbToken:(FBAccessTokenData *)fbToken
 {
-    NSString * URL = @"https://immense-beyond-2989.herokuapp.com/getSession";
+    NSString *url = @"https://immense-beyond-2989.herokuapp.com/getSession";
     NSDictionary *parameters = @{@"fbAccessToken":fbToken.accessToken};
 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [[CKTJSONResponseSerializer alloc] init];
 
-    [manager POST:URL parameters:parameters
+    [manager POST:url parameters:parameters
           success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
               NSString *s = [responseObject valueForKey:@"success"];
-              if(s.intValue == 1)
-              {
+              if (s.intValue == 1) {
                   NSLog(@"Token exchange succeeded! CK token %@", responseObject);
                   // Save the CKTToken to the user object and rejoice
-                  NSString * sId = [responseObject valueForKey:@"sessionId"];
+                  NSString *sId = [responseObject valueForKey:@"sessionId"];
                   [[CKTDataModel sharedDataModel] setSession:sId];
               }
           }
@@ -110,19 +112,20 @@
           }];
 }
 
-+(void)createUser:(CKTUser *)user
++ (void)createUser:(CKTUser *)user
 {
     // If a user already exists, the return that user
-    if([[CKTDataModel sharedDataModel]getUser].sessionId)
+    if ([[CKTDataModel sharedDataModel]getUser].sessionId) {
         return;
-
-    NSString * URL = @"https://immense-beyond-2989.herokuapp.com/createUser";
-    NSArray * keys = @[@"fbAccessToken",@"name",@"email",@"phone"];
-    NSDictionary * parameters = [user dictionaryWithValuesForKeys:keys];
+    }
+    
+    NSString *url = @"https://immense-beyond-2989.herokuapp.com/createUser";
+    NSArray *keys = @[@"fbAccessToken", @"name", @"email", @"phone"];
+    NSDictionary *parameters = [user dictionaryWithValuesForKeys:keys];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [[CKTJSONResponseSerializer alloc] init];
     
-    [manager POST:URL parameters:parameters
+    [manager POST:url parameters:parameters
           success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
               NSLog(@"JSON: %@", responseObject);
           }
@@ -131,14 +134,17 @@
           }];
 }
 
-+(void)setUserAddress:(CKTAddress *)address user:(CKTUser *)user delegate:(id<CKTAddressSaveHandler>)delegate
++ (void)setUserAddress:(CKTAddress *)address
+                  user:(CKTUser *)user
+              delegate:(id<CKTAddressSaveHandler>)delegate
 {
-    NSString * URL = @"https://immense-beyond-2989.herokuapp.com/addAddress";
-    NSArray * addressKeys = @[@"addressLine1",@"addressLine2",@"unit",@"city",@"state",@"country",@"zipCode"];
-    NSArray * userKeys = @[@"sessionId"];
+    NSString *url = @"https://immense-beyond-2989.herokuapp.com/addAddress";
+    NSArray *addressKeys = @[@"addressLine1", @"addressLine2", @"unit", @"city",
+                             @"state", @"country", @"zipCode"];
+    NSArray *userKeys = @[@"sessionId"];
 
-    NSMutableDictionary * parameters = [[address dictionaryWithValuesForKeys:addressKeys]mutableCopy];
-    NSMutableDictionary * userParams = [user dictionaryWithValuesForKeys:userKeys];
+    NSMutableDictionary *parameters = [[address dictionaryWithValuesForKeys:addressKeys]mutableCopy];
+    NSDictionary* userParams = [user dictionaryWithValuesForKeys:userKeys];
     
     [parameters addEntriesFromDictionary:userParams];
     
@@ -146,7 +152,7 @@
   
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [[CKTJSONResponseSerializer alloc] init];
-    [manager POST:URL parameters:parameters
+    [manager POST:url parameters:parameters
           success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
               NSLog(@"%@", responseObject);
               [delegate addressSaved:responseObject];
@@ -156,6 +162,5 @@
               [delegate addressSaveFailed:error];
           }];
 }
-
 
 @end
