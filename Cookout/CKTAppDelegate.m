@@ -27,7 +27,7 @@
     #endif
     
     [FBLoginView class];
-
+    
     // The app has launched; async load last know state of data model from disk
     dispatch_async(dispatch_get_main_queue(), ^{
         [CKTDataModel sharedDataModel];
@@ -52,6 +52,10 @@
         [CKTServerCommunicator startSession];
     });
     
+    [[UINavigationBar appearance] setTitleTextAttributes: @{
+                                                            NSForegroundColorAttributeName: [UIColor whiteColor],
+                                                            NSFontAttributeName: [UIFont fontWithName:@"OpenSans-Semibold" size:20.0f]
+                                                            }];
     // Add a red rectangle UIView at the top of the screen, behind the status bar
     // Only do this on iOS7 devices
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {

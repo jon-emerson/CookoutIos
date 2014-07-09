@@ -188,13 +188,13 @@
           }];
 }
 
-+(void)getPlaceDetails:(NSString *)placeId delegate:(id<CKTGMapsAutoCompleter>) delegate
++(void)getPlaceDetails:(NSString *)placeReference delegate:(id<CKTGMapsAutoCompleter>) delegate
 {
     NSString * apiKey = @"AIzaSyAfagTr9VXJ-imio0CpRT9wdkOtTa7Jz8g";
     NSString *url = @"https://maps.googleapis.com/maps/api/place/details/json";
     // input=Vict&types=geocode&language=fr&key=API_KEY
     
-    NSDictionary * parameters = @{@"key":apiKey, @"placeid":placeId};
+    NSDictionary * parameters = @{@"key":apiKey, @"reference":placeReference};
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [[CKTJSONResponseSerializer alloc] init];

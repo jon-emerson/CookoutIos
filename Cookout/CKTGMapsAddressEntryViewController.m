@@ -76,14 +76,16 @@
     return cell;
 }
 
-- (void) tableView: (UITableView *) tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void) tableView: (UITableView *) tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
     
-    NSString * placeId = [self.addresses[indexPath.row] valueForKey:@"place_id"];
-    // Dispatch a call to get place details
-    [CKTServerCommunicator getPlaceDetails:placeId delegate:self];
+    NSString * placeReference = [self.addresses[indexPath.row] valueForKey:@"reference"];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        // Dispatch a call to get place details
+        [CKTServerCommunicator getPlaceDetails:placeReference delegate:self];
+    });
 }
 
 - (void)placeDetailsReceived:(NSDictionary *)response
@@ -94,19 +96,67 @@
     CKTAddress *address = [[CKTAddress alloc] init];
     
     NSArray * results = [[response valueForKey:@"result"] valueForKey:@"address_components"];
-    NSObject * result;
+    NSDictionary * result;
+    NSString * type;
+    BOOL streetNumberFound = NO;
+    
+    // Check if the address component is a street number. If not, this is not a valid address
+    for(type in [results[0] valueForKey:@"types"])
+    {
+        if([type isEqualToString:@"street_number"])
+        {
+            streetNumberFound = YES;
+        }
+    }
+    
+    if(!streetNumberFound)
+    {
+        NSLog(@"Invalid address, no street number");
+        UIAlertView * newAlert = [[UIAlertView alloc]init];
+        newAlert.message = @"Please include the house number we should deliver to :)";
+        [newAlert addButtonWithTitle:@"Ok"];
+        [newAlert show];
+        return;
+    }
     
     for(result in results)
     {
-       
+        // Get the address component type
+        [result valueForKey:@"types"];
+        
+        for(type in [result valueForKey:@"types"])
+        {
+            if([type isEqualToString:@"street_number"])
+            {
+                address.addressLine1 = [result valueForKey:@"short_name"];
+            }
+            
+            if([type isEqualToString:@"route"])
+            {
+                address.addressLine2 = [result valueForKey:@"short_name"];
+            }
+            
+            if([type isEqualToString:@"locality"])
+            {
+                address.city = [result valueForKey:@"short_name"];
+            }
+            
+            if([type isEqualToString:@"administrative_area_level_1"])
+            {
+                address.state = [result valueForKey:@"short_name"];
+            }
+            
+            if([type isEqualToString:@"country"])
+            {
+                address.country = [result valueForKey:@"short_name"];
+            }
+            
+            if([type isEqualToString:@"postal_code"])
+            {
+                address.zipCode = [result valueForKey:@"short_name"];
+            }
+        }
     }
-
-    address.addressLine1 = [response valueForKeyPath:@"street_number"];
-    address.addressLine2 = [response valueForKeyPath:@"route"];
-    address.city = [response valueForKeyPath:@"locality"];
-    address.state = [response valueForKeyPath:@"administrative_area_level_1"];
-    address.country = [response valueForKeyPath:@"country"];
-    address.zipCode = [response valueForKeyPath:@"postal_code"];
 
     NSLog(@"%@", address);
 

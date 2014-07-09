@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		2036B215196B8788000E5214 /* CKTGMapsAddressEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2036B213196B8788000E5214 /* CKTGMapsAddressEntryViewController.m */; };
 		2036B216196B8788000E5214 /* CKTGMapsAddressEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2036B214196B8788000E5214 /* CKTGMapsAddressEntryViewController.xib */; };
+		2036B21B196CDF3E000E5214 /* Open Sans 300.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2036B218196CDF3E000E5214 /* Open Sans 300.ttf */; };
+		2036B21C196CDF3E000E5214 /* Open Sans 600.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2036B219196CDF3E000E5214 /* Open Sans 600.ttf */; };
+		2036B21D196CDF3E000E5214 /* Open Sans regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2036B21A196CDF3E000E5214 /* Open Sans regular.ttf */; };
 		20858A9119656DEF007769AE /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 20858A7F19656DEF007769AE /* AFHTTPRequestOperation.m */; };
 		20858A9219656DEF007769AE /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 20858A8119656DEF007769AE /* AFHTTPRequestOperationManager.m */; };
 		20858A9319656DEF007769AE /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 20858A8319656DEF007769AE /* AFHTTPSessionManager.m */; };
@@ -72,6 +75,9 @@
 		2036B213196B8788000E5214 /* CKTGMapsAddressEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKTGMapsAddressEntryViewController.m; sourceTree = "<group>"; };
 		2036B214196B8788000E5214 /* CKTGMapsAddressEntryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CKTGMapsAddressEntryViewController.xib; sourceTree = "<group>"; };
 		2036B217196C6F49000E5214 /* CKTGMapsAutoCompleter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTGMapsAutoCompleter.h; sourceTree = "<group>"; };
+		2036B218196CDF3E000E5214 /* Open Sans 300.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Open Sans 300.ttf"; sourceTree = "<group>"; };
+		2036B219196CDF3E000E5214 /* Open Sans 600.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Open Sans 600.ttf"; sourceTree = "<group>"; };
+		2036B21A196CDF3E000E5214 /* Open Sans regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Open Sans regular.ttf"; sourceTree = "<group>"; };
 		20403BA219660EC4008BF4F0 /* CKTSessionHandlerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTSessionHandlerDelegate.h; sourceTree = "<group>"; };
 		20858A7E19656DEF007769AE /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		20858A7F19656DEF007769AE /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
@@ -328,6 +334,9 @@
 		FC9B5036194FBFAC00C32D97 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2036B218196CDF3E000E5214 /* Open Sans 300.ttf */,
+				2036B219196CDF3E000E5214 /* Open Sans 600.ttf */,
+				2036B21A196CDF3E000E5214 /* Open Sans regular.ttf */,
 				FC9B5037194FBFAC00C32D97 /* Cookout-Info.plist */,
 				FC9B5038194FBFAC00C32D97 /* InfoPlist.strings */,
 				FC9B503B194FBFAC00C32D97 /* main.m */,
@@ -430,13 +439,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2036B21D196CDF3E000E5214 /* Open Sans regular.ttf in Resources */,
 				FC9B503A194FBFAC00C32D97 /* InfoPlist.strings in Resources */,
 				209593BD1964C41500C0C007 /* CKTCheckoutViewController.xib in Resources */,
 				FC9B5087194FD5A000C32D97 /* CKTHomeViewCell.xib in Resources */,
+				2036B21C196CDF3E000E5214 /* Open Sans 600.ttf in Resources */,
 				FC9B5042194FBFAC00C32D97 /* Images.xcassets in Resources */,
 				FC2FFFC319514AA6000C8AF7 /* CKTDinnerViewController.xib in Resources */,
 				209593BB1964BDED00C0C007 /* CKTCreateAccountViewController.xib in Resources */,
 				2036B216196B8788000E5214 /* CKTGMapsAddressEntryViewController.xib in Resources */,
+				2036B21B196CDF3E000E5214 /* Open Sans 300.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

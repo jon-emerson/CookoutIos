@@ -31,6 +31,7 @@
         /*UIImage *image = [UIImage imageNamed:@"cookout-logo-160.png"];
         UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
         navItem.titleView = imageView;*/
+        UIFont *customFont = [UIFont fontWithName:@"OpenSans-Semibold" size:35];
         navItem.title = @"Vessel";
         
         // Add the settings pane as the left bar button item

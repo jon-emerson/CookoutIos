@@ -41,6 +41,12 @@
 			</array>
 		</dict>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Open Sans 300.ttf</string>
+		<string>Open Sans regular.ttf</string>
+		<string>Open Sans 600.ttf</string>
+	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

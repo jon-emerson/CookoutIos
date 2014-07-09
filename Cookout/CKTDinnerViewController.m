@@ -112,6 +112,12 @@
                                                            attribute:NSLayoutAttributeBottom
                                                           multiplier:1.0
                                                             constant:0.0]];
+    UIBarButtonItem *btnBack = [[UIBarButtonItem alloc]
+                                initWithTitle:@" "
+                                style:UIBarButtonItemStyleBordered
+                                target:self
+                                action:nil];
+    self.navigationController.navigationBar.topItem.backBarButtonItem=btnBack;
 }
 
 - (void)didReceiveMemoryWarning
