@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2036B215196B8788000E5214 /* CKTGMapsAddressEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2036B213196B8788000E5214 /* CKTGMapsAddressEntryViewController.m */; };
+		2036B216196B8788000E5214 /* CKTGMapsAddressEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2036B214196B8788000E5214 /* CKTGMapsAddressEntryViewController.xib */; };
 		20858A9119656DEF007769AE /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 20858A7F19656DEF007769AE /* AFHTTPRequestOperation.m */; };
 		20858A9219656DEF007769AE /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 20858A8119656DEF007769AE /* AFHTTPRequestOperationManager.m */; };
 		20858A9319656DEF007769AE /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 20858A8319656DEF007769AE /* AFHTTPSessionManager.m */; };
@@ -66,6 +68,10 @@
 
 /* Begin PBXFileReference section */
 		202BC51B1966529000FC444A /* CKTAddressSaveHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTAddressSaveHandler.h; sourceTree = "<group>"; };
+		2036B212196B8788000E5214 /* CKTGMapsAddressEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTGMapsAddressEntryViewController.h; sourceTree = "<group>"; };
+		2036B213196B8788000E5214 /* CKTGMapsAddressEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKTGMapsAddressEntryViewController.m; sourceTree = "<group>"; };
+		2036B214196B8788000E5214 /* CKTGMapsAddressEntryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CKTGMapsAddressEntryViewController.xib; sourceTree = "<group>"; };
+		2036B217196C6F49000E5214 /* CKTGMapsAutoCompleter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTGMapsAutoCompleter.h; sourceTree = "<group>"; };
 		20403BA219660EC4008BF4F0 /* CKTSessionHandlerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTSessionHandlerDelegate.h; sourceTree = "<group>"; };
 		20858A7E19656DEF007769AE /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		20858A7F19656DEF007769AE /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
@@ -238,6 +244,9 @@
 				209593BC1964C41500C0C007 /* CKTCheckoutViewController.xib */,
 				209593B71964BDED00C0C007 /* CKTCreateAccountViewController.h */,
 				209593B81964BDED00C0C007 /* CKTCreateAccountViewController.m */,
+				2036B212196B8788000E5214 /* CKTGMapsAddressEntryViewController.h */,
+				2036B213196B8788000E5214 /* CKTGMapsAddressEntryViewController.m */,
+				2036B214196B8788000E5214 /* CKTGMapsAddressEntryViewController.xib */,
 				209593B91964BDED00C0C007 /* CKTCreateAccountViewController.xib */,
 				FC2FFFBF19514AA6000C8AF7 /* CKTDinnerViewController.h */,
 				FC2FFFC019514AA6000C8AF7 /* CKTDinnerViewController.m */,
@@ -306,6 +315,7 @@
 				FC0B071F195CEF8200DF3BD2 /* CKTNavigationBar.m */,
 				FC0B0706195B7D6300DF3BD2 /* CKTServerCommunicator.h */,
 				FC0B0707195B7D6300DF3BD2 /* CKTServerCommunicator.m */,
+				2036B217196C6F49000E5214 /* CKTGMapsAutoCompleter.h */,
 				20403BA219660EC4008BF4F0 /* CKTSessionHandlerDelegate.h */,
 				209593C71964DE8000C0C007 /* Controllers */,
 				209593C61964DDF400C0C007 /* Data Model */,
@@ -426,6 +436,7 @@
 				FC9B5042194FBFAC00C32D97 /* Images.xcassets in Resources */,
 				FC2FFFC319514AA6000C8AF7 /* CKTDinnerViewController.xib in Resources */,
 				209593BB1964BDED00C0C007 /* CKTCreateAccountViewController.xib in Resources */,
+				2036B216196B8788000E5214 /* CKTGMapsAddressEntryViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -474,6 +485,7 @@
 				20858A9419656DEF007769AE /* AFNetworkReachabilityManager.m in Sources */,
 				20858A9819656DEF007769AE /* AFURLResponseSerialization.m in Sources */,
 				FC0B0711195B947F00DF3BD2 /* CKTDataModelBuilder.m in Sources */,
+				2036B215196B8788000E5214 /* CKTGMapsAddressEntryViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

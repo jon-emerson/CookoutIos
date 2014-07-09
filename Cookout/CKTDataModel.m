@@ -61,6 +61,11 @@
     [self.userDictionary setObject:user forKey:user.userId];
 }
 
+- (void)setCurrentUser:(CKTCurrentUser *)user
+{
+    self.currentUser = user;
+}
+
 - (CKTUser *)userWithId:(NSString *)id
 {
     return [self.userDictionary valueForKey:id];

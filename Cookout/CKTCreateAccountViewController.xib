@@ -14,6 +14,7 @@
                 <outlet property="loginButton" destination="JhD-b6-hd7" id="cDb-q9-4Hs"/>
                 <outlet property="loginSection" destination="apl-MX-nOa" id="51I-SK-9YY"/>
                 <outlet property="save" destination="CCg-aY-1ae" id="dLk-Z6-ZLb"/>
+                <outlet property="spinner" destination="Tnm-dA-Agf" id="A4q-qj-j75"/>
                 <outlet property="state" destination="S4r-oD-TVK" id="ceW-fc-A8Y"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="zipcode" destination="pnv-ZA-lbs" id="KVw-dl-O2T"/>
@@ -119,6 +120,10 @@
                                 <action selector="saveAddress:" destination="-1" eventType="touchUpInside" id="yob-RI-lHi"/>
                             </connections>
                         </button>
+                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Tnm-dA-Agf">
+                            <rect key="frame" x="154" y="148" width="20" height="20"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </activityIndicatorView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>

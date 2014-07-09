@@ -9,16 +9,15 @@
 #import <Foundation/Foundation.h>
 
 @interface CKTCurrentUser : NSObject
-
-// TODO(cra): Should these properties be copy
-@property (copy, readwrite) NSString *userId;
-@property (copy, readwrite) NSString *name;
-@property (copy, readwrite) NSString *sessionId;
-@property (copy, readwrite) NSString *fbAccessToken;
-@property (copy, nonatomic, readwrite) NSString *phone;
-@property (copy, nonatomic, readwrite) NSString *email;
+@property (retain, readwrite) NSString *userId;
+@property (retain, readwrite) NSString *name;
+@property (retain, readwrite) NSString *sessionId;
+@property (retain, readwrite) NSString *fbAccessToken;
+@property (retain, nonatomic, readwrite) NSString *phone;
+@property (retain, nonatomic, readwrite) NSString *email;
 
 // @type NSMutableArray<CKTAddress *>
 @property (retain, nonatomic, readwrite) NSMutableArray *addresses;
+-(instancetype)initWithDictionary:(NSDictionary *) dictionary;
 
 @end

@@ -26,6 +26,9 @@
     for (NSDictionary *dinnerDictionary in dinners) {
         [dataModel addDinner:[[CKTDinner alloc] initWithDictionary:dinnerDictionary]];
     }
+    NSDictionary *currentUser = [json valueForKey:@"currentUser"];
+    if(currentUser)
+        [dataModel setCurrentUser:[[CKTCurrentUser alloc] initWithDictionary:currentUser]];
 }
 
 @end

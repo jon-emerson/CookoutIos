@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AFHTTPRequestOperationManager.h"
 
 @protocol CKTAddressSaveHandler <NSObject>
 -(void)addressSaved:(NSDictionary *)responseObject;
--(void)addressSaveFailed:(NSError *)error;
+-(void)addressSaveFailed:(NSError *)error operation:(AFHTTPRequestOperation *) operation;
 @end

@@ -11,6 +11,7 @@
 #import "CKTServerCommunicator.h"
 #import "CKTDataModel.h"
 #include "CKTFacebookSessionListener.h"
+#include "CKTGMapsAddressEntryViewController.h"
 
 @interface CKTCreateAccountViewController ()
 @property (weak, nonatomic) IBOutlet UIView *addressEntryView;
@@ -24,8 +25,10 @@
 @property (weak, nonatomic) IBOutlet UITextField *state;
 @property (weak, nonatomic) IBOutlet UITextField *country;
 @property (weak, nonatomic) IBOutlet UITextField *zipcode;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 -(IBAction)saveAddress:(id) sender;
 -(IBAction)doFacebookLogin:(id) sender;
+
 @end
 
 @implementation CKTCreateAccountViewController 
@@ -150,7 +153,10 @@
     [sharedModel addAddress:address];
     
     NSLog(@"Dispatching save address call");
-
+    
+    self.spinner.hidden = false;
+    [self.spinner startAnimating];
+    
     // Save address to the server.
     [CKTServerCommunicator setUserAddress:address
                               currentUser:sharedModel.currentUser
@@ -163,27 +169,43 @@
     [[CKTLoginManager sharedLoginManager] startFBSessionWithLoginUI];
 }
 
-// Handle the request CKT Server's error response to CKT Session Request
-- (void)sessionRequestError:(NSError *)error
-{
-    // Address did not save correctly
-    // TODO: show error to user and return to view
-    
-}
 
 - (void)addressSaved:(NSDictionary *)responseObject
 {
     // The user's address was saved succesfully.
     // This means the user has a cookout session and a delivery address
     // Pop this view of the stack and go back to the checkout screen
-    NSNumber *didSessionRequestSucceed = [responseObject valueForKey:@"success"];
-    if (didSessionRequestSucceed) {
+    NSString *didSessionRequestSucceed = [responseObject valueForKey:@"success"];
+    if (didSessionRequestSucceed.intValue == 1) {
+        // the address was saved successfully. Remove the spinner and pop the view
+        [self.spinner stopAnimating];
+        self.spinner.hidden = true;
         [self.navigationController popViewControllerAnimated:YES];
     }
+    else
+    {
+        // The address save did not succeed due to a problem with the address the user
+        // entered. Display an appropriate error message and keep the user on the address
+        // entry view.
+        [self.spinner stopAnimating];
+        self.spinner.hidden = true;
+        UIAlertView * newAlert = [[UIAlertView alloc]init];
+        newAlert.message = @"There was a problem saving your address. Please try again.";
+        newAlert.cancelButtonIndex = 0;
+        [newAlert show];
+        
+    }
 }
-- (void)addressSaveFailed:(NSError *)error
+- (void)addressSaveFailed:(NSError *)error operation:(AFHTTPRequestOperation *)operation
 {
-    
+    // The address save did not succeed due to server error. Display an error message and
+    // keep the user on the address entry view.
+    self.spinner.hidden = true;
+    [self.spinner stopAnimating];
+    UIAlertView * newAlert = [[UIAlertView alloc]init];
+    newAlert.message = @"There was a problem saving your address. Please try again.";
+    [newAlert addButtonWithTitle:@"Ok"];
+    [newAlert show];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -225,5 +247,6 @@
         }
     }
 }
+
 
 @end

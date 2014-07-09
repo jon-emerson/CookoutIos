@@ -14,6 +14,7 @@
 #import "CKTCurrentUser.h"
 #import "CKTDataModelChangeDelegate.h"
 #import "CKTOrder.h"
+#import "CKTGMapsAutoCompleter.h"
 
 @interface CKTServerCommunicator : NSObject
 
@@ -26,5 +27,6 @@
 + (void)setUserAddress:(CKTAddress *)address
            currentUser:(CKTCurrentUser *)currentUser
               delegate:(id<CKTAddressSaveHandler>)delegate;
-
++(void)gmapsAutoComplete: (NSString *)substring delegate:(id<CKTGMapsAutoCompleter>) delegate;
++(void)getPlaceDetails:(NSString *) placeId delegate:(id<CKTGMapsAutoCompleter>) delegate;
 @end

@@ -16,6 +16,7 @@
 #import "CKTAddressSaveHandler.h"
 #import "CKTDataModel.h"
 #import "CKTLoginManager.h"
+#include "CKTGMapsAutoCompleter.h"
 
 @implementation CKTServerCommunicator
 
@@ -26,7 +27,7 @@
 
     // Fire off an unauthenticated request to get an initial sense of dinners.
     
-    [manager GET:@"http://immense-beyond-2989.herokuapp.com/readDinners" parameters:@{}
+    [manager GET:@"http://immense-beyond-2989.herokuapp.com/getUserState" parameters:@{}
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               NSDictionary *json = (NSDictionary *)responseObject;
               [CKTDataModelBuilder populateDataModelFromJSON:json];
@@ -147,9 +148,7 @@
     NSDictionary *currentUserParams =
             [currentUser dictionaryWithValuesForKeys:userKeys];
     [parameters addEntriesFromDictionary:currentUserParams];
-    
-    NSLog(@"%@", parameters);
-  
+
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [[CKTJSONResponseSerializer alloc] init];
     [manager POST:url parameters:parameters
@@ -159,8 +158,58 @@
           }
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"%@", error);
-              [delegate addressSaveFailed:error];
+              [delegate addressSaveFailed:error operation:operation];
           }];
 }
+
++(void)gmapsAutoComplete:(NSString *)substring delegate:(id<CKTGMapsAutoCompleter>) delegate
+{
+    NSString * apiKey = @"AIzaSyAfagTr9VXJ-imio0CpRT9wdkOtTa7Jz8g";
+    NSString *url = @"https://maps.googleapis.com/maps/api/place/autocomplete/json";
+    // input=Vict&types=geocode&language=fr&key=API_KEY
+    
+    NSDictionary * parameters = @{@"key":apiKey,
+                                     @"input":substring,
+                                     @"types":@"geocode",
+                                     @"language":@"en",
+                                     @"location":@"37.745322,-122.4514656",
+                                     @"radius":@"6438"};
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [[CKTJSONResponseSerializer alloc] init];
+    
+    [manager GET:url parameters:parameters
+          success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+              //NSLog(@"%@", responseObject);
+              [delegate autoCompleteSuggestions:responseObject];
+          }
+          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              NSLog(@"%@", error);
+          }];
+}
+
++(void)getPlaceDetails:(NSString *)placeId delegate:(id<CKTGMapsAutoCompleter>) delegate
+{
+    NSString * apiKey = @"AIzaSyAfagTr9VXJ-imio0CpRT9wdkOtTa7Jz8g";
+    NSString *url = @"https://maps.googleapis.com/maps/api/place/details/json";
+    // input=Vict&types=geocode&language=fr&key=API_KEY
+    
+    NSDictionary * parameters = @{@"key":apiKey, @"placeid":placeId};
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [[CKTJSONResponseSerializer alloc] init];
+    
+    [manager GET:url parameters:parameters
+         success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+             //NSLog(@"%@", responseObject);
+             [delegate placeDetailsReceived:responseObject];
+         }
+         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             NSLog(@"%@", error);
+         }];
+}
+
+
+
 
 @end

@@ -19,4 +19,20 @@
     return self;
 }
 
+- (instancetype) initWithDictionary:(NSDictionary *)currentUser
+{
+    self = [super init];
+    if(self)
+    {
+        _userId = [currentUser valueForKey:@"userId"];
+        _sessionId = [currentUser valueForKey:@"sessionId"];
+        _name = [currentUser valueForKey:@"name"];
+        _email = [currentUser valueForKey:@"email"];
+        _phone = [currentUser valueForKey:@"phone"];
+        _addresses = [currentUser valueForKey:@"addresses"];
+    }
+    
+    return self;
+}
+
 @end

@@ -9,6 +9,7 @@
 #import "CKTCheckoutViewController.h"
 #import "CKTAsyncImageView.h"
 #import "CKTCreateAccountViewController.h"
+#import "CKTGMapsAddressEntryViewController.h"
 
 @interface CKTCheckoutViewController ()
 
@@ -21,6 +22,9 @@
 @property (nonatomic, weak) IBOutlet UIButton *placeOrder;
 @property (nonatomic, weak) IBOutlet UIPickerView *addressPicker;
 -(IBAction)placeOrderAction:(id) sender;
+
+-(IBAction)openGmaps:(id) sender;
+@property (weak, nonatomic) IBOutlet UIButton *triggerGmaps;
 
 @end
 
@@ -115,6 +119,12 @@
 - (BOOL)hasValidCCInfo
 {
     return YES;
+}
+-(IBAction)openGmaps:(id) sender
+{
+    CKTGMapsAddressEntryViewController * aEntry = [[CKTGMapsAddressEntryViewController alloc]init];
+    [[self navigationController] setNavigationBarHidden:YES animated:YES];
+    [self.navigationController pushViewController:aEntry animated:YES];
 }
 
 @end

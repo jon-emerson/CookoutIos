@@ -26,5 +26,5 @@
 - (void)addAddress:(CKTAddress *)address;
 - (CKTCurrentUser *)currentUser;
 - (void)setSession:(NSString *) sId;
-
+- (void)setCurrentUser:(CKTCurrentUser *)user;
 @end
