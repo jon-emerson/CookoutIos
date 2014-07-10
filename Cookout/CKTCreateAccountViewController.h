@@ -12,14 +12,17 @@
 #import "CKTAddressSaveHandler.h"
 #import "CKTFacebookSessionListener.h"
 #import "CKTOrder.h"
-#import "CKTSessionHandlerDelegate.h"
+#import "CKTCreateUserHandler.h"
 
 @interface CKTCreateAccountViewController : UIViewController
-        <CKTFacebookSessionListener, CKTSessionHandlerDelegate,
-                CKTAddressSaveHandler>
-
+        <CKTFacebookSessionListener,CKTAddressSaveHandler, CKTCreateUserHandler,UITextFieldDelegate>
+@property (weak, nonatomic) IBOutlet UIButton *loginButton;
+@property (weak, nonatomic) IBOutlet UIButton *saveButton;
+@property (weak, nonatomic) IBOutlet UITextField *name;
+@property (weak, nonatomic) IBOutlet UITextField *email;
+@property (weak, nonatomic) IBOutlet UITextField *phone;
+@property (weak, nonatomic) IBOutlet UILabel *guideText;
 @property (weak, nonatomic) CKTOrder *order;
-
-- (void)handleFacebookSessionStateChange;
+-(BOOL) isValidEmailAddress:(NSString *) email;
 
 @end

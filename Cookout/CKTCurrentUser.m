@@ -9,27 +9,28 @@
 #import "CKTCurrentUser.h"
 
 @implementation CKTCurrentUser
-
-- (instancetype)init
++ (instancetype)sharedInstance
 {
-    self = [super init];
-    if (self) {
-        // Initialize an empty user object
-    }
-    return self;
+    static CKTCurrentUser *sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        if (!sharedInstance) {
+            sharedInstance = [[CKTCurrentUser alloc] init];
+        }
+    });
+    return sharedInstance;
 }
 
-- (instancetype) initWithDictionary:(NSDictionary *)currentUser
+- (instancetype) setCurrentUser:(NSDictionary *)currentUser
 {
-    self = [super init];
     if(self)
     {
-        _userId = [currentUser valueForKey:@"userId"];
-        _sessionId = [currentUser valueForKey:@"sessionId"];
-        _name = [currentUser valueForKey:@"name"];
-        _email = [currentUser valueForKey:@"email"];
-        _phone = [currentUser valueForKey:@"phone"];
-        _addresses = [currentUser valueForKey:@"addresses"];
+        self.userId = [currentUser valueForKey:@"userId"];
+        self.sessionId = [currentUser valueForKey:@"sessionId"];
+        self.name = [currentUser valueForKey:@"name"];
+        self.email = [currentUser valueForKey:@"email"];
+        self.phoneNumber = [currentUser valueForKey:@"phoneNumber"];
+        self.addresses = [currentUser valueForKey:@"addresses"];
     }
     
     return self;

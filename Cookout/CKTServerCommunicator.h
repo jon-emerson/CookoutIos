@@ -8,7 +8,7 @@
 
 #import <CoreLocation/CoreLocation.h>
 #import <FacebookSDK/FacebookSDK.h>
-
+#import "CKTCreateUserHandler.h"
 #import "CKTAddress.h"
 #import "CKTAddressSaveHandler.h"
 #import "CKTCurrentUser.h"
@@ -23,7 +23,7 @@
          delegate:(id<CKTDataModelChangeDelegate>)dataModelChangeDelegate;
 + (void)startSession;
 + (void)exchangeFbToken:(FBAccessTokenData *)fbToken;
-+ (void)createCurrentUser:(CKTCurrentUser *)user;
++ (void)createCurrentUser:(id<CKTCreateUserHandler>)delegate;
 + (void)setUserAddress:(CKTAddress *)address
            currentUser:(CKTCurrentUser *)currentUser
               delegate:(id<CKTAddressSaveHandler>)delegate;

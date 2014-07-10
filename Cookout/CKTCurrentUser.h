@@ -13,11 +13,9 @@
 @property (retain, readwrite) NSString *name;
 @property (retain, readwrite) NSString *sessionId;
 @property (retain, readwrite) NSString *fbAccessToken;
-@property (retain, nonatomic, readwrite) NSString *phone;
+@property (retain, nonatomic, readwrite) NSString *phoneNumber;
 @property (retain, nonatomic, readwrite) NSString *email;
-
-// @type NSMutableArray<CKTAddress *>
 @property (retain, nonatomic, readwrite) NSMutableArray *addresses;
--(instancetype)initWithDictionary:(NSDictionary *) dictionary;
-
++(instancetype)sharedInstance;
+-(instancetype)setCurrentUser:(NSDictionary *) dictionary;
 @end

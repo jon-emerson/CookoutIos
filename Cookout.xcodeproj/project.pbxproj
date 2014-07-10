@@ -12,6 +12,7 @@
 		2036B21B196CDF3E000E5214 /* Open Sans 300.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2036B218196CDF3E000E5214 /* Open Sans 300.ttf */; };
 		2036B21C196CDF3E000E5214 /* Open Sans 600.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2036B219196CDF3E000E5214 /* Open Sans 600.ttf */; };
 		2036B21D196CDF3E000E5214 /* Open Sans regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2036B21A196CDF3E000E5214 /* Open Sans regular.ttf */; };
+		2036B224196E0DC1000E5214 /* SemiModalAnimatedTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 2036B223196E0DC1000E5214 /* SemiModalAnimatedTransition.m */; };
 		20858A9119656DEF007769AE /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 20858A7F19656DEF007769AE /* AFHTTPRequestOperation.m */; };
 		20858A9219656DEF007769AE /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 20858A8119656DEF007769AE /* AFHTTPRequestOperationManager.m */; };
 		20858A9319656DEF007769AE /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 20858A8319656DEF007769AE /* AFHTTPSessionManager.m */; };
@@ -70,15 +71,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		202BC51B1966529000FC444A /* CKTAddressSaveHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTAddressSaveHandler.h; sourceTree = "<group>"; };
+		202BC51B1966529000FC444A /* CKTAddressSaveHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKTAddressSaveHandler.h; path = Cookout/CKTAddressSaveHandler.h; sourceTree = "<group>"; };
 		2036B212196B8788000E5214 /* CKTGMapsAddressEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTGMapsAddressEntryViewController.h; sourceTree = "<group>"; };
 		2036B213196B8788000E5214 /* CKTGMapsAddressEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKTGMapsAddressEntryViewController.m; sourceTree = "<group>"; };
 		2036B214196B8788000E5214 /* CKTGMapsAddressEntryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CKTGMapsAddressEntryViewController.xib; sourceTree = "<group>"; };
-		2036B217196C6F49000E5214 /* CKTGMapsAutoCompleter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTGMapsAutoCompleter.h; sourceTree = "<group>"; };
+		2036B217196C6F49000E5214 /* CKTGMapsAutoCompleter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKTGMapsAutoCompleter.h; path = Cookout/CKTGMapsAutoCompleter.h; sourceTree = "<group>"; };
 		2036B218196CDF3E000E5214 /* Open Sans 300.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Open Sans 300.ttf"; sourceTree = "<group>"; };
 		2036B219196CDF3E000E5214 /* Open Sans 600.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Open Sans 600.ttf"; sourceTree = "<group>"; };
 		2036B21A196CDF3E000E5214 /* Open Sans regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Open Sans regular.ttf"; sourceTree = "<group>"; };
-		20403BA219660EC4008BF4F0 /* CKTSessionHandlerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTSessionHandlerDelegate.h; sourceTree = "<group>"; };
+		2036B220196DFDC4000E5214 /* CKTCreateUserHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTCreateUserHandler.h; sourceTree = "<group>"; };
+		2036B222196E0DC1000E5214 /* SemiModalAnimatedTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SemiModalAnimatedTransition.h; path = Cookout/SemiModalAnimatedTransition.h; sourceTree = "<group>"; };
+		2036B223196E0DC1000E5214 /* SemiModalAnimatedTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SemiModalAnimatedTransition.m; path = Cookout/SemiModalAnimatedTransition.m; sourceTree = "<group>"; };
 		20858A7E19656DEF007769AE /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		20858A7F19656DEF007769AE /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		20858A8019656DEF007769AE /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -130,9 +133,9 @@
 		FC0B071E195CEF8200DF3BD2 /* CKTNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTNavigationBar.h; sourceTree = "<group>"; };
 		FC0B071F195CEF8200DF3BD2 /* CKTNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKTNavigationBar.m; sourceTree = "<group>"; };
 		FC0B0721195CF6AE00DF3BD2 /* CKTDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKTDefines.h; sourceTree = "<group>"; };
-		FC0B07221962638800DF3BD2 /* CKTFacebookSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTFacebookSessionManager.h; sourceTree = "<group>"; };
+		FC0B07221962638800DF3BD2 /* CKTFacebookSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKTFacebookSessionManager.h; path = Cookout/CKTFacebookSessionManager.h; sourceTree = "<group>"; };
 		FC0B07231962638800DF3BD2 /* CKTFacebookSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKTFacebookSessionManager.m; sourceTree = "<group>"; };
-		FC0B07251963315000DF3BD2 /* CKTFacebookSessionListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CKTFacebookSessionListener.h; sourceTree = "<group>"; };
+		FC0B07251963315000DF3BD2 /* CKTFacebookSessionListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CKTFacebookSessionListener.h; path = Cookout/CKTFacebookSessionListener.h; sourceTree = "<group>"; };
 		FC0B072819634D8000DF3BD2 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		FC0B07301965E30600DF3BD2 /* CKTJSONResponseSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTJSONResponseSerializer.h; sourceTree = "<group>"; };
 		FC0B07311965E30600DF3BD2 /* CKTJSONResponseSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKTJSONResponseSerializer.m; sourceTree = "<group>"; };
@@ -191,6 +194,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2036B221196DFDCD000E5214 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				FC0B07221962638800DF3BD2 /* CKTFacebookSessionManager.h */,
+				202BC51B1966529000FC444A /* CKTAddressSaveHandler.h */,
+				2036B217196C6F49000E5214 /* CKTGMapsAutoCompleter.h */,
+				2036B220196DFDC4000E5214 /* CKTCreateUserHandler.h */,
+				FC0B07251963315000DF3BD2 /* CKTFacebookSessionListener.h */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
 		20858A7D19656DEF007769AE /* AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
@@ -248,12 +263,12 @@
 				209593A11963C15D00C0C007 /* CKTCheckoutViewController.h */,
 				209593A21963C15D00C0C007 /* CKTCheckoutViewController.m */,
 				209593BC1964C41500C0C007 /* CKTCheckoutViewController.xib */,
+				209593B91964BDED00C0C007 /* CKTCreateAccountViewController.xib */,
 				209593B71964BDED00C0C007 /* CKTCreateAccountViewController.h */,
 				209593B81964BDED00C0C007 /* CKTCreateAccountViewController.m */,
 				2036B212196B8788000E5214 /* CKTGMapsAddressEntryViewController.h */,
 				2036B213196B8788000E5214 /* CKTGMapsAddressEntryViewController.m */,
 				2036B214196B8788000E5214 /* CKTGMapsAddressEntryViewController.xib */,
-				209593B91964BDED00C0C007 /* CKTCreateAccountViewController.xib */,
 				FC2FFFBF19514AA6000C8AF7 /* CKTDinnerViewController.h */,
 				FC2FFFC019514AA6000C8AF7 /* CKTDinnerViewController.m */,
 				FC2FFFC119514AA6000C8AF7 /* CKTDinnerViewController.xib */,
@@ -269,6 +284,9 @@
 		FC9B5023194FBFAC00C32D97 = {
 			isa = PBXGroup;
 			children = (
+				2036B222196E0DC1000E5214 /* SemiModalAnimatedTransition.h */,
+				2036B223196E0DC1000E5214 /* SemiModalAnimatedTransition.m */,
+				2036B221196DFDCD000E5214 /* Protocols */,
 				20858A7D19656DEF007769AE /* AFNetworking */,
 				FC9B5035194FBFAC00C32D97 /* Cookout */,
 				FC9B504E194FBFAC00C32D97 /* CookoutTests */,
@@ -305,13 +323,10 @@
 		FC9B5035194FBFAC00C32D97 /* Cookout */ = {
 			isa = PBXGroup;
 			children = (
-				202BC51B1966529000FC444A /* CKTAddressSaveHandler.h */,
 				FC9B503E194FBFAC00C32D97 /* CKTAppDelegate.h */,
 				FC9B503F194FBFAC00C32D97 /* CKTAppDelegate.m */,
 				FC0B06FF195A266200DF3BD2 /* CKTAsyncImageView.h */,
 				FC0B0700195A266200DF3BD2 /* CKTAsyncImageView.m */,
-				FC0B07251963315000DF3BD2 /* CKTFacebookSessionListener.h */,
-				FC0B07221962638800DF3BD2 /* CKTFacebookSessionManager.h */,
 				FC0B07231962638800DF3BD2 /* CKTFacebookSessionManager.m */,
 				FC0B07301965E30600DF3BD2 /* CKTJSONResponseSerializer.h */,
 				FC0B07311965E30600DF3BD2 /* CKTJSONResponseSerializer.m */,
@@ -321,8 +336,6 @@
 				FC0B071F195CEF8200DF3BD2 /* CKTNavigationBar.m */,
 				FC0B0706195B7D6300DF3BD2 /* CKTServerCommunicator.h */,
 				FC0B0707195B7D6300DF3BD2 /* CKTServerCommunicator.m */,
-				2036B217196C6F49000E5214 /* CKTGMapsAutoCompleter.h */,
-				20403BA219660EC4008BF4F0 /* CKTSessionHandlerDelegate.h */,
 				209593C71964DE8000C0C007 /* Controllers */,
 				209593C61964DDF400C0C007 /* Data Model */,
 				FC9B5041194FBFAC00C32D97 /* Images.xcassets */,
@@ -468,6 +481,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				20858A9719656DEF007769AE /* AFURLRequestSerialization.m in Sources */,
+				2036B224196E0DC1000E5214 /* SemiModalAnimatedTransition.m in Sources */,
 				20858A9619656DEF007769AE /* AFURLConnectionOperation.m in Sources */,
 				FC9B5060194FC77000C32D97 /* CKTHomeViewController.m in Sources */,
 				FC2FFFC619514AE0000C8AF7 /* CKTDinner.m in Sources */,

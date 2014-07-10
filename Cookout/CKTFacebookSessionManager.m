@@ -40,37 +40,6 @@
     if (self)
     {
         _listeners = [[NSMutableArray alloc] init];
-        /*if (!self.session.isOpen)
-        {
-            // create a fresh session object
-            _session = [[FBSession alloc] init];
-            
-            // if we have a cached token, use it to login and activate the session
-            if (self.session.state == FBSessionStateCreatedTokenLoaded)
-            {
-                // even though we had a cached token, we need to login to make the session usable
-                [self.session openWithCompletionHandler:^(FBSession *session,
-                                                          FBSessionState status,
-                                                          NSError *error) {
-                    [self dispatchStateChange];
-                }];
-            }
-            else
-            {
-                // Make a UI less attempt to refresh the session token
-                [FBSession openActiveSessionWithReadPermissions:@[@"public_profile", @"email"]
-                                                   allowLoginUI:NO
-                                              completionHandler:
-                 ^(FBSession *session, FBSessionState state, NSError *error) {
-                     _session = session;
-                     [self dispatchStateChange];
-                 }];
-            }
-        }
-        else
-        {
-            [self dispatchStateChange];
-        }*/
     }
     return self;
 };
@@ -102,36 +71,59 @@
         return;
     }
     
-    [FBSession openActiveSessionWithReadPermissions:@[@"public_profile", @"email"] // , @"user_friends", @"email"]
+    /*[FBSession openActiveSessionWithReadPermissions:@[@"public_profile", @"email"] // , @"user_friends", @"email"]
                                        allowLoginUI:YES
                                   completionHandler:
          ^(FBSession *session, FBSessionState state, NSError *error) {
              _session = session;
              [self dispatchStateChange];
-         }];
+         }];*/
+    
+    [FBSession openActiveSessionWithReadPermissions:@[@"public_profile", @"email"]
+                                       allowLoginUI:YES
+                                  completionHandler:
+     ^(FBSession *session, FBSessionState state, NSError *error) {
+         if(!error && state == FBSessionStateOpen) {
+             { [FBRequestConnection startWithGraphPath:@"me" parameters:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"name,email",@"fields",nil] HTTPMethod:@"GET" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                 self.userData = (NSDictionary *)result;
+                 NSLog(@"%@",[self.userData description]);
+                 [self dispatchStateChange];
+             }];
+             }
+         }
+     }];
 }
 
 - (void)quietLogin
 {
     NSLog(@"FBSession.activeSession.state = %u", FBSession.activeSession.state);
     
-    // If the session state is any of the two "open" states when the button is clicked
-    if (FBSession.activeSession.state == FBSessionStateOpen
-        || FBSession.activeSession.state == FBSessionStateOpenTokenExtended) {
-        
-        // The user is already logged in.  Just dispatch an event so that the UI
-        // properly updates itself.
-        [self dispatchStateChange];
-        return;
-    }
     // Attempt a silent login
-    [FBSession openActiveSessionWithReadPermissions:@[@"public_profile", @"email"] // , @"user_friends", @"email"]
+    
+    // TODO: Seems like the completion handler doesn't get called if the user doesn't grant
+    // access to all requested scopes
+        
+    [FBSession openActiveSessionWithReadPermissions:@[@"public_profile", @"email"]
                                        allowLoginUI:NO
                                   completionHandler:
      ^(FBSession *session, FBSessionState state, NSError *error) {
-         _session = session;
-         [self dispatchStateChange];
+         NSLog(@"Did this call back ever happen");
+         if(!error && state == FBSessionStateOpen) {
+             { [FBRequestConnection startWithGraphPath:@"me" parameters:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"name,email",@"fields",nil] HTTPMethod:@"GET" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                 self.userData = (NSDictionary *)result;
+                 NSLog(@"%@",[self.userData description]);
+                 [self dispatchStateChange];
+             }];
+             }
+         }
      }];
+    
+     /*[FBSession openActiveSessionWithReadPermissions:@[@"public_profile",@"email"] // , @"user_friends", @"email"]
+                                       allowLoginUI:NO
+                                  completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
+                                                _session = session;
+                                                [self dispatchStateChange];
+                                  }];*/
 }
 
 - (void)addListener:(id<CKTFacebookSessionListener>)listener

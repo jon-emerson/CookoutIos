@@ -14,21 +14,8 @@
 #include "CKTGMapsAddressEntryViewController.h"
 
 @interface CKTCreateAccountViewController ()
-@property (weak, nonatomic) IBOutlet UIView *addressEntryView;
-@property (weak, nonatomic) IBOutlet UIView *loginSection;
-@property (weak, nonatomic) IBOutlet UIButton *loginButton;
-
-@property (weak, nonatomic) IBOutlet UIButton *save;
-@property (weak, nonatomic) IBOutlet UITextField *addressLine1;
-@property (weak, nonatomic) IBOutlet UITextField *addressLine2;
-@property (weak, nonatomic) IBOutlet UITextField *city;
-@property (weak, nonatomic) IBOutlet UITextField *state;
-@property (weak, nonatomic) IBOutlet UITextField *country;
-@property (weak, nonatomic) IBOutlet UITextField *zipcode;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
--(IBAction)saveAddress:(id) sender;
 -(IBAction)doFacebookLogin:(id) sender;
-
+-(IBAction)saveUserDetails:(id) sender;
 @end
 
 @implementation CKTCreateAccountViewController 
@@ -39,22 +26,52 @@
     if (self) {
         // Custom initialization
         self.navigationItem.title = @"Create account";
-        
         // Register myself as a listener for FB login events
         [[CKTFacebookSessionManager sharedFacebookSessionManager]addListener:self];
     }
     return self;
 }
 
-
-- (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-}
-
-- (void)loginViewFetchedUserInfo:(FBLoginView *)loginView
-                            user:(id<FBGraphUser>)user {
-
-
+    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    NSArray *components = [newString componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]];
+    NSString *decimalString = [components componentsJoinedByString:@""];
+    
+    NSUInteger length = decimalString.length;
+    BOOL hasLeadingOne = length > 0 && [decimalString characterAtIndex:0] == '1';
+    
+    if (length == 0 || (length > 10 && !hasLeadingOne) || (length > 11)) {
+        textField.text = decimalString;
+        return NO;
+    }
+    
+    NSUInteger index = 0;
+    NSMutableString *formattedString = [NSMutableString string];
+    
+    if (hasLeadingOne) {
+        [formattedString appendString:@"1 "];
+        index += 1;
+    }
+    
+    if (length - index > 3) {
+        NSString *areaCode = [decimalString substringWithRange:NSMakeRange(index, 3)];
+        [formattedString appendFormat:@"(%@) ",areaCode];
+        index += 3;
+    }
+    
+    if (length - index > 3) {
+        NSString *prefix = [decimalString substringWithRange:NSMakeRange(index, 3)];
+        [formattedString appendFormat:@"%@-",prefix];
+        index += 3;
+    }
+    
+    NSString *remainder = [decimalString substringFromIndex:index];
+    [formattedString appendString:remainder];
+    
+    textField.text = formattedString;
+    
+    return NO;
 }
 
 - (void)viewDidLoad
@@ -63,190 +80,139 @@
     // Do any additional setup after loading the view from its nib.
 }
 
-/*-(void)sessionStateChanged:(FBSession *)session state:(FBSessionState)state error:(NSError *)error
-{
-    // If a valid session is opened, send the session token to the server and request
-    // user credentials
-    [CKTServerCommunicator getCKTSession:session.accessTokenData delegate:self];
-}*/
-
-// Handle the request CKT Server's success response to CKT Session Request
-- (void)sessionRequestResponse:(NSDictionary *)responseObject;
-{
-    // Check if the server said success=0 or returned no sessionId
-    // If this is the case, then the user doesn't exist yet in the backend
-    // and has to be created via createUser call
-    NSNumber *didSessionRequestSucceed = [responseObject valueForKey:@"success"];
-    NSLog(@"VALUE OF dis sesso%@", didSessionRequestSucceed);
-    CKTDataModel *sharedModel = [CKTDataModel sharedDataModel];
-    
-    //NSLog(@"%@", [responseObject valueForKey:@"fbUserId"]);
-
-    if (didSessionRequestSucceed) {
-        // Add the CKT Session Id to CKT User
-        CKTCurrentUser *u;
-        
-        if (!sharedModel.currentUser) {
-            u = [[CKTCurrentUser alloc] init];
-            sharedModel.currentUser = u;
-        }
-        u = sharedModel.currentUser;
-
-        u.sessionId = [responseObject valueForKey:@"sessionId"];
-        NSLog(@"Session ID is %@", u.sessionId);
-        
-        // Check if delivery address is available in the user object
-        if (!u.addresses) {
-            // Addresses aren't already setup in the user object
-            // Show the address entry screen to the user
-            self.addressEntryView.hidden = NO;
-        } else {
-            // Addresses are setup. We should pop this view controller
-            [self.navigationController popViewControllerAnimated:YES];
-        }
-    } else {
-        // The user doesn't exist on the server. Need to send a createUser
-        // request.
-        [CKTServerCommunicator createCurrentUser:sharedModel.currentUser];
-    }
-    
-    // Proceed to final checkout
-}
-
 - (void)handleFacebookSessionStateChange
 {
     // Facebook session state changed. I may have to change onscreen items
-    if (FBSession.activeSession.state == FBSessionStateOpen ||
-            FBSession.activeSession.state == FBSessionStateOpenTokenExtended) {
-        // Remove Facebook login section from screen
-        self.loginSection.hidden = true;
+    if ([[CKTLoginManager sharedLoginManager] isFacebookSessionOpen])
+    {
+        // A valid FB session is available, the login manager may have tried token exchange
+        // Check for valid token
+        NSLog(@"Handling in CKTCREATEACCOUNT");
+
+        CKTDataModel *sharedModel = [CKTDataModel sharedDataModel];
+        if (!sharedModel.currentUser.sessionId)
+        {
+            // TODO: Call exchange token here instead
+            
+            
+            // Confirm user details. Email and Name are mandatory
+            self.saveButton.hidden = false;
+            self.name.hidden = false;
+            self.email.hidden = false;
+            self.phone.hidden = false;
+            
+            self.loginButton.hidden = true;
+            self.guideText.hidden = true;
         
-        // Check if the user has an address setup
-        if (CKTDataModel.sharedDataModel.currentUser.addresses) {
-            // My work here is done
-            [self.navigationController popViewControllerAnimated:YES];
-        } else {
-            // Show the address entry interface
-            self.addressEntryView.hidden = false;
+            if([CKTCurrentUser sharedInstance].name)
+                self.name.text = [CKTCurrentUser sharedInstance].name;
+            if([CKTCurrentUser sharedInstance].email)
+                self.email.text = [CKTCurrentUser sharedInstance].email;
         }
-    } else {
-        self.loginSection.hidden = false;
-        self.addressEntryView.hidden = true;
+        
     }
 }
-
-- (IBAction)saveAddress:(id)sender
-{
-    // Validate the address fields entered by the user
-    // TODO: some validations
-    
-    // Save address to the local data model
-    CKTDataModel *sharedModel = [CKTDataModel sharedDataModel];
-    CKTAddress *address = [[CKTAddress alloc] init];
-    address.addressLine1 = self.addressLine1.text;
-    address.addressLine2 = self.addressLine2.text;
-    address.city = self.city.text;
-    address.state = self.state.text;
-    address.country = self.country.text;
-    address.zipCode = self.zipcode.text;
-    address.unit = @"1";
-    [sharedModel addAddress:address];
-    
-    NSLog(@"Dispatching save address call");
-    
-    self.spinner.hidden = false;
-    [self.spinner startAnimating];
-    
-    // Save address to the server.
-    [CKTServerCommunicator setUserAddress:address
-                              currentUser:sharedModel.currentUser
-                                 delegate:self];
-}
-
 - (IBAction)doFacebookLogin:(id)sender
 {
     // Do facebook login
     [[CKTLoginManager sharedLoginManager] startFBSessionWithLoginUI];
 }
 
-
-- (void)addressSaved:(NSDictionary *)responseObject
+-(IBAction)saveUserDetails:(id) sender
 {
-    // The user's address was saved succesfully.
-    // This means the user has a cookout session and a delivery address
-    // Pop this view of the stack and go back to the checkout screen
-    NSString *didSessionRequestSucceed = [responseObject valueForKey:@"success"];
-    if (didSessionRequestSucceed.intValue == 1) {
-        // the address was saved successfully. Remove the spinner and pop the view
-        [self.spinner stopAnimating];
-        self.spinner.hidden = true;
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-    else
+    // Ok the user has already signed and authorized CKT for FB
+    // Validate text fields
+    if([self.name.text length]==0 || [self.email.text length] == 0 ||
+       ![self isValidEmailAddress:self.email.text] || (self.phone.text.length < 14))
     {
-        // The address save did not succeed due to a problem with the address the user
-        // entered. Display an appropriate error message and keep the user on the address
-        // entry view.
-        [self.spinner stopAnimating];
-        self.spinner.hidden = true;
+        // Prompt the user to put in valid shit yo
         UIAlertView * newAlert = [[UIAlertView alloc]init];
-        newAlert.message = @"There was a problem saving your address. Please try again.";
-        newAlert.cancelButtonIndex = 0;
+        newAlert.message = @"Please enter a valid name & email address";
+        [newAlert addButtonWithTitle:@"Ok"];
         [newAlert show];
-        
+        return;
     }
+    
+    // Update currentUser with name and email from form
+    [CKTCurrentUser sharedInstance].name = self.name.text;
+    [CKTCurrentUser sharedInstance].email = self.email.text;
+    [CKTCurrentUser sharedInstance].phoneNumber = self.phone.text;
+    
+    // Issue a create user call to the CKT server
+    [CKTServerCommunicator createCurrentUser:self];
 }
-- (void)addressSaveFailed:(NSError *)error operation:(AFHTTPRequestOperation *)operation
+
+-(BOOL) isValidEmailAddress:(NSString *) email
 {
-    // The address save did not succeed due to server error. Display an error message and
-    // keep the user on the address entry view.
-    self.spinner.hidden = true;
-    [self.spinner stopAnimating];
-    UIAlertView * newAlert = [[UIAlertView alloc]init];
-    newAlert.message = @"There was a problem saving your address. Please try again.";
-    [newAlert addButtonWithTitle:@"Ok"];
-    [newAlert show];
+    BOOL stricterFilter = YES; // Discussion http://blog.logichigh.com/2010/09/02/validating-an-e-mail-address/
+    NSString *stricterFilterString = @"[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}";
+    NSString *laxString = @".+@([A-Za-z0-9]+\\.)+[A-Za-z]{2}[A-Za-z]*";
+    NSString *emailRegex = stricterFilter ? stricterFilterString : laxString;
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    return [emailTest evaluateWithObject:email];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    self.phone.delegate = self;
+    self.saveButton.hidden = true;
+    self.name.hidden = true;
+    self.email.hidden = true;
+    self.phone.hidden = true;
+    
+    self.loginButton.hidden = false;
+    self.guideText.hidden = false;
+    
     // Check if there is an active CKT session
     CKTDataModel *sharedModel = [CKTDataModel sharedDataModel];
     if (sharedModel.currentUser.sessionId) {
-        // Check if user already has an address
+        // The user is logged in, my work is done. time to pop pop
         NSLog(@"valid");
-        if (sharedModel.currentUser.addresses) {
-            // My work here is done
-            [self.navigationController popViewControllerAnimated:YES];
-        } else {
-            // Show the address entry interface
-            self.addressEntryView.hidden = NO;
-        }
-    } else {
+        [self dismissViewControllerAnimated:TRUE completion:NULL];
+    }
+    else
+    {
         // No valid cookout session. Check if there is already a Facebook session
         if ([[CKTLoginManager sharedLoginManager] isFacebookSessionOpen]) {
-            // Ok the user has already signed and authorized CKT for FB
-            // Issue a create user call to the CKT server
+            // Confirm user details. Email and Name are mandatory
+            self.saveButton.hidden = false;
+            self.name.hidden = false;
+            self.email.hidden = false;
+            self.phone.hidden = false;
             
-            self.loginSection.hidden = YES;
+            self.loginButton.hidden = true;
+            self.guideText.hidden = true;
 
-            [CKTServerCommunicator createCurrentUser:sharedModel.currentUser];
-           
-            if (sharedModel.currentUser.addresses) {
-                // User address already setup!
-                [self.navigationController popViewControllerAnimated:YES];
-            } else {
-                // Prompt address entry
-                self.addressEntryView.hidden = NO;
-                self.loginSection.hidden = YES;
-            }
-        } else {
-            // Prompt Facebook sign in
-            self.addressEntryView.hidden = YES;
-            self.loginSection.hidden = NO;
+            self.name.text = [CKTCurrentUser sharedInstance].name;
+            self.email.text = [CKTCurrentUser sharedInstance].email;
         }
     }
 }
 
+-(void)createUserSucceeded:(NSDictionary *) response
+{
+    // Ok user created, session setup, exit stage left
+    [self dismissViewControllerAnimated:TRUE completion:NULL];
+}
 
+-(void)createUserFailed:(NSError *) error operation:(AFHTTPRequestOperation *) operation
+{
+    // The request may have failed, but that might be because
+    // a valid session already exists
+    if([operation.responseObject objectForKey:@"sessionId"])
+    {
+        // All good, time to go
+        [self dismissViewControllerAnimated:TRUE completion:NULL];
+    }
+    
+    // If not show an error message and pop the view in an error state
+    else
+    {
+        UIAlertView * newAlert = [[UIAlertView alloc]init];
+        newAlert.title = @"Oops :(";
+        newAlert.message = @"We had problems creating your account. We're working hard to fix it - try again in a few minutes, pretty please?";
+        [newAlert addButtonWithTitle:@"Ok"];
+        [newAlert show];
+    }
+}
 @end

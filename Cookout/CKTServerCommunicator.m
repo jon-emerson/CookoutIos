@@ -12,7 +12,6 @@
 #import "CKTJSONResponseSerializer.h"
 #import "CKTServerCommunicator.h"
 #import "CKTOrder.h"
-#import "CKTSessionHandlerDelegate.h"
 #import "CKTAddressSaveHandler.h"
 #import "CKTDataModel.h"
 #import "CKTLoginManager.h"
@@ -113,25 +112,32 @@
           }];
 }
 
-+ (void)createCurrentUser:(CKTCurrentUser *)user
++ (void)createCurrentUser:(id<CKTCreateUserHandler>)delegate
 {
     // If a user already exists, the return that user.
     if (CKTDataModel.sharedDataModel.currentUser.sessionId) {
         return;
     }
     
+    CKTCurrentUser *user = [CKTCurrentUser sharedInstance];
+    
     NSString *url = @"https://immense-beyond-2989.herokuapp.com/createUser";
-    NSArray *keys = @[@"fbAccessToken", @"name", @"email", @"phone"];
+    NSArray *keys = @[@"fbAccessToken", @"name", @"email", @"phoneNumber"];
     NSDictionary *parameters = [user dictionaryWithValuesForKeys:keys];
+    
+
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [[CKTJSONResponseSerializer alloc] init];
     
     [manager POST:url parameters:parameters
           success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
               NSLog(@"JSON: %@", responseObject);
+              [CKTCurrentUser sharedInstance].sessionId = [[responseObject valueForKey:@"sessionId"] copy];
+              [delegate createUserSucceeded:responseObject];
           }
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-              NSLog(@"Error: %@  Operation: %@", error, operation);
+              NSLog(@"Error: %@  Operation: %@", error, operation.responseObject);
+              [delegate createUserFailed:error operation:operation];
           }];
 }
 

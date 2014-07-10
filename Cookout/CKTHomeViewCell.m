@@ -28,6 +28,8 @@
 - (void)populate:(CKTDinner *)dinner
 {
     [self unload];
+    [self.foodLabel setFont:[UIFont fontWithName:@"OpenSans-Semibold" size:17]];
+    [self.subtitleLabel setFont:[UIFont fontWithName:@"OpenSans-Light" size:14]];
 
     CKTUser *chef = [CKTDataModel.sharedDataModel userWithId:dinner.chefId];
     self.foodImage.imageURL = dinner.imageNSUrl;

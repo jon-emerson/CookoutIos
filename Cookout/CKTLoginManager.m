@@ -68,6 +68,12 @@
                 FBSession.activeSession.state == FBSessionStateOpenTokenExtended) {
             // Exchange the FB session token for a cookout session
             NSLog(@"Active FB session, let's exchange it");
+            
+            // Let's store the facebook token in the current user data structure
+            // in case token exchange fails
+            [CKTCurrentUser sharedInstance].fbAccessToken=FBSession.activeSession.accessTokenData.description;
+            [CKTCurrentUser sharedInstance].name = [[CKTFacebookSessionManager sharedFacebookSessionManager].userData valueForKeyPath:@"name"];
+            [CKTCurrentUser sharedInstance].email = [[CKTFacebookSessionManager sharedFacebookSessionManager].userData valueForKeyPath:@"email"];
             [CKTServerCommunicator exchangeFbToken:FBSession.activeSession.accessTokenData];
         }
         else return;

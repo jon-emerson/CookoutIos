@@ -14,6 +14,8 @@
 @interface CKTFacebookSessionManager : NSObject
 
 @property (strong, readonly) FBSession *session;
+@property (strong, nonatomic) NSDictionary * userData;
+
 
 + (instancetype)sharedFacebookSessionManager;
 - (void)applicationDidBecomeActive:(UIApplication *)application;

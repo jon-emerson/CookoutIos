@@ -10,10 +10,11 @@
 #import "CKTOrder.h"
 #import "CKTDataModel.h"
 #import "CKTFacebookSessionManager.h"
+#import "CKTAddressSaveHandler.h"
 #import "CKTUser.h"
 
-@interface CKTCheckoutViewController : UIViewController
-
+@interface CKTCheckoutViewController : UIViewController <CKTFacebookSessionListener,
+CKTAddressSaveHandler>
 @property (nonatomic, strong) CKTOrder *order;
 
 @end

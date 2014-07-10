@@ -37,11 +37,7 @@
     if (self) {
         _dinnersArray = [[NSMutableArray alloc] init];
         _userDictionary = [[NSMutableDictionary alloc] init];
-        
-        // TODO(anyone): DO NOT allocate this client-side.  Variables here
-        // should be a reflection of the client-side.  If the server-side has
-        // no notion of who the current user is, this should be nil.
-        _currentUser = [[CKTCurrentUser alloc] init];
+        _currentUser = [CKTCurrentUser sharedInstance];
     }
     return self;
 }
@@ -61,11 +57,6 @@
     [self.userDictionary setObject:user forKey:user.userId];
 }
 
-- (void)setCurrentUser:(CKTCurrentUser *)user
-{
-    self.currentUser = user;
-}
-
 - (CKTUser *)userWithId:(NSString *)id
 {
     return [self.userDictionary valueForKey:id];
@@ -76,12 +67,9 @@
     self.currentUser.sessionId = [sId copy];
 }
 
-- (void)addAddress:(CKTAddress *)address
+- (void)addAddress:(CKTAddress *)address type:(NSString *)addressType
 {
-    if (!self.currentUser.addresses) {
-        self.currentUser.addresses = [[NSMutableArray alloc] init];
-    }
-    [self.currentUser.addresses addObject:address];
+    [self.currentUser.addresses setValue:address forKey:addressType];
 }
 
 + (NSString *)itemArchivePath

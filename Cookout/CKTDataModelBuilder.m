@@ -28,7 +28,9 @@
     }
     NSDictionary *currentUser = [json valueForKey:@"currentUser"];
     if(currentUser)
-        [dataModel setCurrentUser:[[CKTCurrentUser alloc] initWithDictionary:currentUser]];
+    {
+        [[CKTCurrentUser sharedInstance] setCurrentUser:currentUser];
+    }
 }
 
 @end

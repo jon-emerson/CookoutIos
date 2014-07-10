@@ -10,6 +10,7 @@
 #import "CKTAsyncImageView.h"
 #import "CKTCreateAccountViewController.h"
 #import "CKTGMapsAddressEntryViewController.h"
+#import "SemiModalAnimatedTransition.h"
 
 @interface CKTCheckoutViewController ()
 
@@ -17,12 +18,12 @@
 @property (nonatomic, weak) IBOutlet UILabel *totalPrice;
 @property (weak, nonatomic) IBOutlet CKTAsyncImageView *foodImage;
 @property (nonatomic, weak) IBOutlet UILabel *foodLabel;
-@property (nonatomic, weak) IBOutlet UIView *needsOnboarding;
-@property (nonatomic, weak) IBOutlet UIView *orderConfirmation;
 @property (nonatomic, weak) IBOutlet UIButton *placeOrder;
-@property (nonatomic, weak) IBOutlet UIPickerView *addressPicker;
--(IBAction)placeOrderAction:(id) sender;
+@property (nonatomic, weak) IBOutlet UITextField *streetAddress;
+@property (nonatomic, weak) IBOutlet UITextField *unitNumber;
+@property (nonatomic, weak) IBOutlet UITextField *creditCard;
 
+-(IBAction)placeOrderAction:(id) sender;
 -(IBAction)openGmaps:(id) sender;
 @property (weak, nonatomic) IBOutlet UIButton *triggerGmaps;
 
@@ -48,6 +49,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    self.streetAddress.delegate = self;
     
     // Do any additional setup after loading the view from its nib.
     // Display order summary
@@ -56,6 +58,11 @@
     self.totalPrice.text = [[NSString alloc] initWithFormat:@"$%.2f",
                             ([self.order.dinner.price floatValue] * [self.order.orderQuantity floatValue])];
     self.foodLabel.text = [self.order.dinner name];
+    
+    [self.creditCard setLeftViewMode:UITextFieldViewModeAlways];
+    self.creditCard.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cc.png"]];
+    self.creditCard.alpha = 0.6;
+    
     
     
     // Handle autolayout messiness and allow scrolling - create a subview of UIScrollView that
@@ -79,19 +86,85 @@
     if ([self isValidUser]) {
         // User is signed in - yaay!
         if ([self hasValidDeliveryAddress] && [self hasValidCCInfo]) {
-            // Setup checkout
-            self.needsOnboarding.hidden = YES;
-            self.orderConfirmation.hidden = NO;
+            // All is well don't have to do anything
+            
         } else {
-             // Uh-oh no valid CC or address - open the door to onboarding ville.
-            self.needsOnboarding.hidden = NO;
-            self.orderConfirmation.hidden = YES;
+            // Ascertain what exactly is missing and open to that view
+            if(![self hasValidDeliveryAddress])
+            {
+                // Modally load the Gmaps based address entry view
+                /*CKTGMapsAddressEntryViewController * addressEntry = [[CKTGMapsAddressEntryViewController alloc]init];
+                self.definesPresentationContext = YES;
+                self.providesPresentationContextTransitionStyle = YES;
+                self.modalPresentationStyle = UIModalPresentationFormSheet;
+                
+                [addressEntry.view setBackgroundColor:[[UIColor clearColor] colorWithAlphaComponent:0.5]];
+
+                [self presentViewController:addressEntry animated:YES completion:^(void) {
+                   // Do something after address entry comes back
+                }];*/
+                
+            }
+            if([self hasValidDeliveryAddress] && ![self hasValidCCInfo])
+            {
+                // Modally load the credit card info view directly
+                
+            }
+            
         }
     } else {
-        // Get user to sign in using FB
-        self.needsOnboarding.hidden = NO;
-        self.orderConfirmation.hidden = YES;
+        // Modally load the Facebook sign in prompt
+        CKTCreateAccountViewController * createAccount = [[CKTCreateAccountViewController alloc]init];
+
+        [createAccount.view setBackgroundColor:[[UIColor clearColor] colorWithAlphaComponent:0.8]];
+        createAccount.modalPresentationStyle = UIModalPresentationCustom;
+        createAccount.transitioningDelegate = self;
+        createAccount.saveButton.hidden = true;
+        createAccount.name.hidden = true;
+        createAccount.email.hidden = true;
+        createAccount.phone.hidden = true;
+        
+        [self presentViewController:createAccount animated:YES completion:^(void) {
+            // Do something after Facebook sign in comes back
+        }];
     }
+}
+
+- (id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
+{
+    SemiModalAnimatedTransition *semiModalAnimatedTransition = [[SemiModalAnimatedTransition alloc] init];
+    semiModalAnimatedTransition.presenting = YES;
+    return semiModalAnimatedTransition;
+}
+
+- (id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
+{
+    SemiModalAnimatedTransition *semiModalAnimatedTransition = [[SemiModalAnimatedTransition alloc] init];
+    return semiModalAnimatedTransition;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField;
+{
+    
+    
+}
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField;
+{
+    if(textField.tag == 10)
+    {
+        // The user touched the address field - bring up the Gmaps view
+        CKTGMapsAddressEntryViewController * addressEntry = [[CKTGMapsAddressEntryViewController alloc]init];
+        addressEntry.modalPresentationStyle = UIModalPresentationCustom;
+        addressEntry.transitioningDelegate = self;
+        
+        [addressEntry.view setBackgroundColor:[[UIColor clearColor] colorWithAlphaComponent:0.8]];
+        
+        [self presentViewController:addressEntry animated:YES completion:^(void) {
+            // Do something after address entry comes back
+        }];
+        return NO;
+    }
+    else return YES;
 }
 
 - (IBAction)doOnboarding:(id)sender
@@ -106,8 +179,7 @@
 - (BOOL)isValidUser
 {
     // See if user is signed in - if not prompt sign in
-    NSLog(@"isValidUser session id %@",
-          CKTDataModel.sharedDataModel.currentUser.sessionId);
+    NSLog(@"isValidUser session id %@", CKTDataModel.sharedDataModel.currentUser.sessionId);
     return !!CKTDataModel.sharedDataModel.currentUser.sessionId;
 }
 
@@ -118,6 +190,7 @@
 
 - (BOOL)hasValidCCInfo
 {
+    // Check for credit card info on the server
     return YES;
 }
 -(IBAction)openGmaps:(id) sender
@@ -126,5 +199,4 @@
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
     [self.navigationController pushViewController:aEntry animated:YES];
 }
-
 @end

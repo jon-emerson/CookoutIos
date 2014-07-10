@@ -194,8 +194,8 @@
 
 -(IBAction) cancelAddressEntry:(id) sender
 {
-    [[self navigationController] setNavigationBarHidden:NO animated:YES];
-    [self.navigationController popViewControllerAnimated:YES];
+    //[[self navigationController] setNavigationBarHidden:NO animated:YES];
+    [self dismissViewControllerAnimated:TRUE completion:NULL];
 }
 
 - (void)viewDidLoad
@@ -215,12 +215,15 @@
     self.addressField.delegate = self;
     self.navigationItem.backBarButtonItem.title=@"";
     
-    UIBarButtonItem *btnBack = [[UIBarButtonItem alloc]
+    
+    // Populate the first section of the address bar    
+    
+    /*UIBarButtonItem *btnBack = [[UIBarButtonItem alloc]
                                 initWithTitle:@" "
                                 style:UIBarButtonItemStyleBordered
                                 target:self
                                 action:nil];
-    self.navigationController.navigationBar.topItem.backBarButtonItem=btnBack;
+    self.navigationController.navigationBar.topItem.backBarButtonItem=btnBack;*/
 }
 
 - (void)didReceiveMemoryWarning
