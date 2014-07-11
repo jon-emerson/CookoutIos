@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CKTAddress : NSObject <NSCopying>
+@interface CKTAddress : NSObject
 
 // User's delivery address
 @property (nonatomic, copy) NSString *addressId;

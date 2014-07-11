@@ -29,23 +29,41 @@
     if (self) {
         // Custom initialization
         self.navigationItem.title = @"Enter delivery address";
+        self.addressContainer = [[CKTAddress alloc]init];
     }
     return self;
 }
 
-- (NSInteger)tableView: (UITableView *) tableView numberOfRowsInSection:(NSInteger)section
-{
-    return [self.addresses count];
-}
+
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     NSLog(@"Text view did change %@", self.addressField.text);
+    
+    // User started typing - remove the suggestions section
+    self.showRecent = false;
+    [self.autoCompleteOptions reloadData];
+    
     if(self.addressField.text.length == 0)
         self.autoCompleteOptions.hidden = true;
     // Fire off a request to Gmaps with this substring
     [CKTServerCommunicator gmapsAutoComplete:self.addressField.text delegate:self];
     return true;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    // Check if there are valid addresses in local data model
+    return 1;
+}
+
+- (NSInteger)tableView: (UITableView *) tableView numberOfRowsInSection:(NSInteger)section
+{
+    if(self.showRecent)
+    {
+        return [[CKTCurrentUser sharedInstance].addresses count];
+    }   
+    return self.addresses.count;
 }
 
 -(void) autoCompleteSuggestions: (NSDictionary *) response
@@ -72,8 +90,23 @@
     UITableViewCell * cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                                     reuseIdentifier:@"UITableViewCell"];
     
-    cell.textLabel.text = [self.addresses[indexPath.row] valueForKey:@"description"];
-    return cell;
+    cell.alpha = self.view.alpha;
+    cell.backgroundColor = [UIColor clearColor];
+    cell.textLabel.textColor = [UIColor whiteColor];
+    [cell.textLabel setFont:[UIFont fontWithName:@"OpenSans-Semibold" size:14]];
+
+    
+    if(self.showRecent)
+    {
+
+        cell.textLabel.text = [[CKTCurrentUser sharedInstance].addresses[indexPath.row] description];
+        return cell;
+    }
+    else
+    {
+        cell.textLabel.text = [self.addresses[indexPath.row] valueForKey:@"description"];
+        return cell;
+    }
 }
 
 - (void) tableView: (UITableView *) tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -81,11 +114,40 @@
     UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
     
-    NSString * placeReference = [self.addresses[indexPath.row] valueForKey:@"reference"];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        // Dispatch a call to get place details
-        [CKTServerCommunicator getPlaceDetails:placeReference delegate:self];
-    });
+    if(!self.showRecent)
+    {
+         NSString * placeReference = [self.addresses[indexPath.row] valueForKey:@"reference"];
+        // The user has selected a new address
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // Dispatch a call to get place details
+            [CKTServerCommunicator getPlaceDetails:placeReference delegate:self];
+        });
+    }
+    else {
+        self.selectedIndex = indexPath.row;
+        [self dismissViewControllerAnimated:TRUE completion:^(void){
+            // Communicate which address was selected to the previous view
+            [(id<CKTAddressUpdateHandler>)self.delegate addressUpdated:self.selectedIndex];
+        }];
+    }
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (self.showRecent)
+        return 32.0f;
+    return 0.1f;
+}
+
+- (NSString*) tableView:(UITableView *) tableView titleForHeaderInSection:(NSInteger)section
+{
+    if (self.showRecent) {
+        return @"Recent";
+    }
+    else {
+        // return some string here ...
+        return @"";
+    }
 }
 
 - (void)placeDetailsReceived:(NSDictionary *)response
@@ -93,8 +155,6 @@
     // Once an address is selected, save the address to local data model
     // and sync it to the cloud.
     CKTDataModel *sharedModel = [CKTDataModel sharedDataModel];
-    CKTAddress *address = [[CKTAddress alloc] init];
-    
     NSArray * results = [[response valueForKey:@"result"] valueForKey:@"address_components"];
     NSDictionary * result;
     NSString * type;
@@ -128,45 +188,44 @@
         {
             if([type isEqualToString:@"street_number"])
             {
-                address.addressLine1 = [result valueForKey:@"short_name"];
+                self.addressContainer.addressLine1 = [result valueForKey:@"short_name"];
             }
             
             if([type isEqualToString:@"route"])
             {
-                address.addressLine2 = [result valueForKey:@"short_name"];
+                self.addressContainer.addressLine2 = [result valueForKey:@"short_name"];
             }
             
             if([type isEqualToString:@"locality"])
             {
-                address.city = [result valueForKey:@"short_name"];
+               self.addressContainer.city = [result valueForKey:@"short_name"];
             }
             
             if([type isEqualToString:@"administrative_area_level_1"])
             {
-                address.state = [result valueForKey:@"short_name"];
+                self.addressContainer.state = [result valueForKey:@"short_name"];
             }
             
             if([type isEqualToString:@"country"])
             {
-                address.country = [result valueForKey:@"short_name"];
+                self.addressContainer.country = [result valueForKey:@"short_name"];
             }
             
             if([type isEqualToString:@"postal_code"])
             {
-                address.zipCode = [result valueForKey:@"short_name"];
+                self.addressContainer.zipCode = [result valueForKey:@"short_name"];
             }
         }
     }
 
-    NSLog(@"%@", address);
-
-    // Figure out UX for inputing unit number
-
-    [sharedModel addAddress:address];
+    NSLog(@"%@", self.addressContainer);
+    
+    
+    
     NSLog(@"Dispatching save address call");
 
     // Save address to the server.
-    [CKTServerCommunicator setUserAddress:address
+    [CKTServerCommunicator setUserAddress:self.addressContainer
                           currentUser:sharedModel.currentUser
                              delegate:self];
 }
@@ -176,9 +235,15 @@
     // The user's address was saved succesfully.
     // This means the user has a cookout session and a delivery address
     // Pop this view of the stack and go back to the checkout screen
-    [[self navigationController] setNavigationBarHidden:NO animated:YES];
-    [self.navigationController popViewControllerAnimated:YES];
-
+    
+    self.addressContainer.addressId = [[responseObject valueForKey:@"address"] valueForKey:@"id"];
+    [[CKTCurrentUser sharedInstance] addAddress:self.addressContainer];
+    
+    [self dismissViewControllerAnimated:TRUE completion:^(void){
+        // Communicate which address was selected to the previous view
+        if(!self.showRecent) self.selectedIndex = [[CKTCurrentUser sharedInstance].addresses count]-1;
+        [(id<CKTAddressUpdateHandler>)self.delegate addressUpdated:self.selectedIndex];
+    }];
 }
 - (void)addressSaveFailed:(NSError *)error operation:(AFHTTPRequestOperation *)operation
 {
@@ -190,7 +255,6 @@
     [newAlert addButtonWithTitle:@"Ok"];
     [newAlert show];
 }
-
 
 -(IBAction) cancelAddressEntry:(id) sender
 {
@@ -205,18 +269,34 @@
     
     _addresses = [[NSMutableArray alloc]init];
     
+
+    //self.autoCompleteOptions.contentInset = UIEdgeInsetsMake(-1.0f, 0.0f, 0.0f, 0.0);
+
     [self.view addSubview:_addressField];
     [self.view addSubview:_autoCompleteOptions];
     
+    if([[CKTCurrentUser sharedInstance].addresses count]>0)
+    {
+        self.autoCompleteOptions.hidden = false;
+        _showRecent = true;
+    }
+    else
+    {
+        self.autoCompleteOptions.hidden = true;
+        _showRecent = false;
+    }
     self.autoCompleteOptions.delegate = self;
     self.autoCompleteOptions.dataSource = self;
     self.autoCompleteOptions.scrollEnabled = true;
-    self.autoCompleteOptions.hidden = true;
+    
     self.addressField.delegate = self;
     self.navigationItem.backBarButtonItem.title=@"";
+    self.autoCompleteOptions.alpha = self.view.alpha;
+    self.autoCompleteOptions.backgroundColor = [UIColor clearColor];
     
     
-    // Populate the first section of the address bar    
+    // Populate the first section of the address bar
+
     
     /*UIBarButtonItem *btnBack = [[UIBarButtonItem alloc]
                                 initWithTitle:@" "

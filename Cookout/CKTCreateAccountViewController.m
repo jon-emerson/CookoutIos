@@ -201,7 +201,8 @@
     // a valid session already exists
     if([operation.responseObject objectForKey:@"sessionId"])
     {
-        // All good, time to go
+        // All good, time to go - but setup the sessionId first
+        [[CKTCurrentUser sharedInstance] setSessionId:[operation.responseObject valueForKey:@"sessionId"]];
         [self dismissViewControllerAnimated:TRUE completion:NULL];
     }
     

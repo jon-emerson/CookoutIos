@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CKTAddress.h"
 
 @interface CKTCurrentUser : NSObject
 @property (retain, readwrite) NSString *userId;
@@ -18,4 +19,5 @@
 @property (retain, nonatomic, readwrite) NSMutableArray *addresses;
 +(instancetype)sharedInstance;
 -(instancetype)setCurrentUser:(NSDictionary *) dictionary;
+-(void) addAddress: (CKTAddress *)address;
 @end

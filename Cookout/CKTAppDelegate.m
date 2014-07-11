@@ -54,7 +54,7 @@
     
     [[UINavigationBar appearance] setTitleTextAttributes: @{
                                                             NSForegroundColorAttributeName: [UIColor whiteColor],
-                                                            NSFontAttributeName: [UIFont fontWithName:@"OpenSans-Semibold" size:20.0f]
+                                                            NSFontAttributeName: [UIFont fontWithName:@"OpenSans-Semibold" size:16.0f]
                                                             }];
     // Add a red rectangle UIView at the top of the screen, behind the status bar
     // Only do this on iOS7 devices

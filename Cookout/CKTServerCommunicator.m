@@ -37,27 +37,25 @@
           }];
 }
 
-+ (void)postOrder:(CKTOrder *)order
++ (void)placeOrder:(CKTOrder *)order addressIndex: (int) addressIndex
          delegate:(id<CKTDataModelChangeDelegate>)dataModelChangeDelegate
 {
     NSString *baseURL = @"http://immense-beyond-2989.herokuapp.com/order";
+    CKTCurrentUser *user = [CKTCurrentUser sharedInstance];
 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [[CKTJSONResponseSerializer alloc] init];
-    NSString *uId = order.user.userId;
+    
+    NSString *sessionId = user.sessionId;
     NSString *dId = order.dinner.dinnerId;
     NSString *oQ = order.orderQuantity.stringValue;
     NSString *sR = order.specialRequests;
-    
-    // Use an address from the addresses array.
-    // TODO(cra): Let the user choose one.
-    NSArray *addresses = CKTDataModel.sharedDataModel.currentUser.addresses;
-    NSString *aId = ((CKTAddress *) addresses[0]).addressId;
+    NSString *aId = ((CKTAddress *)user.addresses[addressIndex]).addressId;
 
-    NSDictionary *parameters = @{@"userId":(uId) ? uId : @"-1",
-                                 @"addressId":(aId) ? aId : @"-1",
-                                 @"dinnerId":(dId) ? dId :@"-1",
-                                 @"orderQuantity":(oQ) ? oQ : @"-1",
+    NSDictionary *parameters = @{@"sessionId":(sessionId),
+                                 @"addressId":(aId),
+                                 @"dinnerId":(dId),
+                                 @"orderQuantity":(oQ),
                                  @"specialRequests":(sR) ? sR : @"None"};
     
     [manager POST:baseURL parameters:parameters

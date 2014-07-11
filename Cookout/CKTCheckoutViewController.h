@@ -16,5 +16,5 @@
 @interface CKTCheckoutViewController : UIViewController <CKTFacebookSessionListener,
 CKTAddressSaveHandler>
 @property (nonatomic, strong) CKTOrder *order;
-
+@property (nonatomic) int selectedAddressIndex;
 @end

@@ -36,4 +36,11 @@
     return self;
 }
 
+-(void) addAddress: (CKTAddress *)address
+{
+    if(!self.addresses)
+        self.addresses = [[NSMutableArray alloc]init];
+    [self.addresses addObject:address];
+}
+
 @end

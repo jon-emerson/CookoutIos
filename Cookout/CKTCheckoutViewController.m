@@ -11,6 +11,7 @@
 #import "CKTCreateAccountViewController.h"
 #import "CKTGMapsAddressEntryViewController.h"
 #import "SemiModalAnimatedTransition.h"
+#import "CKTServerCommunicator.h"
 
 @interface CKTCheckoutViewController ()
 
@@ -22,6 +23,7 @@
 @property (nonatomic, weak) IBOutlet UITextField *streetAddress;
 @property (nonatomic, weak) IBOutlet UITextField *unitNumber;
 @property (nonatomic, weak) IBOutlet UITextField *creditCard;
+@property (nonatomic) UITextField *activeField;
 
 -(IBAction)placeOrderAction:(id) sender;
 -(IBAction)openGmaps:(id) sender;
@@ -43,6 +45,14 @@
 
 - (IBAction)placeOrderAction:(id)sender
 {
+    // OMG time to place the order!
+    ((CKTAddress *)[CKTCurrentUser sharedInstance].addresses[self.selectedAddressIndex]).unit
+                                                                = self.unitNumber.text;
+    if([self isValidUser] && [self hasValidDeliveryAddress] && [self hasValidCCInfo])
+    {
+        [CKTServerCommunicator placeOrder:self.order addressIndex:self.selectedAddressIndex delegate:self];
+    }
+    else NSLog(@"Something wasn't setup right");
     
 }
 
@@ -50,6 +60,8 @@
 {
     [super viewDidAppear:animated];
     self.streetAddress.delegate = self;
+    self.unitNumber.delegate = self;
+    self.creditCard.delegate = self;
     
     // Do any additional setup after loading the view from its nib.
     // Display order summary
@@ -62,6 +74,16 @@
     [self.creditCard setLeftViewMode:UITextFieldViewModeAlways];
     self.creditCard.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cc.png"]];
     self.creditCard.alpha = 0.6;
+    
+    
+    // By default pick the first address.
+    // TODO: replace with more intelligence
+    if([CKTCurrentUser sharedInstance].addresses.count >0)
+    {
+        self.selectedAddressIndex = 0;
+        self.streetAddress.text = [[CKTCurrentUser sharedInstance].addresses[self.selectedAddressIndex] description];
+        self.unitNumber.text = ((CKTAddress *)[CKTCurrentUser sharedInstance].addresses[self.selectedAddressIndex]).unit;
+    }
     
     
     
@@ -82,6 +104,8 @@
                                                            attribute:NSLayoutAttributeBottom
                                                           multiplier:1.0
                                                             constant:0.0]];
+    
+
 
     if ([self isValidUser]) {
         // User is signed in - yaay!
@@ -145,8 +169,13 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField;
 {
-    
-    
+    self.activeField = textField;
+    [(UIScrollView *)self.view setContentOffset:CGPointMake(0,textField.center.y-60) animated:YES];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    self.activeField = nil;
 }
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField;
 {
@@ -156,7 +185,7 @@
         CKTGMapsAddressEntryViewController * addressEntry = [[CKTGMapsAddressEntryViewController alloc]init];
         addressEntry.modalPresentationStyle = UIModalPresentationCustom;
         addressEntry.transitioningDelegate = self;
-        
+        addressEntry.delegate = self;
         [addressEntry.view setBackgroundColor:[[UIColor clearColor] colorWithAlphaComponent:0.8]];
         
         [self presentViewController:addressEntry animated:YES completion:^(void) {
@@ -165,6 +194,15 @@
         return NO;
     }
     else return YES;
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
+}
+
+- (void)addressUpdated: (int) selectedIndex
+{
+    self.streetAddress.text = [[CKTCurrentUser sharedInstance].addresses[selectedIndex] description];
 }
 
 - (IBAction)doOnboarding:(id)sender

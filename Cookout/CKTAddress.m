@@ -10,4 +10,10 @@
 
 @implementation CKTAddress
 
+-(NSString *) description
+{
+    NSMutableString * address = [[NSMutableString alloc] initWithFormat:@"%@ %@, %@, %@ %@",
+                                 _addressLine1, _addressLine2,_city,_state,_zipCode];
+    return address;
+}
 @end

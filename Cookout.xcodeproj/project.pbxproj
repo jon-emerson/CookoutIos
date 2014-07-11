@@ -121,6 +121,7 @@
 		20959465196530F600C0C007 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		209594671965310200C0C007 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		209594691965310F00C0C007 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		20C1D47C196F3401002D14BF /* CKTAddressUpdateHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTAddressUpdateHandler.h; sourceTree = "<group>"; };
 		FC0B06FF195A266200DF3BD2 /* CKTAsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTAsyncImageView.h; sourceTree = "<group>"; };
 		FC0B0700195A266200DF3BD2 /* CKTAsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKTAsyncImageView.m; sourceTree = "<group>"; };
 		FC0B0706195B7D6300DF3BD2 /* CKTServerCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTServerCommunicator.h; sourceTree = "<group>"; };
@@ -197,6 +198,7 @@
 		2036B221196DFDCD000E5214 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				20C1D47C196F3401002D14BF /* CKTAddressUpdateHandler.h */,
 				FC0B07221962638800DF3BD2 /* CKTFacebookSessionManager.h */,
 				202BC51B1966529000FC444A /* CKTAddressSaveHandler.h */,
 				2036B217196C6F49000E5214 /* CKTGMapsAutoCompleter.h */,

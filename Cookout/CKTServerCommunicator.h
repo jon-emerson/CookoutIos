@@ -19,7 +19,7 @@
 @interface CKTServerCommunicator : NSObject
 
 + (void)syncDataModel:(id<CKTDataModelChangeDelegate>)dataModelChangeDelegate;
-+ (void)postOrder:(CKTOrder *)order
++ (void)placeOrder:(CKTOrder *)order addressIndex:(int) addressIndex
          delegate:(id<CKTDataModelChangeDelegate>)dataModelChangeDelegate;
 + (void)startSession;
 + (void)exchangeFbToken:(FBAccessTokenData *)fbToken;
