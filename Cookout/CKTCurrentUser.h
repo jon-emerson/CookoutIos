@@ -17,6 +17,7 @@
 @property (retain, nonatomic, readwrite) NSString *phoneNumber;
 @property (retain, nonatomic, readwrite) NSString *email;
 @property (retain, nonatomic, readwrite) NSMutableArray *addresses;
+@property (retain, nonatomic, readwrite) NSMutableArray *creditCards;
 +(instancetype)sharedInstance;
 -(instancetype)setCurrentUser:(NSDictionary *) dictionary;
 -(void) addAddress: (CKTAddress *)address;

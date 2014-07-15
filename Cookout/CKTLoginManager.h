@@ -16,4 +16,5 @@
 -(void)handleFacebookSessionStateChange;
 -(void)startFBSessionWithLoginUI;
 -(BOOL)isFacebookSessionOpen;
+-(void)exchangeFBToken: (id) delegate;
 @end

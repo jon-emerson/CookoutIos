@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "CKTDinner.h"
+#import "CKTDataModelChangeDelegate.h"
 
-@interface CKTDinnerViewController : UIViewController
+@interface CKTDinnerViewController : UIViewController <CKTDataModelChangeDelegate>
 
 @property (nonatomic, strong) CKTDinner *dinner;
 

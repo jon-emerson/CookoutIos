@@ -74,10 +74,29 @@
             [CKTCurrentUser sharedInstance].fbAccessToken=FBSession.activeSession.accessTokenData.description;
             [CKTCurrentUser sharedInstance].name = [[CKTFacebookSessionManager sharedFacebookSessionManager].userData valueForKeyPath:@"name"];
             [CKTCurrentUser sharedInstance].email = [[CKTFacebookSessionManager sharedFacebookSessionManager].userData valueForKeyPath:@"email"];
-            [CKTServerCommunicator exchangeFbToken:FBSession.activeSession.accessTokenData];
+            [CKTServerCommunicator exchangeFbToken:FBSession.activeSession.accessTokenData delegate:nil];
         }
         else return;
     }
+}
+
+
+// Force a FB token exchange and return to delegate
+- (void)exchangeFBToken: (id) delegate
+{
+    // If a valid facebook session is available, and no CKT session id available
+    // then send the CKT server a request to exchange the FB session for a CKT session
+    NSLog(@"Attempting forced token exchange");
+    CKTDataModel *sharedModel = [CKTDataModel sharedDataModel];
+    
+    // ok check if the user has a valid FB session. If not, don't force UI here.
+    if (self.isFacebookSessionOpen)
+    {
+        // Exchange the FB session token for a cookout session
+        NSLog(@"Active FB session, forcing an exchange");
+        [CKTServerCommunicator exchangeFbToken:FBSession.activeSession.accessTokenData delegate:delegate];
+    }
+    else return;
 }
 
 @end

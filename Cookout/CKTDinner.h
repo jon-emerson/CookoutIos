@@ -15,7 +15,8 @@
 @property (copy, readonly) NSString *chefId;
 @property (copy, readonly) NSString *imageUrl;
 @property (copy, readonly) NSNumber *price;
-@property (copy, readonly) NSNumber *numAvailable;
+@property (copy, readonly) NSNumber *quantity;
+@property (copy, readonly) NSNumber *quantityOrdered;
 @property (copy, readonly) NSDate *orderByDateTime;
 @property (copy, readonly) NSDate *deliveryDateTime;
 @property (copy, readonly) NSArray *ingredients;
@@ -34,7 +35,6 @@
                      description:(NSString *)description;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
-
 - (NSURL *)imageNSUrl;
-
+-(int)dinnersAvailable;
 @end

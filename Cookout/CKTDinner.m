@@ -24,7 +24,8 @@
                           chefId:(NSString *)chefId
                         imageUrl:(NSString *)imageUrl
                            price:(NSNumber *)price
-                    numAvailable:(NSNumber *)numAvailable
+                        quantity:(NSNumber *)quantity
+                 quantityOrdered: (NSNumber *) quantityOrdered
                  orderByDateTime:(NSDate *)orderByDateTime
                 deliveryDateTime:(NSDate *)deliveryDateTime
                      ingredients:(NSArray *)ingredients
@@ -38,7 +39,8 @@
         _chefId = chefId;
         _imageUrl = imageUrl;
         _price = price;
-        _numAvailable = numAvailable;
+        _quantity = quantity;
+        _quantityOrdered = quantityOrdered;
         _orderByDateTime = orderByDateTime;
         _deliveryDateTime = deliveryDateTime;
         _ingredients = ingredients;
@@ -65,7 +67,8 @@
                            chefId:[dictionary valueForKey:@"chefId"]
                          imageUrl:[dictionary valueForKey:@"imageUrl"]
                             price:[dictionary valueForKey:@"price"]
-                     numAvailable:[dictionary valueForKey:@"numAvailable"]
+                     quantity:[dictionary valueForKey:@"quantity"]
+                  quantityOrdered: [dictionary valueForKey:@"quantityOrdered"]
                   orderByDateTime:orderByDateTime
                  deliveryDateTime:deliveryDateTime
                       ingredients:ingredients
@@ -85,7 +88,8 @@
     [encoder encodeObject:_chefId forKey:@"chefId"];
     [encoder encodeObject:_imageUrl forKey:@"imageUrl"];
     [encoder encodeObject:_price forKey:@"price"];
-    [encoder encodeObject:_numAvailable forKey:@"numAvailable"];
+    [encoder encodeObject:_quantity forKey:@"quantity"];
+    [encoder encodeObject:_quantityOrdered forKey:@"quantityOrdered"];
     [encoder encodeObject:_orderByDateTime forKey:@"orderByDateTime"];
     [encoder encodeObject:_deliveryDateTime forKey:@"deliveryDateTime"];
     [encoder encodeObject:_ingredients forKey:@"ingredients"];
@@ -98,12 +102,19 @@
     _chefId = [decoder decodeObjectForKey:@"chefId"];
     _imageUrl = [decoder decodeObjectForKey:@"imageUrl"];
     _price = [decoder decodeObjectForKey:@"price"];
-    _numAvailable = [decoder decodeObjectForKey:@"numAvailable"];
+    _quantity = [decoder decodeObjectForKey:@"quantity"];
+    _quantityOrdered = [decoder decodeObjectForKey:@"quantityOrdered"];
     _orderByDateTime = [decoder decodeObjectForKey:@"orderByDateTime"];
     _deliveryDateTime = [decoder decodeObjectForKey:@"deliveryDateTime"];
     _ingredients = [decoder decodeObjectForKey:@"ingredients"];
     _description = [decoder decodeObjectForKey:@"description"];
     return self;
+}
+
+// Returns the number of meals available to order
+-(int)dinnersAvailable
+{
+    return self.quantity.intValue - self.quantityOrdered.intValue;
 }
 
 @end

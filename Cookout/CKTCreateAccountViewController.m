@@ -94,7 +94,6 @@
         {
             // TODO: Call exchange token here instead
             
-            
             // Confirm user details. Email and Name are mandatory
             self.saveButton.hidden = false;
             self.name.hidden = false;
@@ -159,6 +158,7 @@
     self.name.hidden = true;
     self.email.hidden = true;
     self.phone.hidden = true;
+    self.spinner.hidden = true;
     
     self.loginButton.hidden = false;
     self.guideText.hidden = false;
@@ -174,19 +174,53 @@
     {
         // No valid cookout session. Check if there is already a Facebook session
         if ([[CKTLoginManager sharedLoginManager] isFacebookSessionOpen]) {
-            // Confirm user details. Email and Name are mandatory
-            self.saveButton.hidden = false;
-            self.name.hidden = false;
-            self.email.hidden = false;
-            self.phone.hidden = false;
+            // Attempt token exchange again and only show
+            // create user UI if token exchange fails again
             
-            self.loginButton.hidden = true;
-            self.guideText.hidden = true;
+            [[CKTLoginManager sharedLoginManager] exchangeFBToken:self];
+            self.spinner.hidden = false;
+            [self.spinner startAnimating];
 
-            self.name.text = [CKTCurrentUser sharedInstance].name;
-            self.email.text = [CKTCurrentUser sharedInstance].email;
         }
     }
+}
+
+-(void)exchangeSucceeded:(NSDictionary *) response
+{
+    // Ok user does have a cookout session, time to leave.
+    [self dismissViewControllerAnimated:TRUE completion:NULL];
+}
+
+-(void)exchangeFailed:(NSError *) error operation:(AFHTTPRequestOperation *) operation
+{
+    // Exchange could have failed because the user does not exist or because of server error
+    // If server error, show error message
+    if(![operation.responseObject objectForKey:@"success"])
+    {
+        // Implies that the server had issues. Inform the user go back to
+        // Home view controller
+        UIAlertView * newAlert = [[UIAlertView alloc]init];
+        newAlert.message = @"Sorry we're experiencing problems on our service. We'll back shortly!";
+        [newAlert addButtonWithTitle:@"Ok"];
+        [newAlert show];
+        [self dismissViewControllerAnimated:TRUE completion:^void(){
+            [self.parentViewController.navigationController popToRootViewControllerAnimated:true];
+        }];
+    }
+     else
+     {
+         // Confirm user details. Email and Name are mandatory
+         self.saveButton.hidden = false;
+         self.name.hidden = false;
+         self.email.hidden = false;
+         self.phone.hidden = false;
+     
+         self.loginButton.hidden = true;
+         self.guideText.hidden = true;
+     
+         self.name.text = [CKTCurrentUser sharedInstance].name;
+         self.email.text = [CKTCurrentUser sharedInstance].email;
+     }
 }
 
 -(void)createUserSucceeded:(NSDictionary *) response

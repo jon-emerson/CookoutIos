@@ -11,6 +11,7 @@
 #import "CKTCurrentUser.h"
 #import "CKTDataModel.h"
 #import "CKTDinnerViewController.h"
+#import "CKTServerCommunicator.h"
 #import "CKTOrder.h"
 #import "CKTUser.h"
 
@@ -25,8 +26,13 @@
 @property (weak, nonatomic) IBOutlet UIStepper *quantityStepper;
 @property (weak, nonatomic) IBOutlet UITextField *quantity;
 @property (weak, nonatomic) IBOutlet UIButton *orderButton;
+@property (weak, nonatomic) IBOutlet UIButton *wishlistButton;
 @property (weak, nonatomic) IBOutlet UIView *starRatings;
 @property (weak, nonatomic) IBOutlet UILabel *quantityAvailable;
+
+-(IBAction)placeOrder:(id)sender;
+-(IBAction)incrementDecrementOrder:(id)sender;
+-(IBAction)addToWishlist:(id)sender;
 @end
 
 @implementation CKTDinnerViewController
@@ -68,13 +74,24 @@
     [self.navigationController pushViewController:checkout animated:YES];
 }
 
+- (IBAction)addToWishlist:(id)sender
+{
+    // If the dinner has run out then add it to the wishlist
+    UIAlertView * newAlert = [[UIAlertView alloc]init];
+    newAlert.message = @"We'll add this dish to your wishlist and let you know the next time it's made";
+    [newAlert addButtonWithTitle:@"Ok"];
+    [newAlert show];
+    return;
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    // Set the default quantity of the dinner order
-    self.quantity.text = @"1";
-
+    // Register as a listener to data model changes
+    [CKTServerCommunicator addSyncListener:self];
+    
     // Do any additional setup after loading the view from its nib.
     CKTUser *chef = [CKTDataModel.sharedDataModel userWithId:self.dinner.chefId];
     self.foodImage.imageURL = [self.dinner imageNSUrl];
@@ -85,9 +102,29 @@
     self.descriptionLabel.numberOfLines = 0;
     [self.descriptionLabel sizeToFit];
     self.price.text = [[NSString alloc] initWithFormat:@"$%@", self.dinner.price];
-    NSArray *ingredients = [self.dinner ingredients];   
-    self.quantityAvailable.text = [[NSString alloc] initWithFormat:@"%@ meals still available",self.dinner.numAvailable];
-    self.quantityStepper.maximumValue = self.dinner.numAvailable.doubleValue;
+    NSArray *ingredients = [self.dinner ingredients];
+    
+    
+    // Setup available dinner quantity
+    if([self.dinner dinnersAvailable]>0)
+    {
+        self.quantity.text = @"1";
+        self.quantity.hidden = false;
+        self.quantityStepper.hidden = false;
+        self.orderButton.hidden = false;
+        self.wishlistButton.hidden = true;
+        self.quantityStepper.maximumValue = [self.dinner dinnersAvailable];
+        self.quantityAvailable.text = [[NSString alloc] initWithFormat:@"%d meals still available",[self.dinner dinnersAvailable]];
+    }
+    else
+    {
+        self.quantity.hidden = true;
+        self.quantityStepper.hidden = true;
+        self.orderButton.hidden = true;
+        self.wishlistButton.hidden = false;
+        self.quantityAvailable.text = [[NSString alloc] initWithFormat:@"Sold out!"];
+
+    }
     
     if ([ingredients count] > 0) {
         self.ingredientsLabel.text = ingredients[0];
@@ -124,6 +161,23 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    
+    
 }
 
+- (void)dataModelInitialized
+{
+    // Sync with the cookout server completed
+    // the data model may have been updated.
+    NSLog(@"Data model synced!");
+    dispatch_async(dispatch_get_main_queue(), ^{
+        // Reload the view
+        [self viewDidLoad];
+    });
+}
+
+- (void)dataModelError:(NSError *)error
+{
+    NSLog(@"Data model error: %@", error);
+}
 @end

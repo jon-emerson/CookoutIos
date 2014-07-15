@@ -13,6 +13,7 @@
 #import "CKTFacebookSessionListener.h"
 #import "CKTOrder.h"
 #import "CKTCreateUserHandler.h"
+#import "CKTTokenExchangeDelegate.h"
 
 @interface CKTCreateAccountViewController : UIViewController
         <CKTFacebookSessionListener,CKTAddressSaveHandler, CKTCreateUserHandler,UITextFieldDelegate>
@@ -23,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *phone;
 @property (weak, nonatomic) IBOutlet UILabel *guideText;
 @property (weak, nonatomic) CKTOrder *order;
+@property (weak,nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 -(BOOL) isValidEmailAddress:(NSString *) email;
 
 @end

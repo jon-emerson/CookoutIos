@@ -30,6 +30,7 @@
         // Custom initialization
         self.navigationItem.title = @"Enter delivery address";
         self.addressContainer = [[CKTAddress alloc]init];
+//        [self.addressField setLeftViewMode:UITextFieldViewModeAlways];
     }
     return self;
 }
@@ -193,7 +194,9 @@
             
             if([type isEqualToString:@"route"])
             {
-                self.addressContainer.addressLine2 = [result valueForKey:@"short_name"];
+                self.addressContainer.addressLine1 = [self.addressContainer.addressLine1 stringByAppendingString:@" "];
+                self.addressContainer.addressLine1 = [self.addressContainer.addressLine1 stringByAppendingString:[result valueForKey:@"short_name"]];
+                self.addressContainer.addressLine2 = @"";
             }
             
             if([type isEqualToString:@"locality"])
@@ -219,8 +222,6 @@
     }
 
     NSLog(@"%@", self.addressContainer);
-    
-    
     
     NSLog(@"Dispatching save address call");
 

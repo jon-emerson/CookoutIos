@@ -19,6 +19,7 @@
                 <outlet property="starRatings" destination="Rxb-3S-kwZ" id="K3n-wW-wUY"/>
                 <outlet property="subtitleLabel" destination="QKS-gR-whZ" id="pDy-ja-QEd"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="wishlistButton" destination="I4t-zt-1Pl" id="IMj-1C-1uZ"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -79,6 +80,18 @@
                             </state>
                             <connections>
                                 <action selector="placeOrder:" destination="-1" eventType="touchUpInside" id="Hfk-8C-3i3"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I4t-zt-1Pl">
+                            <rect key="frame" x="65" y="257" width="191" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="1" green="0.16411375" blue="0.27604695019999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <state key="normal" title="Add to wishlist">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="addToWishlist:" destination="-1" eventType="touchUpInside" id="1Dv-Rr-510"/>
                             </connections>
                         </button>
                         <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zTI-9c-glz">

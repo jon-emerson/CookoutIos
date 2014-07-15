@@ -13,6 +13,7 @@
 		2036B21C196CDF3E000E5214 /* Open Sans 600.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2036B219196CDF3E000E5214 /* Open Sans 600.ttf */; };
 		2036B21D196CDF3E000E5214 /* Open Sans regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2036B21A196CDF3E000E5214 /* Open Sans regular.ttf */; };
 		2036B224196E0DC1000E5214 /* SemiModalAnimatedTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 2036B223196E0DC1000E5214 /* SemiModalAnimatedTransition.m */; };
+		207E055719748B40005C3439 /* CKTCreditCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 207E055619748B40005C3439 /* CKTCreditCard.m */; };
 		20858A9119656DEF007769AE /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 20858A7F19656DEF007769AE /* AFHTTPRequestOperation.m */; };
 		20858A9219656DEF007769AE /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 20858A8119656DEF007769AE /* AFHTTPRequestOperationManager.m */; };
 		20858A9319656DEF007769AE /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 20858A8319656DEF007769AE /* AFHTTPSessionManager.m */; };
@@ -71,6 +72,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		135B512D626E41ED9130989C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		202BC51B1966529000FC444A /* CKTAddressSaveHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CKTAddressSaveHandler.h; path = Cookout/CKTAddressSaveHandler.h; sourceTree = "<group>"; };
 		2036B212196B8788000E5214 /* CKTGMapsAddressEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTGMapsAddressEntryViewController.h; sourceTree = "<group>"; };
 		2036B213196B8788000E5214 /* CKTGMapsAddressEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKTGMapsAddressEntryViewController.m; sourceTree = "<group>"; };
@@ -82,6 +84,10 @@
 		2036B220196DFDC4000E5214 /* CKTCreateUserHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTCreateUserHandler.h; sourceTree = "<group>"; };
 		2036B222196E0DC1000E5214 /* SemiModalAnimatedTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SemiModalAnimatedTransition.h; path = Cookout/SemiModalAnimatedTransition.h; sourceTree = "<group>"; };
 		2036B223196E0DC1000E5214 /* SemiModalAnimatedTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SemiModalAnimatedTransition.m; path = Cookout/SemiModalAnimatedTransition.m; sourceTree = "<group>"; };
+		207E055319709ACE005C3439 /* CKTTokenExchangeDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTTokenExchangeDelegate.h; sourceTree = "<group>"; };
+		207E05541970A198005C3439 /* CKTPostOrderDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTPostOrderDelegate.h; sourceTree = "<group>"; };
+		207E055519748B40005C3439 /* CKTCreditCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTCreditCard.h; sourceTree = "<group>"; };
+		207E055619748B40005C3439 /* CKTCreditCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKTCreditCard.m; sourceTree = "<group>"; };
 		20858A7E19656DEF007769AE /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		20858A7F19656DEF007769AE /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		20858A8019656DEF007769AE /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -122,6 +128,7 @@
 		209594671965310200C0C007 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		209594691965310F00C0C007 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		20C1D47C196F3401002D14BF /* CKTAddressUpdateHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTAddressUpdateHandler.h; sourceTree = "<group>"; };
+		21FD75E7CDA343FC994E9DCF /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		FC0B06FF195A266200DF3BD2 /* CKTAsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTAsyncImageView.h; sourceTree = "<group>"; };
 		FC0B0700195A266200DF3BD2 /* CKTAsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKTAsyncImageView.m; sourceTree = "<group>"; };
 		FC0B0706195B7D6300DF3BD2 /* CKTServerCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKTServerCommunicator.h; sourceTree = "<group>"; };
@@ -198,6 +205,8 @@
 		2036B221196DFDCD000E5214 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				207E05541970A198005C3439 /* CKTPostOrderDelegate.h */,
+				207E055319709ACE005C3439 /* CKTTokenExchangeDelegate.h */,
 				20C1D47C196F3401002D14BF /* CKTAddressUpdateHandler.h */,
 				FC0B07221962638800DF3BD2 /* CKTFacebookSessionManager.h */,
 				202BC51B1966529000FC444A /* CKTAddressSaveHandler.h */,
@@ -239,6 +248,8 @@
 		209593C61964DDF400C0C007 /* Data Model */ = {
 			isa = PBXGroup;
 			children = (
+				207E055519748B40005C3439 /* CKTCreditCard.h */,
+				207E055619748B40005C3439 /* CKTCreditCard.m */,
 				209593AC1964A81800C0C007 /* CKTAddress.h */,
 				209593AD1964A81800C0C007 /* CKTAddress.m */,
 				FCA8B9C1196B4A93008DA6EA /* CKTCurrentUser.h */,
@@ -294,6 +305,7 @@
 				FC9B504E194FBFAC00C32D97 /* CookoutTests */,
 				FC9B502E194FBFAC00C32D97 /* Frameworks */,
 				FC9B502D194FBFAC00C32D97 /* Products */,
+				21FD75E7CDA343FC994E9DCF /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -318,6 +330,7 @@
 				209594691965310F00C0C007 /* SystemConfiguration.framework */,
 				FC9B5033194FBFAC00C32D97 /* UIKit.framework */,
 				FC9B5048194FBFAC00C32D97 /* XCTest.framework */,
+				135B512D626E41ED9130989C /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -508,6 +521,7 @@
 				FC0B0720195CEF8200DF3BD2 /* CKTNavigationBar.m in Sources */,
 				FC0B0701195A266200DF3BD2 /* CKTAsyncImageView.m in Sources */,
 				FC9B5086194FD5A000C32D97 /* CKTHomeViewCell.m in Sources */,
+				207E055719748B40005C3439 /* CKTCreditCard.m in Sources */,
 				FC0B07321965E30600DF3BD2 /* CKTJSONResponseSerializer.m in Sources */,
 				20858A9C19656E24007769AE /* AFHTTPRequestOperationLogger.m in Sources */,
 				20858A9419656DEF007769AE /* AFNetworkReachabilityManager.m in Sources */,
@@ -627,6 +641,7 @@
 		};
 		FC9B5059194FBFAC00C32D97 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 21FD75E7CDA343FC994E9DCF /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -660,6 +675,7 @@
 		};
 		FC9B505A194FBFAC00C32D97 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 21FD75E7CDA343FC994E9DCF /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

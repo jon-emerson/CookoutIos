@@ -10,11 +10,16 @@
 #import "CKTOrder.h"
 #import "CKTDataModel.h"
 #import "CKTFacebookSessionManager.h"
-#import "CKTAddressSaveHandler.h"
+#import "CKTAddressUpdateHandler.h"
 #import "CKTUser.h"
+#import "CKTPostOrderDelegate.h"
+#import "CKTCreditCard.h"
+
 
 @interface CKTCheckoutViewController : UIViewController <CKTFacebookSessionListener,
-CKTAddressSaveHandler>
+CKTAddressUpdateHandler,CKTPostOrderDelegate>
 @property (nonatomic, strong) CKTOrder *order;
 @property (nonatomic) int selectedAddressIndex;
+@property (nonatomic, strong) CKTCreditCard *selectedCard;
+- (BOOL) isLuhnValid: (NSString *) ccNumber;
 @end

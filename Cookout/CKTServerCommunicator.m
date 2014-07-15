@@ -19,7 +19,44 @@
 
 @implementation CKTServerCommunicator
 
-+ (void)syncDataModel:(id<CKTDataModelChangeDelegate>)dataModelChangeDelegate
++ (instancetype)sharedInstance
+{
+    static CKTServerCommunicator *sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        if (!sharedInstance) {
+            sharedInstance = [[CKTServerCommunicator alloc] init];
+            sharedInstance.listeners = [[NSMutableArray alloc]init];
+        }
+    });
+    return sharedInstance;
+}
+
++(void) dispatchSyncSuccess: (NSDictionary *) response
+{
+    CKTServerCommunicator *sharedInstance = [CKTServerCommunicator sharedInstance];
+    for(NSObject *listner in sharedInstance.listeners)
+    {
+        [(id<CKTDataModelChangeDelegate>)listner dataModelInitialized];
+    }
+}
+
++(void) dispatchSyncFailure: (AFHTTPRequestOperation *) operation
+{
+    CKTServerCommunicator *sharedInstance = [CKTServerCommunicator sharedInstance];
+    for(NSObject *listner in sharedInstance.listeners)
+    {
+        [(id<CKTDataModelChangeDelegate>)listner dataModelInitialized];
+    }
+}
+
++ (void)addSyncListener: (id) listener
+{
+    CKTServerCommunicator *sharedInstance = [CKTServerCommunicator sharedInstance];
+    [sharedInstance.listeners addObject:listener];
+}
+
++ (void)syncDataModel
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [[CKTJSONResponseSerializer alloc] init];
@@ -30,15 +67,17 @@
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               NSDictionary *json = (NSDictionary *)responseObject;
               [CKTDataModelBuilder populateDataModelFromJSON:json];
-              [dataModelChangeDelegate dataModelInitialized];
+              [CKTServerCommunicator dispatchSyncSuccess:responseObject];
+              //[dataModelChangeDelegate dataModelInitialized];
           }
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-              [dataModelChangeDelegate dataModelError:error];
+              //[dataModelChangeDelegate dataModelError:error];
+              [CKTServerCommunicator dispatchSyncFailure:operation];
           }];
 }
 
 + (void)placeOrder:(CKTOrder *)order addressIndex: (int) addressIndex
-         delegate:(id<CKTDataModelChangeDelegate>)dataModelChangeDelegate
+         delegate:(id<CKTPostOrderDelegate>)delegate
 {
     NSString *baseURL = @"http://immense-beyond-2989.herokuapp.com/order";
     CKTCurrentUser *user = [CKTCurrentUser sharedInstance];
@@ -60,10 +99,11 @@
     
     [manager POST:baseURL parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-              NSLog(@"JSON: %@", responseObject);
+              [delegate orderSucceeded:responseObject];
           }
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"Error: %@  Operation: %@", error, operation);
+              [delegate orderFailed:error operation:operation];
           }];
 }
 
@@ -85,7 +125,7 @@
     [[CKTLoginManager sharedLoginManager] startFBSession];
 }
 
-+ (void)exchangeFbToken:(FBAccessTokenData *)fbToken
++ (void)exchangeFbToken:(FBAccessTokenData *)fbToken delegate: (id) delegate
 {
     NSString *url = @"https://immense-beyond-2989.herokuapp.com/getSession";
     NSDictionary *parameters = @{@"fbAccessToken":fbToken.accessToken};
@@ -102,11 +142,13 @@
                   NSString *sId = [responseObject valueForKey:@"sessionId"];
                   [[CKTDataModel sharedDataModel] setSession:sId];
               }
+              [delegate exchangeSucceeded:responseObject];
           }
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               // Tough luck - the server didn't want to exchange the token.
               // No worries, log the error and move on
               NSLog(@"Token exchange failed. %@", error);
+              [delegate exchangeFailed:error operation:operation];
           }];
 }
 

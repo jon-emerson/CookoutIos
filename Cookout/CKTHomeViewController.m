@@ -69,8 +69,6 @@
             [self.tableView reloadData];
         });
     }
-    
-    //[CKTServerCommunicator initializeDataModel:self];
 }
 
 - (void)dataModelInitialized

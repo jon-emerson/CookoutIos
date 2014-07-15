@@ -46,7 +46,8 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
         // Dispatch async task to fetch latest state from server
-        [CKTServerCommunicator syncDataModel:hvc];
+        [CKTServerCommunicator addSyncListener:hvc];
+        [CKTServerCommunicator syncDataModel];
         
         // Attempt to start a cookout session
         [CKTServerCommunicator startSession];

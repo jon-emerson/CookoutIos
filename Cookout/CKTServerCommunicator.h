@@ -15,14 +15,21 @@
 #import "CKTDataModelChangeDelegate.h"
 #import "CKTOrder.h"
 #import "CKTGMapsAutoCompleter.h"
+#import "CKTTokenExchangeDelegate.h"
+#import "CKTPostOrderDelegate.h"
 
 @interface CKTServerCommunicator : NSObject
+@property (nonatomic, strong) NSMutableArray * listeners;
 
-+ (void)syncDataModel:(id<CKTDataModelChangeDelegate>)dataModelChangeDelegate;
++ (void)syncDataModel;
++ (instancetype)sharedInstance;
++(void) dispatchSyncSuccess: (NSDictionary *) response;
++(void) dispatchSyncFailure: (AFHTTPRequestOperation *) operation;
++ (void)addSyncListener: (id) listener;
 + (void)placeOrder:(CKTOrder *)order addressIndex:(int) addressIndex
          delegate:(id<CKTDataModelChangeDelegate>)dataModelChangeDelegate;
 + (void)startSession;
-+ (void)exchangeFbToken:(FBAccessTokenData *)fbToken;
++ (void)exchangeFbToken:(FBAccessTokenData *)fbToken delegate:(id<CKTTokenExchangeDelegate>) delegate;
 + (void)createCurrentUser:(id<CKTCreateUserHandler>)delegate;
 + (void)setUserAddress:(CKTAddress *)address
            currentUser:(CKTCurrentUser *)currentUser

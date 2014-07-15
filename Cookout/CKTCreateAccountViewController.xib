@@ -12,6 +12,7 @@
                 <outlet property="name" destination="1vr-Dh-ja7" id="B0Z-hc-9Mi"/>
                 <outlet property="phone" destination="4qY-wy-PXw" id="bHu-4m-KnH"/>
                 <outlet property="saveButton" destination="xc3-mO-iOS" id="H5N-ab-819"/>
+                <outlet property="spinner" destination="iRp-CP-R2A" id="kCq-dK-V1e"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -78,6 +79,10 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="iRp-CP-R2A">
+                    <rect key="frame" x="142" y="163" width="37" height="37"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
